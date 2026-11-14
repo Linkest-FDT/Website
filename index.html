@@ -6,7 +6,7 @@
     <title>Linkest Foundation | Link this galaxy</title>
     <meta name="description" content="Linkest Foundation is a decentralized non-profit collaborative foundation for open-source security and modern web infrastructure.">
     
-    <!-- 🐟 Favicon: The Kunpeng Logo -->
+    <!-- Favicon: The Kunpeng Logo -->
     <link rel="icon" href="/logo.svg" type="image/svg+xml">
     
     <!-- SEO and Social Meta -->
@@ -195,7 +195,7 @@
         <div class="header-container">
             <a href="/" class="logo" id="logo-link">
                 <span class="logo-mark">
-                    <!-- 鲲鹏 Logo -->
+                    <!-- Kunpeng Logo -->
                     <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100" width="100%" height="100%">
                       <defs>
                         <linearGradient id="kunpengGradH" x1="10%" y1="10%" x2="90%" y2="90%">
@@ -215,12 +215,12 @@
                 Linkest Foundation
             </a>
             <nav>
-                <!-- 🚀 Navigation Links: Added IDs to dynamically update href based on language -->
-                <a id="link-contribution" href="/contribution.html" data-i18n="nav_contribution">Contribution</a>
-                <a id="link-security" href="/security.html" data-i18n="nav_security">Security</a>
-                <a id="link-projects" href="/projects.html" data-i18n="nav_projects">Projects</a>
-                <a id="link-sponsor" href="/sponsor.html" data-i18n="nav_sponsor">Sponsor</a>
-                <a id="link-about" href="/about.html" data-i18n="nav_about">About</a>
+                <!-- Navigation Links with clean URLs -->
+                <a id="link-contribution" href="/contribution" data-i18n="nav_contribution">Contribution</a>
+                <a id="link-security" href="/security" data-i18n="nav_security">Security</a>
+                <a id="link-projects" href="/projects" data-i18n="nav_projects">Projects</a>
+                <a id="link-sponsor" href="/sponsor" data-i18n="nav_sponsor">Sponsor</a>
+                <a id="link-about" href="/about" data-i18n="nav_about">About</a>
                 <a href="https://github.com/Linkest-FDT" target="_blank" rel="noopener">GitHub ↗</a>
                 
                 <div class="lang-switcher">
@@ -278,9 +278,9 @@
                 </div>
                 <div class="footer-links">
                     <a href="https://status.linkest.org" target="_blank" rel="noopener" data-i18n="footer_status">Status</a>
-                    <!-- 🚀 Also updated footer links with IDs -->
-                    <a id="footer-policy" href="/policy.html" data-i18n="footer_policy">Policy</a>
-                    <a id="footer-contact" href="/contact.html" data-i18n="footer_contact">Contact Us</a>
+                    <!-- Footer Links with clean URLs -->
+                    <a id="footer-policy" href="/policy" data-i18n="footer_policy">Policy</a>
+                    <a id="footer-contact" href="/contact" data-i18n="footer_contact">Contact Us</a>
                 </div>
             </div>
             <div class="footer-notice" id="machine-notice">
@@ -290,6 +290,7 @@
     </footer>
 
     <script>
+        // 1. Language Configuration
         const languages = [
             { code: 'en-US', name: 'English', rtl: false, isMachine: false },
             { code: 'zh-CN', name: '简体中文', rtl: false, isMachine: false },
@@ -306,6 +307,7 @@
             { code: 'ar-SA', name: 'العربية', rtl: true, isMachine: true } 
         ];
 
+        // 2. Language Dictionary
         const i18n = {
             'en-US': {
                 nav_contribution: "Contribution", nav_security: "Security", nav_projects: "Projects", nav_sponsor: "Sponsor", nav_about: "About",
@@ -407,37 +409,42 @@
 
         let typewriterTimeout;
 
+        // Update URL without reloading the page
         function updateURL(langCode) {
             const newPath = langCode === 'en-US' ? '/' : `/${langCode}`;
             window.history.pushState({ lang: langCode }, '', newPath);
         }
 
+        // Set the active language and update UI elements
         function setLanguage(langCode, updateUrl = true) {
             document.cookie = `linkest_lang=${langCode}; path=/; max-age=31536000`;
             
             const langConfig = languages.find(l => l.code === langCode) || languages[0];
             const dict = i18n[langCode] || i18n['en-US'];
 
+            // Apply RTL direction for Arabic
             document.documentElement.setAttribute('dir', langConfig.rtl ? 'rtl' : 'ltr');
             document.documentElement.setAttribute('lang', langCode);
 
+            // Replace text content using data-i18n attributes
             document.querySelectorAll('[data-i18n]').forEach(el => {
                 const key = el.getAttribute('data-i18n');
                 if (dict[key] !== undefined) el.innerHTML = dict[key];
             });
 
-            // 🚀 Fix 1: Dynamically update ALL navigation and footer links based on selected language
+            // Dynamically update all navigation and footer links based on selected language
             const prefix = langCode === 'en-US' ? '' : `/${langCode}`;
             
             document.getElementById('logo-link').href = prefix || '/';
-            document.getElementById('link-contribution').href = `${prefix}/contribution.html`;
-            document.getElementById('link-security').href = `${prefix}/security.html`;
-            document.getElementById('link-projects').href = `${prefix}/projects.html`;
-            document.getElementById('link-sponsor').href = `${prefix}/sponsor.html`;
-            document.getElementById('link-about').href = `${prefix}/about.html`;
-            document.getElementById('footer-policy').href = `${prefix}/policy.html`;
-            document.getElementById('footer-contact').href = `${prefix}/contact.html`;
+            document.getElementById('link-contribution').href = `${prefix}/contribution`;
+            document.getElementById('link-security').href = `${prefix}/security`;
+            document.getElementById('link-projects').href = `${prefix}/projects`;
+            document.getElementById('link-sponsor').href = `${prefix}/sponsor`;
+            document.getElementById('link-about').href = `${prefix}/about`;
+            document.getElementById('footer-policy').href = `${prefix}/policy`;
+            document.getElementById('footer-contact').href = `${prefix}/contact`;
 
+            // Show machine translation notice for non-EN/ZH languages
             const machineNotice = document.getElementById('machine-notice');
             if (langConfig.isMachine) {
                 machineNotice.style.display = 'block';
@@ -445,6 +452,7 @@
                 machineNotice.style.display = 'none';
             }
 
+            // Restart typewriter effect
             clearTimeout(typewriterTimeout);
             runTypewriter(dict.typewriter_text);
 
@@ -453,6 +461,7 @@
             closeLangMenu();
         }
 
+        // Typewriter effect logic
         function runTypewriter(text) {
             const typewriterElement = document.getElementById('typewriter');
             const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
@@ -475,6 +484,7 @@
             typewriterTimeout = setTimeout(type, 300);
         }
 
+        // Render the language dropdown menu
         function renderMenu(currentLang) {
             const menu = document.getElementById('lang-menu');
             menu.innerHTML = '';
@@ -500,6 +510,7 @@
             langBtn.setAttribute('aria-expanded', 'false');
         }
 
+        // Toggle menu on button click
         langBtn.addEventListener('click', (e) => {
             e.stopPropagation();
             const isShowing = langMenu.classList.contains('show');
@@ -512,12 +523,14 @@
             }
         });
 
+        // Close menu when clicking outside
         document.addEventListener('click', (e) => {
             if (!langMenu.contains(e.target) && e.target !== langBtn) {
                 closeLangMenu();
             }
         });
 
+        // Initialize language based on URL, cookie, or browser settings
         function initLanguage() {
             const urlParams = new URLSearchParams(window.location.search);
             const redirectPath = urlParams.get('redirect');
@@ -550,6 +563,7 @@
             setLanguage(initialLang, false); 
         });
 
+        // Handle browser back/forward navigation
         window.addEventListener('popstate', () => {
             const initialLang = initLanguage();
             setLanguage(initialLang, false);
