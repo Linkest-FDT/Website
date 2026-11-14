@@ -1,0 +1,574 @@
+<!DOCTYPE html>
+<html lang="en-US" class="dark">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Security Policy | Linkest Foundation</title>
+    <meta name="description" content="Linkest Foundation Security Policy and Vulnerability Disclosure Policy (VDP).">
+    
+    <!-- Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Fira+Code:wght@400;500&display=swap" rel="stylesheet" />
+
+    <style>
+        /* ==========================================================================
+           CSS Variables (100% reused from the homepage for consistency)
+           ========================================================================== */
+        :root {
+            color-scheme: dark;
+            --bg-base: #0b1020;
+            --bg-surface: #131c33;
+            --border-color: #1e2942;
+            --text-primary: #e5e7eb;
+            --text-secondary: #94a3b8;
+            --text-muted: #64748b;
+            --brand-300: #93c5fd;
+            --brand-400: #60a5fa;
+            --brand-500: #3b82f6;
+            --brand-600: #2563eb;
+            --font-sans: 'Inter', system-ui, -apple-system, sans-serif;
+            --font-mono: 'Fira Code', monospace;
+            --shape-start: #8da4f1;
+            --shape-end: #6c7ee5;
+        }
+
+        * { box-sizing: border-box; margin: 0; padding: 0; }
+        html { background-color: var(--bg-base); scroll-behavior: smooth; }
+        body {
+            font-family: var(--font-sans); background-color: var(--bg-base); color: var(--text-primary);
+            line-height: 1.6; min-height: 100vh; display: flex; flex-direction: column;
+            overflow-x: hidden; -webkit-font-smoothing: antialiased;
+        }
+
+        /* RTL Support (Right-To-Left languages like Arabic) */
+        html[dir="rtl"] body { direction: rtl; }
+        html[dir="rtl"] nav { flex-direction: row-reverse; }
+        html[dir="rtl"] .lang-switcher { margin-right: 16px; margin-left: 0; }
+        html[dir="rtl"] .dropdown-content { right: auto; left: 0; }
+        html[dir="rtl"] .logo { flex-direction: row-reverse; }
+        html[dir="rtl"] ul { padding-right: 24px; padding-left: 0; }
+        html[dir="rtl"] .policy-card h2 { flex-direction: row-reverse; }
+        html[dir="rtl"] .policy-card h2 .num { margin-left: 10px; margin-right: 0; }
+
+        a { color: var(--text-primary); text-decoration: none; transition: color 0.2s ease; }
+        a:hover { color: var(--brand-400); }
+
+        /* ==========================================================================
+           Header & Navigation
+           ========================================================================== */
+        header {
+            position: sticky; top: 0; z-index: 100;
+            background: linear-gradient(180deg, rgba(11,16,32,.98) 0%, rgba(30,41,59,.92) 100%);
+            backdrop-filter: blur(18px); -webkit-backdrop-filter: blur(18px);
+            border-bottom: 1px solid rgba(255,255,255,.08);
+        }
+
+        .header-container {
+            max-width: 1200px; margin: 0 auto; padding: 14px 24px;
+            display: flex; justify-content: space-between; align-items: center;
+        }
+
+        .logo { display: flex; align-items: center; gap: 10px; font-weight: 800; font-size: 16px; letter-spacing: -0.5px; color: #fff; }
+        .logo-mark { width: 28px; height: 28px; display: flex; align-items: center; justify-content: center; filter: drop-shadow(0 4px 10px rgba(108, 126, 229, 0.5)); }
+
+        nav { display: flex; gap: 24px; align-items: center; font-size: 13.5px; font-weight: 500; color: var(--text-secondary); }
+        nav a { color: var(--text-secondary); }
+        nav a:hover, nav a.active { color: #fff; }
+        nav a.active { border-bottom: 2px solid var(--brand-400); padding-bottom: 2px; }
+
+        /* Language Dropdown */
+        .lang-switcher { position: relative; display: inline-block; margin-left: 10px; }
+        .lang-btn {
+            background-color: rgba(59,130,246,.12); border: 1px solid rgba(59,130,246,.3);
+            color: var(--brand-300); padding: 6px 10px; border-radius: 8px;
+            font-weight: 600; display: flex; align-items: center; gap: 6px; cursor: pointer;
+            transition: all 0.2s ease; font-size: 13px;
+        }
+        .lang-btn:hover { background-color: rgba(59,130,246,.2); border-color: var(--brand-400); color: #fff; }
+        
+        .dropdown-content {
+            display: none; position: absolute; right: 0; top: 100%; margin-top: 8px;
+            background-color: var(--bg-surface); border: 1px solid var(--border-color);
+            border-radius: 8px; box-shadow: 0 10px 25px rgba(0,0,0,0.5); min-width: 140px; z-index: 101;
+            max-height: 400px; overflow-y: auto;
+        }
+        .lang-switcher:hover .dropdown-content { display: block; }
+        .dropdown-content a { display: block; padding: 8px 16px; font-size: 13px; color: var(--text-primary); cursor: pointer;}
+        .dropdown-content a:hover { background-color: rgba(255,255,255,0.05); color: var(--brand-400); }
+        
+        .machine-ast { font-size: 10px; color: var(--text-muted); margin-left: 2px; vertical-align: super;}
+
+        /* ==========================================================================
+           Main Content Layout
+           ========================================================================== */
+        main { flex: 1; max-width: 900px; margin: 0 auto; padding: 60px 24px 80px; width: 100%; position: relative; }
+
+        .page-header { text-align: center; margin-bottom: 48px; }
+        .page-title { font-size: clamp(2rem, 4vw, 2.8rem); font-weight: 800; color: #fff; letter-spacing: -1px; margin-bottom: 12px; }
+        .page-subtitle { color: var(--brand-300); font-family: var(--font-mono); font-size: 14px; }
+
+        /* Translation Warning Banner (Only visible for non-EN languages) */
+        .translation-banner {
+            display: none; background: rgba(245, 158, 11, 0.1); border: 1px solid rgba(245, 158, 11, 0.3);
+            color: #fbbf24; padding: 12px 16px; border-radius: 8px; font-size: 13.5px; margin-bottom: 32px;
+            text-align: center; font-weight: 500;
+        }
+
+        /* Policy Cards */
+        .policy-card {
+            background-color: var(--bg-surface); border: 1px solid var(--border-color);
+            border-radius: 16px; padding: 32px; margin-bottom: 24px;
+            box-shadow: 0 10px 30px -15px rgba(0,0,0,0.5);
+            transition: transform 0.2s ease, border-color 0.2s ease;
+        }
+        .policy-card:hover { border-color: rgba(96, 165, 250, 0.4); }
+        
+        .policy-card h2 {
+            font-size: 20px; font-weight: 700; color: #f8fafc; margin-bottom: 16px;
+            display: flex; align-items: center; gap: 10px;
+        }
+        .policy-card h2 .num {
+            background: var(--brand-500); color: #fff; font-size: 12px; font-weight: 800;
+            width: 24px; height: 24px; display: inline-flex; align-items: center; justify-content: center;
+            border-radius: 6px; font-family: var(--font-mono);
+        }
+        
+        .policy-card p, .policy-card ul { color: var(--text-secondary); margin-bottom: 16px; font-size: 14.5px; }
+        .policy-card ul { padding-left: 24px; }
+        .policy-card li { margin-bottom: 8px; }
+        
+        .highlight { color: var(--brand-300); font-weight: 600; }
+        .code-box {
+            background: #0b1020; padding: 12px 16px; border-radius: 8px; font-family: var(--font-mono);
+            color: #a7f3d0; font-size: 13.5px; border: 1px solid rgba(255,255,255,0.05); margin-bottom: 16px;
+            display: inline-block; word-break: break-all;
+        }
+
+        /* Triage Badges */
+        .badge { display: inline-block; padding: 2px 8px; border-radius: 4px; font-size: 12px; font-weight: 600; margin-right: 8px; }
+        .badge-p0 { background: rgba(239,68,68,.15); color: #f87171; border: 1px solid rgba(239,68,68,.3); }
+        .badge-p1 { background: rgba(245,158,11,.15); color: #fbbf24; border: 1px solid rgba(245,158,11,.3); }
+        .badge-p2 { background: rgba(16,185,129,.15); color: #34d399; border: 1px solid rgba(16,185,129,.3); }
+
+        /* Final Declaration Box */
+        .declaration-box {
+            margin-top: 40px; padding: 32px; border-radius: 16px;
+            background: linear-gradient(135deg, rgba(59, 130, 246, 0.1) 0%, rgba(108, 126, 229, 0.05) 100%);
+            border: 1px solid rgba(96, 165, 250, 0.3); text-align: center;
+        }
+        .declaration-box h2 { font-size: 20px; font-weight: 800; color: #fff; margin-bottom: 16px; }
+        .declaration-box p { font-size: 16px; color: var(--brand-300); font-weight: 600; font-style: italic; margin-bottom: 8px; }
+        .declaration-box .sub-text { font-size: 14px; color: var(--text-secondary); font-style: normal; }
+
+        /* Footer */
+        footer { border-top: 1px solid rgba(255,255,255,.05); padding: 32px 24px; font-size: 13px; color: var(--text-muted); margin-top: auto; }
+        .footer-container { max-width: 1200px; margin: 0 auto; display: flex; flex-direction: column; gap: 16px; }
+        .footer-top { display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 16px; }
+        .footer-links { display: flex; gap: 24px; }
+        .footer-links a { color: var(--text-muted); font-weight: 500; }
+        .footer-links a:hover { color: var(--brand-400); }
+        
+        .footer-notice { font-size: 12px; color: var(--text-muted); border-top: 1px solid rgba(255,255,255,0.05); padding-top: 16px; text-align: left; display: none; }
+        .footer-notice .ast { color: var(--brand-400); font-weight: bold;}
+
+        @media (max-width: 768px) {
+            .header-container { flex-direction: column; gap: 16px; }
+            nav { flex-wrap: wrap; justify-content: center; gap: 16px; }
+            .footer-top { flex-direction: column; text-align: center; }
+            .policy-card { padding: 24px; }
+            .lang-switcher:hover .dropdown-content { display: none; }
+            .lang-switcher:focus-within .dropdown-content { display: block; }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Reusable SVG Gradients -->
+    <svg width="0" height="0" style="display: none;">
+        <defs>
+            <linearGradient id="brandShapeGradient" x1="0%" y1="0%" x2="100%" y2="100%">
+                <stop offset="0%" stop-color="#8da4f1" />
+                <stop offset="100%" stop-color="#6c7ee5" />
+            </linearGradient>
+        </defs>
+    </svg>
+
+    <!-- Header Navigation -->
+    <header>
+        <div class="header-container">
+            <a href="/" class="logo">
+                <span class="logo-mark">
+                    <svg width="100%" height="100%" viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
+                        <path d="M 17.5 50 C 10 20, 80 5, 90 45 C 100 85, 25 95, 17.5 50 Z" fill="url(#brandShapeGradient)" />
+                    </svg>
+                </span>
+                Linkest Foundation
+            </a>
+            <nav>
+                <a href="#" onclick="return false;" data-i18n="nav_contribution">Contribution</a>
+                <a href="security.html" class="active" data-i18n="nav_security">Security</a>
+                <a href="#" onclick="return false;" data-i18n="nav_projects">Projects</a>
+                <a href="#" onclick="return false;" data-i18n="nav_sponsor">Sponsor</a>
+                <a href="#" onclick="return false;" data-i18n="nav_about">About</a>
+                <a href="https://github.com/Linkest-FDT" target="_blank" rel="noopener">GitHub ↗</a>
+                
+                <div class="lang-switcher">
+                    <button class="lang-btn" aria-label="Choose Language">
+                        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                            <circle cx="12" cy="12" r="10"></circle>
+                            <line x1="2" y1="12" x2="22" y2="12"></line>
+                            <path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"></path>
+                        </svg>
+                    </button>
+                    <div class="dropdown-content" id="lang-menu"></div>
+                </div>
+            </nav>
+        </div>
+    </header>
+
+    <!-- Main Content -->
+    <main>
+        <!-- Translation Warning Banner -->
+        <div class="translation-banner" id="trans-banner">
+            <span class="ast">*</span> <span data-i18n="trans_banner"></span>
+        </div>
+
+        <div class="page-header">
+            <h1 class="page-title" data-i18n="policy_title">Security & Disclosure Policy</h1>
+            <p class="page-subtitle" data-i18n="policy_subtitle">Last Updated: November 14, 2026</p>
+        </div>
+
+        <!-- 01 Scope -->
+        <div class="policy-card">
+            <h2><span class="num">01</span> <span data-i18n="p1_title">Scope & CNA Jurisdiction</span></h2>
+            <p data-i18n="p1_desc">This policy applies strictly to assets officially maintained by Linkest Foundation.</p>
+            <ul>
+                <li data-i18n="p1_li1">All official open-source repositories (github.com/Linkest-FDT/*)</li>
+                <li data-i18n="p1_li2">Official infrastructure and websites (*.linkest.org)</li>
+            </ul>
+            <p data-i18n="p1_cna">In compliance with NIST and MITRE requirements for CVE Numbering Authorities (CNA), we only process reports for the Linkest Foundation ecosystem. We <strong>do not and cannot</strong> process reports for third-party projects. Please report those to their respective maintainers or CNAs.</p>
+        </div>
+
+        <!-- 02 Reporting Channel -->
+        <div class="policy-card">
+            <h2><span class="num">02</span> <span data-i18n="p2_title">Reporting Channels</span></h2>
+            <p data-i18n="p2_desc1"><strong>Primary Channel:</strong> Submit a private vulnerability report (GHSA) directly in our security repository:</p>
+            <div class="code-box">https://github.com/Linkest-FDT/Security/security/advisories/new</div>
+            <p data-i18n="p2_desc2"><strong>Backup Channel:</strong> If you cannot use GitHub, email us at:</p>
+            <div class="code-box">security@linkest.org</div>
+            <p data-i18n="p2_desc3">Do not disclose vulnerabilities publicly before a patch is released.</p>
+        </div>
+
+        <!-- 03 Reporting Format -->
+        <div class="policy-card">
+            <h2><span class="num">03</span> <span data-i18n="p3_title">Reporting Format</span></h2>
+            <p data-i18n="p3_desc">Please format your report (preferably matching the GHSA format) with the following details:</p>
+            <ul>
+                <li data-i18n="p3_li1"><strong>Summary:</strong> A brief description of the vulnerability.</li>
+                <li data-i18n="p3_li2"><strong>Details:</strong> Affected repository, version/commit, CWE classification, and root cause.</li>
+                <li data-i18n="p3_li3"><strong>PoC:</strong> Step-by-step reproduction steps or a minimal executable script.</li>
+                <li data-i18n="p3_li4"><strong>Impact:</strong> Affected user scope (e.g., admin takeover).</li>
+                <li data-i18n="p3_li5"><strong>CVSS:</strong> v3.1/v4.0 vector string.</li>
+            </ul>
+        </div>
+
+        <!-- 04 Triage SLA -->
+        <div class="policy-card">
+            <h2><span class="num">04</span> <span data-i18n="p4_title">Triage Priority & SLAs</span></h2>
+            <p data-i18n="p4_desc">A reproducible PoC is a critical factor for our prioritization.</p>
+            <ul>
+                <li><span class="badge badge-p0">P0</span> <span data-i18n="p4_p0">CVSS >= 8.0 with PoC. Initial response within 7 days.</span></li>
+                <li><span class="badge badge-p1">P1</span> <span data-i18n="p4_p1">CVSS 4.0 - 7.9 or limited impact. Initial response within 14 days.</span></li>
+                <li><span class="badge badge-p2">P2</span> <span data-i18n="p4_p2">CVSS < 4.0 or incomplete info. Best effort response.</span></li>
+            </ul>
+        </div>
+
+        <!-- 05 CVE & GHSA -->
+        <div class="policy-card">
+            <h2><span class="num">05</span> <span data-i18n="p5_title">CVE Assignment & Disclosure</span></h2>
+            <p data-i18n="p5_desc1">Once a vulnerability is verified, Linkest CNA will assign an official CVE ID. <em>(Note: GHSA serves as our collaborative tool for tracking and publishing, while CVE IDs are issued by Linkest CNA).</em></p>
+            <p data-i18n="p5_desc2">We enforce a strict <strong>90-day responsible disclosure</strong> timeline. Public advisories will be published jointly after a patch is available or the 90-day window expires.</p>
+        </div>
+
+        <!-- 06 Safe Harbor -->
+        <div class="policy-card">
+            <h2><span class="num">06</span> <span data-i18n="p6_title">Safe Harbor & Rules of Engagement</span></h2>
+            <ul>
+                <li data-i18n="p6_li1"><strong>Safe Harbor Commitment:</strong> We will not take legal action against researchers acting in good faith and following this policy. We will acknowledge your contribution publicly.</li>
+                <li data-i18n="p6_li2"><strong>Prohibited Destructive Attacks:</strong> We strictly reject intentional, volumetric attacks such as large-scale DDoS, brute-forcing, physical damage, or social engineering against staff.</li>
+                <li data-i18n="p6_li3"><strong>Crucial Exception (Vulnerability-Induced DoS):</strong> If you discover a resource exhaustion issue caused <strong>directly by a logic flaw</strong> in our code (e.g., ReDoS, memory leaks triggered by a single request), <strong>this is a valid vulnerability and will be triaged.</strong> However, you must demonstrate it with a controlled, minimal Proof of Concept (PoC). Unbounded stress testing is not allowed.</li>
+                <li data-i18n="p6_li4"><strong>Self-Hosted Testing Principle:</strong> Any potentially disruptive testing (including the logic-based DoS mentioned above) <strong>must be conducted in a local, self-hosted environment</strong>. Do not test against Linkest Foundation's production environment. If live verification is required, you must obtain prior written permission via security@linkest.org.</li>
+                <li data-i18n="p6_li5"><strong>Data Boundaries:</strong> You must not access, modify, download, or exfiltrate any real user data not generated by yourself. Any test data created during testing must be deleted immediately.</li>
+            </ul>
+        </div>
+
+        <!-- 07 Disclaimer -->
+        <div class="policy-card">
+            <h2><span class="num">07</span> <span data-i18n="p7_title">Strict Disclaimer</span></h2>
+            <p data-i18n="p7_desc">We reserve the right to reject reports for vulnerabilities that are clearly fabricated, maliciously inflated in severity, or submitted with destructive payloads. Attempts to defraud the CVE system will result in public disclosure of the abuse.</p>
+        </div>
+
+        <!-- Final Declaration -->
+        <div class="declaration-box">
+            <h2 data-i18n="dec_title">Our Declaration</h2>
+            <p data-i18n="dec_text">Respect security research. Honor disclosure rules. Protect the open-source ecosystem. Practice responsible disclosure.</p>
+            <p class="sub-text" data-i18n="dec_subtext">It starts with you and me, and it starts with every independent developer.</p>
+        </div>
+    </main>
+
+    <!-- Footer -->
+    <footer>
+        <div class="footer-container">
+            <div class="footer-top">
+                <div class="footer-copyright">
+                    <p>&copy; <span id="year"></span> Linkest Foundation and its affiliated organizations. All rights reserved.</p>
+                </div>
+                <div class="footer-links">
+                    <a href="https://status.linkest.org" target="_blank" rel="noopener" data-i18n="footer_status">Status</a>
+                    <a href="security.html" class="active" data-i18n="footer_policy">Policy</a>
+                    <a href="#" onclick="return false;" data-i18n="footer_contact">Contact Us</a>
+                </div>
+            </div>
+            <!-- Machine translation notice -->
+            <div class="footer-notice" id="machine-notice">
+                <span class="ast">*</span> <span data-i18n="machine_trans_notice"></span>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // ==========================================
+        // 1. Language Configuration
+        // Force isMachine=true for all non-English languages to trigger the banner
+        // ==========================================
+        const languages = [
+            { code: 'en-US', name: 'English', rtl: false, isMachine: false },
+            { code: 'zh-CN', name: '简体中文', rtl: false, isMachine: true },
+            { code: 'zh-TW', name: '繁體中文', rtl: false, isMachine: true },
+            { code: 'ja-JP', name: '日本語', rtl: false, isMachine: true },
+            { code: 'ru-RU', name: 'Русский', rtl: false, isMachine: true },
+            { code: 'de-DE', name: 'Deutsch', rtl: false, isMachine: true },
+            { code: 'fr-FR', name: 'Français', rtl: false, isMachine: true },
+            { code: 'es-ES', name: 'Español', rtl: false, isMachine: true },
+            { code: 'pt-BR', name: 'Português', rtl: false, isMachine: true },
+            { code: 'it-IT', name: 'Italiano', rtl: false, isMachine: true },
+            { code: 'ko-KR', name: '한국어', rtl: false, isMachine: true },
+            { code: 'pl-PL', name: 'Polski', rtl: false, isMachine: true },
+            { code: 'ar-SA', name: 'العربية', rtl: true, isMachine: true }
+        ];
+
+        // ==========================================
+        // 2. Language Dictionary
+        // ==========================================
+        const i18n = {
+            'en-US': {
+                nav_contribution: "Contribution", nav_security: "Security", nav_projects: "Projects", nav_sponsor: "Sponsor", nav_about: "About",
+                footer_status: "Status", footer_policy: "Policy", footer_contact: "Contact Us",
+                trans_banner: "",
+                machine_trans_notice: "",
+                policy_title: "Security & Disclosure Policy",
+                policy_subtitle: "Last Updated: November 14, 2026",
+                p1_title: "Scope & CNA Jurisdiction",
+                p1_desc: "This policy applies strictly to assets officially maintained by Linkest Foundation.",
+                p1_li1: "All official open-source repositories (github.com/Linkest-FDT/*)",
+                p1_li2: "Official infrastructure and websites (*.linkest.org)",
+                p1_cna: "In compliance with NIST and MITRE requirements for CVE Numbering Authorities (CNA), we only process reports for the Linkest Foundation ecosystem. We <strong>do not and cannot</strong> process reports for third-party projects. Please report those to their respective maintainers or CNAs.",
+                p2_title: "Reporting Channels",
+                p2_desc1: "<strong>Primary Channel:</strong> Submit a private vulnerability report (GHSA) directly in our security repository:",
+                p2_desc2: "<strong>Backup Channel:</strong> If you cannot use GitHub, email us at:",
+                p2_desc3: "Do not disclose vulnerabilities publicly before a patch is released.",
+                p3_title: "Reporting Format",
+                p3_desc: "Please format your report (preferably matching the GHSA format) with the following details:",
+                p3_li1: "<strong>Summary:</strong> A brief description of the vulnerability.",
+                p3_li2: "<strong>Details:</strong> Affected repository, version/commit, CWE classification, and root cause.",
+                p3_li3: "<strong>PoC:</strong> Step-by-step reproduction steps or a minimal executable script.",
+                p3_li4: "<strong>Impact:</strong> Affected user scope (e.g., admin takeover).",
+                p3_li5: "<strong>CVSS:</strong> v3.1/v4.0 vector string.",
+                p4_title: "Triage Priority & SLAs",
+                p4_desc: "A reproducible PoC is a critical factor for our prioritization.",
+                p4_p0: "CVSS >= 8.0 with PoC. Initial response within 7 days.",
+                p4_p1: "CVSS 4.0 - 7.9 or limited impact. Initial response within 14 days.",
+                p4_p2: "CVSS < 4.0 or incomplete info. Best effort response.",
+                p5_title: "CVE Assignment & Disclosure",
+                p5_desc1: "Once a vulnerability is verified, Linkest CNA will assign an official CVE ID. <em>(Note: GHSA serves as our collaborative tool for tracking and publishing, while CVE IDs are issued by Linkest CNA).</em>",
+                p5_desc2: "We enforce a strict <strong>90-day responsible disclosure</strong> timeline. Public advisories will be published jointly after a patch is available or the 90-day window expires.",
+                p6_title: "Safe Harbor & Rules of Engagement",
+                p6_li1: "<strong>Safe Harbor Commitment:</strong> We will not take legal action against researchers acting in good faith and following this policy. We will acknowledge your contribution publicly.",
+                p6_li2: "<strong>Prohibited Destructive Attacks:</strong> We strictly reject intentional, volumetric attacks such as large-scale DDoS, brute-forcing, physical damage, or social engineering against staff.",
+                p6_li3: "<strong>Crucial Exception (Vulnerability-Induced DoS):</strong> If you discover a resource exhaustion issue caused <strong>directly by a logic flaw</strong> in our code (e.g., ReDoS, memory leaks triggered by a single request), <strong>this is a valid vulnerability and will be triaged.</strong> However, you must demonstrate it with a controlled, minimal Proof of Concept (PoC). Unbounded stress testing is not allowed.",
+                p6_li4: "<strong>Self-Hosted Testing Principle:</strong> Any potentially disruptive testing (including the logic-based DoS mentioned above) <strong>must be conducted in a local, self-hosted environment</strong>. Do not test against Linkest Foundation's production environment. If live verification is required, you must obtain prior written permission via security@linkest.org.",
+                p6_li5: "<strong>Data Boundaries:</strong> You must not access, modify, download, or exfiltrate any real user data not generated by yourself. Any test data created during testing must be deleted immediately.",
+                p7_title: "Strict Disclaimer",
+                p7_desc: "We reserve the right to reject reports for vulnerabilities that are clearly fabricated, maliciously inflated in severity, or submitted with destructive payloads. Attempts to defraud the CVE system will result in public disclosure of the abuse.",
+                dec_title: "Our Declaration",
+                dec_text: "Respect security research. Honor disclosure rules. Protect the open-source ecosystem. Practice responsible disclosure.",
+                dec_subtext: "It starts with you and me, and it starts with every independent developer."
+            },
+            'zh-CN': {
+                nav_contribution: "贡献", nav_security: "安全", nav_projects: "项目", nav_sponsor: "赞助", nav_about: "关于",
+                footer_status: "状态", footer_policy: "政策", footer_contact: "联系我们",
+                trans_banner: "本页面的非英语版本由机器翻译或社区提供，仅供参考。若与英文版存在歧义，请一律以英文版为准。",
+                machine_trans_notice: "* 部分内容由机器翻译提供，欢迎社区修正。",
+                policy_title: "安全与漏洞披露政策",
+                policy_subtitle: "最后更新：2026年11月14日",
+                p1_title: "适用范围与 CNA 管辖权",
+                p1_desc: "本政策严格适用于由 Linkest Foundation 官方维护的资产。",
+                p1_li1: "所有官方开源仓库 (github.com/Linkest-FDT/*)",
+                p1_li2: "官方基础设施与网站 (*.linkest.org)",
+                p1_cna: "根据 NIST 和 MITRE 对 CVE 编号机构 (CNA) 的要求，我们<strong>仅受理</strong>属于 Linkest Foundation 生态内的漏洞报告。对于任何非 Linkest Foundation 维护的第三方项目或服务，我们<strong>不予受理且无权受理</strong>。请将相关报告提交给对应的项目维护者或相关 CNA。",
+                p2_title: "报告渠道",
+                p2_desc1: "<strong>首选渠道（安全且留痕）：</strong>请在 Linkest Foundation 的专用安全仓库中提交 GitHub 私密漏洞报告 (GHSA)：",
+                p2_desc2: "<strong>备用渠道：</strong>若您无法使用 GitHub，请发送邮件至：",
+                p2_desc3: "在补丁发布前，严禁在任何公开平台（如 Issue、论坛）披露未修复的漏洞。",
+                p3_title: "报告格式",
+                p3_desc: "为提高处理效率，请尽量参考 GHSA 格式提交，包含以下详细信息：",
+                p3_li1: "<strong>Summary (摘要)：</strong>漏洞简述。",
+                p3_li2: "<strong>Details (详情)：</strong>受影响的仓库/版本、CWE 分类、根本原因。",
+                p3_li3: "<strong>PoC (复现步骤)：</strong>详细步骤或最小化可执行脚本。",
+                p3_li4: "<strong>Impact (影响)：</strong>受影响的用户范围。",
+                p3_li5: "<strong>CVSS (评分)：</strong>提供 v3.1 / v4.0 向量字符串。",
+                p4_title: "响应优先级与时间表",
+                p4_desc: "可复现的 PoC 是定级的核心依据。",
+                p4_p0: "CVSS >= 8.0 且带 PoC。7天内初步响应。",
+                p4_p1: "CVSS 4.0 - 7.9 或影响有限。14天内初步响应。",
+                p4_p2: "CVSS < 4.0 或信息不全。尽力而为响应。",
+                p5_title: "CVE 分配与负责任披露",
+                p5_desc1: "漏洞确认后，Linkest CNA 将作为官方机构为其分配 CVE ID。<em>（注：GHSA 仅作为协作和公告工具，CVE 编号由 Linkest CNA 颁发）。</em>",
+                p5_desc2: "我们执行严格的 <strong>90 天</strong>负责任披露时间表，届时将联合发布安全公告。",
+                p6_title: "安全港与测试边界",
+                p6_li1: "<strong>安全港承诺：</strong>对善意遵守规则的研究员，承诺不采取法律行动，并予以公开致谢。",
+                p6_li2: "<strong>严禁纯破坏性攻击：</strong>绝对拒绝并谴责大流量 DDoS 攻击、暴力穷举、物理破坏或社工钓鱼等行为。",
+                p6_li3: "<strong>【关键例外：漏洞引起的 DoS】：</strong>若发现由<strong>系统逻辑缺陷直接导致</strong>的资源耗尽（如 ReDoS、单次请求引发的内存泄漏），<strong>属合法漏洞，我们将予受理</strong>。但必须提供受控、最小化的 PoC，严禁演变为无限制压测。",
+                p6_li4: "<strong>自建环境原则：</strong>所有具有破坏性的测试（含上述逻辑 DoS）<strong>必须在本地自建环境进行</strong>。如需在线上验证，必须提前获得 security@linkest.org 的书面授权。",
+                p6_li5: "<strong>数据红线：</strong>严禁窃取、篡改或泄露真实用户数据，测试产生的临时数据必须删除。",
+                p7_title: "严正声明",
+                p7_desc: "保留拒绝受理明显伪造、恶意夸大严重性或包含破坏性载荷报告的权利。对试图通过伪造材料骗取 CVE 编号的行为，保留向社区公开并列入黑名单的权利。",
+                dec_title: "结语宣言",
+                dec_text: "尊重安全研究，敬畏披露规则，维护开源生态，践行负责任披露。",
+                dec_subtext: "从你我做起，从每一个独立开发者做起。"
+            },
+            'zh-TW': { 
+                trans_banner: "本頁面的非英語版本由機器翻譯或社區提供，僅供參考。若與英文版存在歧義，請一律以英文版為準。", 
+                machine_trans_notice: "部分內容由機器翻譯提供，歡迎社區修正。" 
+            },
+            'ja-JP': { 
+                trans_banner: "このページの非英語版は、機械翻訳またはコミュニティによって提供されており、参考用です。英語版と相違がある場合は、英語版が優先されます。", 
+                machine_trans_notice: "一部の言語は機械翻訳によって提供されています。コミュニティによる修正を歓迎します。" 
+            },
+            'ru-RU': { 
+                trans_banner: "Неанглийские версии этой страницы предоставлены машинным переводом или сообществом и предназначены только для справки. В случае расхождений преимущественную силу имеет английская версия.", 
+                machine_trans_notice: "Некоторые языки предоставлены машинным переводом. Мы приветствуем исправления от сообщества." 
+            },
+            'de-DE': { 
+                trans_banner: "Die nicht-englischen Versionen dieser Seite werden durch maschinelle Übersetzung oder die Community bereitgestellt und dienen nur als Referenz. Bei Abweichungen ist die englische Version maßgeblich.", 
+                machine_trans_notice: "Einige Sprachen werden maschinell übersetzt. Korrekturen aus der Community sind willkommen." 
+            },
+            'fr-FR': { 
+                trans_banner: "Les versions non anglaises de cette page sont fournies par traduction automatique ou par la communauté et sont fournies à titre indicatif. En cas de divergence, la version anglaise prévaut.", 
+                machine_trans_notice: "Certaines langues sont traduites automatiquement. Les corrections de la communauté sont les bienvenues." 
+            },
+            'es-ES': { 
+                trans_banner: "Las versiones no inglesas de esta página son proporcionadas por traducción automática o por la comunidad y son solo para referencia. En caso de discrepancia, prevalecerá la versión en inglés.", 
+                machine_trans_notice: "Algunos idiomas están traducidos automáticamente. Se agradecen las correcciones de la comunidad." 
+            },
+            'pt-BR': { 
+                trans_banner: "As versões não-inglesas desta página são fornecidas por tradução automática ou pela comunidade e servem apenas como referência. Em caso de discrepância, a versão em inglês prevalecerá.", 
+                machine_trans_notice: "Alguns idiomas são traduzidos automaticamente. Correções da comunidade são bem-vindas." 
+            },
+            'it-IT': { 
+                trans_banner: "Le versioni non inglesi di questa pagina sono fornite da traduzione automatica o dalla community e sono solo di riferimento. In caso di discrepanze, prevarrà la versione inglese.", 
+                machine_trans_notice: "Alcune lingue sono tradotte automaticamente. Le correzioni della community sono benvenute." 
+            },
+            'ko-KR': { 
+                trans_banner: "이 페이지의 비영어 버전은 기계 번역 또는 커뮤니티에서 제공하며 참고용입니다. 영어 버전과 차이가 있을 경우 영어 버전이 우선합니다.", 
+                machine_trans_notice: "일부 언어는 기계 번역으로 제공됩니다. 커뮤니티의 수정을 환영합니다." 
+            },
+            'pl-PL': { 
+                trans_banner: "Wersje tej strony w językach innych niż angielski są dostarczane przez tłumaczenie maszynowe lub społeczność i służą wyłącznie celom informacyjnym. W przypadku rozbieżności obowiązuje wersja angielska.", 
+                machine_trans_notice: "Niektóre języki są tłumaczone maszynowo. Poprawki społeczności są mile widziane." 
+            },
+            'ar-SA': { 
+                trans_banner: "يتم توفير النسخ غير الإنجليزية من هذه الصفحة بواسطة الترجمة الآلية أو المجتمع وهي للإشارة فقط. في حالة وجود أي تعارض، تكون النسخة الإنجليزية هي المعتمدة.", 
+                machine_trans_notice: "بعض اللغات مترجمة آلياً. نرحب بتصحيحات المجتمع." 
+            }
+        };
+
+        // ==========================================
+        // 3. Core Functions
+        // ==========================================
+        
+        function setLanguage(langCode, updateUrl = true) {
+            document.cookie = `linkest_lang=${langCode}; path=/; max-age=31536000`;
+            const langConfig = languages.find(l => l.code === langCode) || languages[0];
+            
+            const dict = Object.assign({}, i18n['en-US'], i18n[langCode] || {});
+
+            document.documentElement.setAttribute('dir', langConfig.rtl ? 'rtl' : 'ltr');
+            document.documentElement.setAttribute('lang', langCode);
+
+            document.querySelectorAll('[data-i18n]').forEach(el => {
+                const key = el.getAttribute('data-i18n');
+                if (dict[key] !== undefined) el.innerHTML = dict[key];
+            });
+
+            // Force translation banner to show for ALL non-English languages
+            const transBanner = document.getElementById('trans-banner');
+            if (langCode !== 'en-US' && dict.trans_banner) {
+                transBanner.style.display = 'block';
+            } else {
+                transBanner.style.display = 'none';
+            }
+
+            const machineNotice = document.getElementById('machine-notice');
+            if (langCode !== 'en-US') {
+                machineNotice.style.display = 'block';
+                const footerText = dict.machine_trans_notice || "* Some languages are machine-translated.";
+                document.querySelector('[data-i18n="machine_trans_notice"]').innerHTML = footerText;
+            } else {
+                machineNotice.style.display = 'none';
+            }
+
+            renderMenu(langCode);
+            document.activeElement.blur();
+        }
+
+        function renderMenu(currentLang) {
+            const menu = document.getElementById('lang-menu');
+            menu.innerHTML = '';
+            languages.forEach(lang => {
+                const a = document.createElement('a');
+                // Show asterisk for all non-English languages
+                a.innerHTML = lang.name + (lang.code !== 'en-US' ? '<span class="machine-ast">*</span>' : '');
+                if (lang.code === currentLang) {
+                    a.style.color = 'var(--brand-400)';
+                    a.style.backgroundColor = 'rgba(59,130,246,.1)';
+                }
+                a.onclick = () => setLanguage(lang.code);
+                menu.appendChild(a);
+            });
+        }
+
+        function initLanguage() {
+            const pathSegments = window.location.pathname.split('/').filter(Boolean);
+            if (pathSegments.length > 0) {
+                const urlLang = pathSegments[0];
+                if (languages.some(l => l.code === urlLang)) return urlLang;
+            }
+
+            const match = document.cookie.match(/(^| )linkest_lang=([^;]+)/);
+            if (match) return match[2];
+            
+            const browserLang = navigator.language || navigator.userLanguage;
+            const matchedLang = languages.find(l => browserLang.startsWith(l.code.split('-')[0]));
+            return matchedLang ? matchedLang.code : 'en-US';
+        }
+
+        document.addEventListener('DOMContentLoaded', () => {
+            document.getElementById('year').textContent = new Date().getFullYear();
+            const initialLang = initLanguage();
+            setLanguage(initialLang); 
+        });
+    </script>
+</body>
+</html>
