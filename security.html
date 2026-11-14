@@ -29,8 +29,6 @@
             --brand-600: #2563eb;
             --font-sans: 'Inter', system-ui, -apple-system, sans-serif;
             --font-mono: 'Fira Code', monospace;
-            --shape-start: #8da4f1;
-            --shape-end: #6c7ee5;
         }
 
         * { box-sizing: border-box; margin: 0; padding: 0; }
@@ -68,7 +66,17 @@
         }
 
         .logo { display: flex; align-items: center; gap: 10px; font-weight: 800; font-size: 16px; letter-spacing: -0.5px; color: #fff; }
-        .logo-mark { width: 28px; height: 28px; display: flex; align-items: center; justify-content: center; filter: drop-shadow(0 4px 10px rgba(108, 126, 229, 0.5)); }
+        
+        .logo-mark { 
+            width: 28px; height: 28px; 
+            display: flex; align-items: center; justify-content: center; 
+            filter: drop-shadow(0 4px 10px rgba(108, 126, 229, 0.5));
+        }
+        .logo-mark img {
+            width: 100%;
+            height: 100%;
+            object-fit: contain;
+        }
 
         nav { display: flex; gap: 24px; align-items: center; font-size: 13.5px; font-weight: 500; color: var(--text-secondary); }
         nav a { color: var(--text-secondary); }
@@ -96,7 +104,7 @@
         .dropdown-content a { display: block; padding: 8px 16px; font-size: 13px; color: var(--text-primary); cursor: pointer;}
         .dropdown-content a:hover { background-color: rgba(255,255,255,0.05); color: var(--brand-400); }
         
-        .machine-ast { font-size: 10px; color: var(--text-muted); margin-left: 2px; vertical-align: super;}
+        .machine-ast { font-size: 12px; color: var(--brand-400); margin-left: 2px; vertical-align: super;}
 
         /* Main Content */
         main { flex: 1; max-width: 900px; margin: 0 auto; padding: 60px 24px 80px; width: 100%; position: relative; }
@@ -179,22 +187,11 @@
 </head>
 <body>
 
-    <svg width="0" height="0" style="display: none;">
-        <defs>
-            <linearGradient id="brandShapeGradient" x1="0%" y1="0%" x2="100%" y2="100%">
-                <stop offset="0%" stop-color="#8da4f1" />
-                <stop offset="100%" stop-color="#6c7ee5" />
-            </linearGradient>
-        </defs>
-    </svg>
-
     <header>
         <div class="header-container">
-            <a href="/" class="logo">
+            <a href="index.html" class="logo">
                 <span class="logo-mark">
-                    <svg width="100%" height="100%" viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
-                        <path d="M 17.5 50 C 10 20, 80 5, 90 45 C 100 85, 25 95, 17.5 50 Z" fill="url(#brandShapeGradient)" />
-                    </svg>
+                    <img src="logo.svg" alt="Linkest Foundation Logo" />
                 </span>
                 Linkest Foundation
             </a>
@@ -323,19 +320,19 @@
         // 1. Language Configuration
         // ==========================================
         const languages = [
-            { code: 'en-US', name: 'English', rtl: false, isMachine: false },
-            { code: 'zh-CN', name: '简体中文', rtl: false, isMachine: false },
-            { code: 'zh-TW', name: '繁體中文', rtl: false, isMachine: true },
-            { code: 'ja-JP', name: '日本語', rtl: false, isMachine: true },
-            { code: 'ru-RU', name: 'Русский', rtl: false, isMachine: true },
-            { code: 'de-DE', name: 'Deutsch', rtl: false, isMachine: true },
-            { code: 'fr-FR', name: 'Français', rtl: false, isMachine: true },
-            { code: 'es-ES', name: 'Español', rtl: false, isMachine: true },
-            { code: 'pt-BR', name: 'Português', rtl: false, isMachine: true },
-            { code: 'it-IT', name: 'Italiano', rtl: false, isMachine: true },
-            { code: 'ko-KR', name: '한국어', rtl: false, isMachine: true },
-            { code: 'pl-PL', name: 'Polski', rtl: false, isMachine: true },
-            { code: 'ar-SA', name: 'العربية', rtl: true, isMachine: true }
+            { code: 'en-US', name: 'English', rtl: false },
+            { code: 'zh-CN', name: '简体中文', rtl: false },
+            { code: 'zh-TW', name: '繁體中文', rtl: false },
+            { code: 'ja-JP', name: '日本語', rtl: false },
+            { code: 'ru-RU', name: 'Русский', rtl: false },
+            { code: 'de-DE', name: 'Deutsch', rtl: false },
+            { code: 'fr-FR', name: 'Français', rtl: false },
+            { code: 'es-ES', name: 'Español', rtl: false },
+            { code: 'pt-BR', name: 'Português', rtl: false },
+            { code: 'it-IT', name: 'Italiano', rtl: false },
+            { code: 'ko-KR', name: '한국어', rtl: false },
+            { code: 'pl-PL', name: 'Polski', rtl: false },
+            { code: 'ar-SA', name: 'العربية', rtl: true }
         ];
 
         // ==========================================
@@ -386,7 +383,8 @@
             'zh-CN': {
                 nav_contribution: "贡献", nav_security: "安全", nav_projects: "项目", nav_sponsor: "赞助", nav_about: "关于",
                 footer_status: "状态", footer_policy: "政策", footer_contact: "联系我们",
-                trans_banner: "", machine_trans_notice: "",
+                trans_banner: "本页面的非英语版本由机器翻译或社区提供，仅供参考。若与英文版存在歧义，请一律以英文版为准。", 
+                machine_trans_notice: "* 部分内容由机器翻译提供，欢迎社区修正。",
                 policy_title: "安全与漏洞披露政策", policy_subtitle: "最后更新：2026年11月14日",
                 p1_title: "适用范围与 CNA 管辖权",
                 p1_desc: "本政策严格适用于由 Linkest Foundation 官方维护的资产。",
@@ -427,7 +425,8 @@
             'zh-TW': {
                 nav_contribution: "貢獻", nav_security: "安全", nav_projects: "專案", nav_sponsor: "贊助", nav_about: "關於",
                 footer_status: "狀態", footer_policy: "政策", footer_contact: "聯繫我們",
-                trans_banner: "本頁面的非英語版本由機器翻譯或社區提供，僅供參考。若與英文版存在歧義，請一律以英文版為準。", machine_trans_notice: "* 部分內容由機器翻譯提供，歡迎社區修正。",
+                trans_banner: "本頁面的非英語版本由機器翻譯或社區提供，僅供參考。若與英文版存在歧義，請一律以英文版為準。", 
+                machine_trans_notice: "* 部分內容由機器翻譯提供，歡迎社區修正。",
                 policy_title: "安全與漏洞披露政策", policy_subtitle: "最後更新：2026年11月14日",
                 p1_title: "適用範圍與 CNA 管轄權",
                 p1_desc: "本政策嚴格適用於由 Linkest Foundation 官方維護的資產。",
@@ -881,22 +880,19 @@
         // 3. Core Functions
         // ==========================================
         
-        // Core fix: Use Query Parameters (?lang=zh-CN) instead of path segments to avoid 404 on GitHub Pages
         function updateURL(langCode) {
             const url = new URL(window.location);
             if (langCode === 'en-US') {
-                url.searchParams.delete('lang'); // Clean URL for English
+                url.searchParams.delete('lang');
             } else {
                 url.searchParams.set('lang', langCode);
             }
-            // Use replaceState to avoid polluting browser history with every switch
             window.history.replaceState({ lang: langCode }, '', url);
         }
 
         document.getElementById('lang-btn').addEventListener('click', (e) => {
             e.stopPropagation();
-            const menu = document.getElementById('lang-menu');
-            menu.classList.toggle('show');
+            document.getElementById('lang-menu').classList.toggle('show');
         });
 
         document.addEventListener('click', (e) => {
@@ -921,6 +917,7 @@
                 if (dict[key] !== undefined) el.innerHTML = dict[key];
             });
 
+            // Show translation banner if not English
             const transBanner = document.getElementById('trans-banner');
             if (langCode !== 'en-US' && dict.trans_banner) {
                 transBanner.style.display = 'block';
@@ -928,8 +925,9 @@
                 transBanner.style.display = 'none';
             }
 
+            // Show footer notice if not English
             const machineNotice = document.getElementById('machine-notice');
-            if (langCode !== 'en-US') {
+            if (langCode !== 'en-US' && dict.machine_trans_notice) {
                 machineNotice.style.display = 'block';
             } else {
                 machineNotice.style.display = 'none';
@@ -946,6 +944,7 @@
             menu.innerHTML = '';
             languages.forEach(lang => {
                 const a = document.createElement('a');
+                // Show asterisk for any language that is not English
                 a.innerHTML = lang.name + (lang.code !== 'en-US' ? '<span class="machine-ast">*</span>' : '');
                 
                 if (lang.code === currentLang) {
@@ -964,18 +963,15 @@
         }
 
         function initLanguage() {
-            // Priority 1: Check Query Parameter (?lang=...)
             const urlParams = new URLSearchParams(window.location.search);
             const urlLang = urlParams.get('lang');
             if (urlLang && languages.some(l => l.code === urlLang)) {
                 return urlLang;
             }
 
-            // Priority 2: Check Cookie
             const match = document.cookie.match(/(^| )linkest_lang=([^;]+)/);
             if (match) return match[2];
             
-            // Priority 3: Browser Language
             const browserLang = navigator.language || navigator.userLanguage;
             const matchedLang = languages.find(l => browserLang.startsWith(l.code.split('-')[0]));
             return matchedLang ? matchedLang.code : 'en-US';
