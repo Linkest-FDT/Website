@@ -4,13 +4,21 @@
     <meta charset="utf-8">
     <title>Redirecting...</title>
     <script>
-        // When GitHub Pages returns a 404 (e.g., /zh-CN), this script kicks in.
-        // It redirects to the root and passes the original path as a query parameter.
-        var path = window.location.pathname;
-        window.location.replace("/?redirect=" + path);
+        (function() {
+            var path = window.location.pathname;
+            var lastSegment = path.split('/').pop();
+            
+            // If the path has no file extension (like /contribution), append .html automatically
+            if (lastSegment.indexOf('.') === -1) {
+                window.location.replace(path + '.html');
+            } else {
+                // Fallback for language routing: redirect back to index with the path
+                window.location.replace("/?redirect=" + path);
+            }
+        })();
     </script>
 </head>
 <body>
-    <p>Redirecting to homepage...</p>
+    <p>Redirecting...</p>
 </body>
 </html>
