@@ -1,24 +1,445 @@
 <!DOCTYPE html>
-<html>
+<html lang="en-US" class="dark">
 <head>
-    <meta charset="utf-8">
-    <title>Redirecting...</title>
-    <script>
-        (function() {
-            var path = window.location.pathname;
-            var lastSegment = path.split('/').pop();
-            
-            // If the path has no file extension (like /contribution), append .html automatically
-            if (lastSegment.indexOf('.') === -1) {
-                window.location.replace(path + '.html');
-            } else {
-                // Fallback for language routing: redirect back to index with the path
-                window.location.replace("/?redirect=" + path);
-            }
-        })();
-    </script>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>404 Not Found | Linkest Foundation</title>
+    <meta name="description" content="Page not found.">
+    
+    <!-- Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Fira+Code:wght@400;500&display=swap" rel="stylesheet" />
+
+    <style>
+        /* Reuse the same CSS variables */
+        :root {
+            color-scheme: dark;
+            --bg-base: #0b1020;
+            --bg-surface: #131c33;
+            --border-color: #1e2942;
+            --text-primary: #e5e7eb;
+            --text-secondary: #94a3b8;
+            --text-muted: #64748b;
+            --brand-300: #93c5fd;
+            --brand-400: #60a5fa;
+            --brand-500: #3b82f6;
+            --brand-600: #2563eb;
+            --font-sans: 'Inter', system-ui, -apple-system, sans-serif;
+            --font-mono: 'Fira Code', monospace;
+            --shape-start: #8da4f1;
+            --shape-end: #6c7ee5;
+        }
+
+        * { box-sizing: border-box; margin: 0; padding: 0; }
+        html { background-color: var(--bg-base); }
+        body {
+            font-family: var(--font-sans); background-color: var(--bg-base); color: var(--text-primary);
+            line-height: 1.6; min-height: 100vh; display: flex; flex-direction: column;
+            overflow-x: hidden; -webkit-font-smoothing: antialiased;
+        }
+
+        /* RTL Support */
+        html[dir="rtl"] body { direction: rtl; }
+        html[dir="rtl"] nav { flex-direction: row-reverse; }
+        html[dir="rtl"] .lang-switcher { margin-right: 16px; margin-left: 0; }
+        html[dir="rtl"] .dropdown-content { right: auto; left: 0; }
+        html[dir="rtl"] .logo { flex-direction: row-reverse; }
+
+        a { color: var(--text-primary); text-decoration: none; transition: color 0.2s ease; }
+        a:hover { color: var(--brand-400); }
+
+        /* Header & Navigation */
+        header {
+            position: sticky; top: 0; z-index: 100;
+            background: linear-gradient(180deg, rgba(11,16,32,.98) 0%, rgba(30,41,59,.92) 100%);
+            backdrop-filter: blur(18px); -webkit-backdrop-filter: blur(18px);
+            border-bottom: 1px solid rgba(255,255,255,.08);
+        }
+
+        .header-container {
+            max-width: 1200px; margin: 0 auto; padding: 14px 24px;
+            display: flex; justify-content: space-between; align-items: center;
+        }
+
+        .logo { display: flex; align-items: center; gap: 10px; font-weight: 800; font-size: 16px; letter-spacing: -0.5px; color: #fff; }
+        .logo-mark { width: 28px; height: 28px; display: flex; align-items: center; justify-content: center; filter: drop-shadow(0 4px 10px rgba(108, 126, 229, 0.5)); }
+
+        nav { display: flex; gap: 24px; align-items: center; font-size: 13.5px; font-weight: 500; color: var(--text-secondary); }
+        nav a { color: var(--text-secondary); }
+        nav a:hover { color: #fff; }
+
+        /* Language Dropdown */
+        .lang-switcher { position: relative; display: inline-block; margin-left: 10px; }
+        .lang-btn {
+            background-color: rgba(59,130,246,.12); border: 1px solid rgba(59,130,246,.3);
+            color: var(--brand-300); padding: 6px 10px; border-radius: 8px;
+            font-weight: 600; display: flex; align-items: center; gap: 6px; cursor: pointer;
+            transition: all 0.2s ease; font-size: 13px;
+        }
+        .lang-btn:hover { background-color: rgba(59,130,246,.2); border-color: var(--brand-400); color: #fff; }
+        .dropdown-content {
+            display: none; position: absolute; right: 0; top: 100%; margin-top: 8px;
+            background-color: var(--bg-surface); border: 1px solid var(--border-color);
+            border-radius: 8px; box-shadow: 0 10px 25px rgba(0,0,0,0.5); min-width: 140px; z-index: 101;
+            max-height: 400px; overflow-y: auto;
+        }
+        .dropdown-content.show { display: block; }
+        .dropdown-content a { display: block; padding: 8px 16px; font-size: 13px; color: var(--text-primary); cursor: pointer;}
+        .dropdown-content a:hover { background-color: rgba(255,255,255,0.05); color: var(--brand-400); }
+        .machine-ast { font-size: 10px; color: var(--text-muted); margin-left: 2px; vertical-align: super;}
+
+        /* Main Hero Section */
+        main {
+            flex: 1; display: flex; flex-direction: column; justify-content: center; align-items: center;
+            text-align: center; padding: 40px 24px 80px; position: relative;
+        }
+
+        .hero-shape-container {
+            position: absolute; top: 10%; left: 50%;
+            transform: translateX(-50%);
+            width: clamp(200px, 30vw, 300px); height: clamp(200px, 30vw, 300px);
+            z-index: -1; opacity: 0.1;
+            filter: blur(30px);
+            animation: float 8s ease-in-out infinite;
+            pointer-events: none;
+        }
+
+        .hero-title {
+            font-size: clamp(4rem, 10vw, 8rem); font-weight: 800; color: #fff;
+            margin-bottom: 1rem; letter-spacing: -2px; line-height: 1; position: relative; z-index: 1;
+            background: linear-gradient(90deg, #fff 0%, var(--brand-500) 100%);
+            -webkit-background-clip: text; -webkit-text-fill-color: transparent;
+        }
+
+        .hero-subtitle { 
+            font-size: clamp(1rem, 2vw, 1.25rem); color: var(--text-secondary); 
+            margin-bottom: 3rem; font-weight: 400; position: relative; z-index: 1; max-width: 600px;
+        }
+        .hero-subtitle span { color: var(--brand-300); font-weight: 600; }
+
+        .btn {
+            padding: 12px 28px; border-radius: 12px; font-weight: 600; font-size: 15px;
+            cursor: pointer; transition: all 0.2s ease; border: 1px solid transparent;
+            display: inline-flex; align-items: center; justify-content: center;
+        }
+        .btn-primary {
+            background: linear-gradient(180deg, var(--brand-500) 0%, var(--brand-600) 100%);
+            color: #fff; box-shadow: 0 10px 24px -10px rgba(37,99,235,.55);
+        }
+        .btn-primary:hover { transform: translateY(-2px); filter: brightness(1.1); color: #fff; }
+
+        /* Footer */
+        footer { border-top: 1px solid rgba(255,255,255,.05); padding: 32px 24px; font-size: 13px; color: var(--text-muted); margin-top: auto; }
+        .footer-container { max-width: 1200px; margin: 0 auto; display: flex; flex-direction: column; gap: 16px; }
+        .footer-top { display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 16px; }
+        .footer-links { display: flex; gap: 24px; }
+        .footer-links a { color: var(--text-muted); font-weight: 500; }
+        .footer-links a:hover { color: var(--brand-400); }
+        .footer-notice { font-size: 12px; color: var(--text-muted); border-top: 1px solid rgba(255,255,255,0.05); padding-top: 16px; text-align: left; display: none; }
+        .footer-notice .ast { color: var(--brand-400); font-weight: bold;}
+
+        @keyframes float { 
+            0% { transform: translate(-50%, 0px) rotate(0deg); } 
+            50% { transform: translate(-50%, -20px) rotate(10deg); } 
+            100% { transform: translate(-50%, 0px) rotate(0deg); } 
+        }
+
+        @media (max-width: 768px) {
+            .header-container { flex-direction: column; gap: 16px; }
+            nav { flex-wrap: wrap; justify-content: center; gap: 16px; }
+            .footer-top { flex-direction: column; text-align: center; }
+        }
+    </style>
 </head>
 <body>
-    <p>Redirecting...</p>
+
+    <svg width="0" height="0" style="display: none;">
+        <defs>
+            <linearGradient id="brandShapeGradient" x1="0%" y1="0%" x2="100%" y2="100%">
+                <stop offset="0%" stop-color="#8da4f1" />
+                <stop offset="100%" stop-color="#6c7ee5" />
+            </linearGradient>
+        </defs>
+    </svg>
+
+    <header>
+        <div class="header-container">
+            <a href="index.html" class="logo">
+                <span class="logo-mark">
+                    <svg width="100%" height="100%" viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
+                        <path d="M 17.5 50 C 10 20, 80 5, 90 45 C 100 85, 25 95, 17.5 50 Z" fill="url(#brandShapeGradient)" />
+                    </svg>
+                </span>
+                Linkest Foundation
+            </a>
+            <nav>
+                <a href="#" onclick="return false;" data-i18n="nav_contribution">Contribution</a>
+                <a href="security.html" data-i18n="nav_security">Security</a>
+                <a href="#" onclick="return false;" data-i18n="nav_projects">Projects</a>
+                <a href="#" onclick="return false;" data-i18n="nav_sponsor">Sponsor</a>
+                <a href="#" onclick="return false;" data-i18n="nav_about">About</a>
+                <a href="https://github.com/Linkest-FDT" target="_blank" rel="noopener">GitHub ↗</a>
+                
+                <div class="lang-switcher">
+                    <button class="lang-btn" aria-label="Choose Language" id="lang-btn">
+                        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                            <circle cx="12" cy="12" r="10"></circle>
+                            <line x1="2" y1="12" x2="22" y2="12"></line>
+                            <path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"></path>
+                        </svg>
+                    </button>
+                    <div class="dropdown-content" id="lang-menu"></div>
+                </div>
+            </nav>
+        </div>
+    </header>
+
+    <main>
+        <div class="hero-shape-container">
+            <svg width="100%" height="100%" viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
+                <path d="M 17.5 50 C 10 20, 80 5, 90 45 C 100 85, 25 95, 17.5 50 Z" fill="url(#brandShapeGradient)" />
+            </svg>
+        </div>
+
+        <h1 class="hero-title">404</h1>
+        <p class="hero-subtitle" data-i18n="404_desc">The page you are looking for has drifted into the void.</p>
+        
+        <div class="action-buttons">
+            <a href="index.html" class="btn btn-primary" data-i18n="404_btn">Return to Home</a>
+        </div>
+    </main>
+
+    <footer>
+        <div class="footer-container">
+            <div class="footer-top">
+                <div class="footer-copyright">
+                    <p>&copy; <span id="year"></span> Linkest Foundation and its affiliated organizations. All rights reserved.</p>
+                </div>
+                <div class="footer-links">
+                    <a href="https://status.linkest.org" target="_blank" rel="noopener" data-i18n="footer_status">Status</a>
+                    <a href="security.html" data-i18n="footer_policy">Policy</a>
+                    <a href="#" onclick="return false;" data-i18n="footer_contact">Contact Us</a>
+                </div>
+            </div>
+            <div class="footer-notice" id="machine-notice">
+                <span class="ast">*</span> <span data-i18n="machine_trans_notice"></span>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // ==========================================
+        // 1. Language Configuration
+        // ==========================================
+        const languages = [
+            { code: 'en-US', name: 'English', rtl: false, isMachine: false },
+            { code: 'zh-CN', name: '简体中文', rtl: false, isMachine: false },
+            { code: 'zh-TW', name: '繁體中文', rtl: false, isMachine: true },
+            { code: 'ja-JP', name: '日本語', rtl: false, isMachine: true },
+            { code: 'ru-RU', name: 'Русский', rtl: false, isMachine: true },
+            { code: 'de-DE', name: 'Deutsch', rtl: false, isMachine: true },
+            { code: 'fr-FR', name: 'Français', rtl: false, isMachine: true },
+            { code: 'es-ES', name: 'Español', rtl: false, isMachine: true },
+            { code: 'pt-BR', name: 'Português', rtl: false, isMachine: true },
+            { code: 'it-IT', name: 'Italiano', rtl: false, isMachine: true },
+            { code: 'ko-KR', name: '한국어', rtl: false, isMachine: true },
+            { code: 'pl-PL', name: 'Polski', rtl: false, isMachine: true },
+            { code: 'ar-SA', name: 'العربية', rtl: true, isMachine: true }
+        ];
+
+        // ==========================================
+        // 2. Language Dictionary (Focus on 404 keys + Header/Footer)
+        // ==========================================
+        const i18n = {
+            'en-US': {
+                nav_contribution: "Contribution", nav_security: "Security", nav_projects: "Projects", nav_sponsor: "Sponsor", nav_about: "About",
+                footer_status: "Status", footer_policy: "Policy", footer_contact: "Contact Us",
+                machine_trans_notice: "",
+                "404_desc": "The page you are looking for has drifted into the void.",
+                "404_btn": "Return to Home"
+            },
+            'zh-CN': {
+                nav_contribution: "贡献", nav_security: "安全", nav_projects: "项目", nav_sponsor: "赞助", nav_about: "关于",
+                footer_status: "状态", footer_policy: "政策", footer_contact: "联系我们",
+                machine_trans_notice: "",
+                "404_desc": "您访问的页面已经迷失在虚空之中。",
+                "404_btn": "返回首页"
+            },
+            'zh-TW': { 
+                nav_contribution: "貢獻", nav_security: "安全", nav_projects: "專案", nav_sponsor: "贊助", nav_about: "關於",
+                footer_status: "狀態", footer_policy: "政策", footer_contact: "聯繫我們",
+                machine_trans_notice: "* 部分內容由機器翻譯提供，歡迎社區修正。",
+                "404_desc": "您訪問的頁面已經迷失在虛空之中。",
+                "404_btn": "返回首頁"
+            },
+            'ja-JP': { 
+                nav_contribution: "コントリビューション", nav_security: "セキュリティ", nav_projects: "プロジェクト", nav_sponsor: "スポンサー", nav_about: "概要",
+                footer_status: "ステータス", footer_policy: "ポリシー", footer_contact: "お問い合わせ",
+                machine_trans_notice: "* 一部の言語は機械翻訳によって提供されています。コミュニティによる修正を歓迎します。",
+                "404_desc": "お探しのページは虚空に消え去りました。",
+                "404_btn": "ホームに戻る"
+            },
+            'ru-RU': { 
+                nav_contribution: "Вклад", nav_security: "Безопасность", nav_projects: "Проекты", nav_sponsor: "Спонсор", nav_about: "О нас",
+                footer_status: "Статус", footer_policy: "Политика", footer_contact: "Связаться с нами",
+                machine_trans_notice: "* Некоторые языки предоставлены машинным переводом. Мы приветствуем исправления от сообщества.",
+                "404_desc": "Страница, которую вы ищете, исчезла в пустоте.",
+                "404_btn": "Вернуться на главную"
+            },
+            'de-DE': { 
+                nav_contribution: "Beitragen", nav_security: "Sicherheit", nav_projects: "Projekte", nav_sponsor: "Sponsor", nav_about: "Über uns",
+                footer_status: "Status", footer_policy: "Richtlinie", footer_contact: "Kontakt",
+                machine_trans_notice: "* Einige Sprachen werden maschinell übersetzt. Korrekturen aus der Community sind willkommen.",
+                "404_desc": "Die gesuchte Seite ist in der Leere verschwunden.",
+                "404_btn": "Zurück zur Startseite"
+            },
+            'fr-FR': { 
+                nav_contribution: "Contribution", nav_security: "Sécurité", nav_projects: "Projets", nav_sponsor: "Sponsor", nav_about: "À propos",
+                footer_status: "Statut", footer_policy: "Politique", footer_contact: "Contact",
+                machine_trans_notice: "* Certaines langues sont traduites automatiquement. Les corrections de la communauté sont les bienvenues.",
+                "404_desc": "La page que vous recherchez a dérivé dans le vide.",
+                "404_btn": "Retour à l'accueil"
+            },
+            'es-ES': { 
+                nav_contribution: "Contribución", nav_security: "Seguridad", nav_projects: "Proyectos", nav_sponsor: "Patrocinador", nav_about: "Acerca de",
+                footer_status: "Estado", footer_policy: "Política", footer_contact: "Contacto",
+                machine_trans_notice: "* Algunos idiomas están traducidos automáticamente. Se agradecen las correcciones de la comunidad.",
+                "404_desc": "La página que buscas se ha desviado hacia el vacío.",
+                "404_btn": "Volver al inicio"
+            },
+            'pt-BR': { 
+                nav_contribution: "Contribuição", nav_security: "Segurança", nav_projects: "Projetos", nav_sponsor: "Patrocinador", nav_about: "Sobre",
+                footer_status: "Status", footer_policy: "Política", footer_contact: "Contato",
+                machine_trans_notice: "* Alguns idiomas são traduzidos automaticamente. Correções da comunidade são bem-vindas.",
+                "404_desc": "A página que você procura desapareceu no vazio.",
+                "404_btn": "Voltar ao início"
+            },
+            'it-IT': { 
+                nav_contribution: "Contributo", nav_security: "Sicurezza", nav_projects: "Progetti", nav_sponsor: "Sponsor", nav_about: "Chi siamo",
+                footer_status: "Stato", footer_policy: "Politica", footer_contact: "Contattaci",
+                machine_trans_notice: "* Alcune lingue sono tradotte automaticamente. Le correzioni della community sono benvenute.",
+                "404_desc": "La pagina che stai cercando è scomparsa nel vuoto.",
+                "404_btn": "Torna alla home"
+            },
+            'ko-KR': { 
+                nav_contribution: "기여", nav_security: "보안", nav_projects: "프로젝트", nav_sponsor: "후원", nav_about: "소개",
+                footer_status: "상태", footer_policy: "정책", footer_contact: "문의하기",
+                machine_trans_notice: "* 일부 언어는 기계 번역으로 제공됩니다. 커뮤니티의 수정을 환영합니다.",
+                "404_desc": "찾으시는 페이지가虚空(공허) 속으로 사라졌습니다.",
+                "404_btn": "홈으로 돌아가기"
+            },
+            'pl-PL': { 
+                nav_contribution: "Wkład", nav_security: "Bezpieczeństwo", nav_projects: "Projekty", nav_sponsor: "Sponsor", nav_about: "O nas",
+                footer_status: "Status", footer_policy: "Polityka", footer_contact: "Kontakt",
+                machine_trans_notice: "* Niektóre języki są tłumaczone maszynowo. Poprawki społeczności są mile widziane.",
+                "404_desc": "Strona, której szukasz, odpłynęła w próżnię.",
+                "404_btn": "Powrót do domu"
+            },
+            'ar-SA': { 
+                nav_contribution: "مساهمة", nav_security: "الأمن", nav_projects: "المشاريع", nav_sponsor: "الراعي", nav_about: "حول",
+                footer_status: "الحالة", footer_policy: "سياسة", footer_contact: "اتصل بنا",
+                machine_trans_notice: "* بعض اللغات مترجمة آلياً. نرحب بتصحيحات المجتمع.",
+                "404_desc": "الصفحة التي تبحث عنها انجرفت إلى الفراغ.",
+                "404_btn": "العودة إلى الصفحة الرئيسية"
+            }
+        };
+
+        // ==========================================
+        // 3. Core Functions (Same routing logic)
+        // ==========================================
+        
+        function updateURL(langCode) {
+            const url = new URL(window.location);
+            if (langCode === 'en-US') {
+                url.searchParams.delete('lang');
+            } else {
+                url.searchParams.set('lang', langCode);
+            }
+            window.history.replaceState({ lang: langCode }, '', url);
+        }
+
+        document.getElementById('lang-btn').addEventListener('click', (e) => {
+            e.stopPropagation();
+            document.getElementById('lang-menu').classList.toggle('show');
+        });
+
+        document.addEventListener('click', (e) => {
+            const menu = document.getElementById('lang-menu');
+            const btn = document.getElementById('lang-btn');
+            if (menu.classList.contains('show') && !btn.contains(e.target) && !menu.contains(e.target)) {
+                menu.classList.remove('show');
+            }
+        });
+
+        function setLanguage(langCode, updateUrl = true) {
+            document.cookie = `linkest_lang=${langCode}; path=/; max-age=31536000`;
+            
+            const langConfig = languages.find(l => l.code === langCode) || languages[0];
+            const dict = Object.assign({}, i18n['en-US'], i18n[langCode] || {});
+
+            document.documentElement.setAttribute('dir', langConfig.rtl ? 'rtl' : 'ltr');
+            document.documentElement.setAttribute('lang', langCode);
+
+            document.querySelectorAll('[data-i18n]').forEach(el => {
+                const key = el.getAttribute('data-i18n');
+                if (dict[key] !== undefined) el.innerHTML = dict[key];
+            });
+
+            const machineNotice = document.getElementById('machine-notice');
+            if (langConfig.isMachine) {
+                machineNotice.style.display = 'block';
+            } else {
+                machineNotice.style.display = 'none';
+            }
+
+            if (updateUrl) updateURL(langCode);
+            renderMenu(langCode);
+            document.getElementById('lang-menu').classList.remove('show');
+        }
+
+        function renderMenu(currentLang) {
+            const menu = document.getElementById('lang-menu');
+            menu.innerHTML = '';
+            languages.forEach(lang => {
+                const a = document.createElement('a');
+                a.innerHTML = lang.name + (lang.isMachine ? '<span class="machine-ast">*</span>' : '');
+                
+                if (lang.code === currentLang) {
+                    a.style.color = 'var(--brand-400)';
+                    a.style.backgroundColor = 'rgba(59,130,246,.1)';
+                }
+                
+                a.addEventListener('click', (e) => {
+                    e.preventDefault();
+                    e.stopPropagation();
+                    setLanguage(lang.code);
+                });
+                
+                menu.appendChild(a);
+            });
+        }
+
+        function initLanguage() {
+            const urlParams = new URLSearchParams(window.location.search);
+            const urlLang = urlParams.get('lang');
+            if (urlLang && languages.some(l => l.code === urlLang)) {
+                return urlLang;
+            }
+
+            const match = document.cookie.match(/(^| )linkest_lang=([^;]+)/);
+            if (match) return match[2];
+            
+            const browserLang = navigator.language || navigator.userLanguage;
+            const matchedLang = languages.find(l => browserLang.startsWith(l.code.split('-')[0]));
+            return matchedLang ? matchedLang.code : 'en-US';
+        }
+
+        document.addEventListener('DOMContentLoaded', () => {
+            document.getElementById('year').textContent = new Date().getFullYear();
+            const initialLang = initLanguage();
+            setLanguage(initialLang, false); 
+        });
+    </script>
 </body>
 </html>
