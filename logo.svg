@@ -1,0 +1,31 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100" width="100%" height="100%">
+  <defs>
+    <!-- Extracted gradient colors from the original Kunpeng concept -->
+    <linearGradient id="kunpengGrad" x1="10%" y1="10%" x2="90%" y2="90%">
+      <stop offset="0%" stop-color="#a3aaff"/>
+      <stop offset="100%" stop-color="#6971d8"/>
+    </linearGradient>
+    
+    <!-- Mask definition to cut out the "Link" icon and eye from the fish body -->
+    <mask id="linkCutout">
+      <rect width="100" height="100" fill="white" />
+      
+      <!-- Link ring 1 (Bottom) -->
+      <rect x="25" y="48" width="38" height="14" rx="7" transform="rotate(35 44 55)" fill="none" stroke="black" stroke-width="7" />
+      
+      <!-- Link ring 2 (Top) -->
+      <rect x="36" y="36" width="38" height="14" rx="7" transform="rotate(35 55 43)" fill="none" stroke="black" stroke-width="7" />
+      
+      <!-- Fish eye -->
+      <circle cx="82" cy="35" r="3" fill="black" />
+    </mask>
+  </defs>
+  
+  <!-- Main fish body (Kunpeng) -->
+  <path d="M 10,60 
+           C 10,30 50,10 80,20 
+           C 100,30 95,65 75,80 
+           C 50,100 15,85 10,60 Z" 
+        fill="url(#kunpengGrad)" 
+        mask="url(#linkCutout)" />
+</svg>
