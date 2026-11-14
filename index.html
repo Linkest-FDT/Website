@@ -6,9 +6,6 @@
     <title>Linkest Foundation | Link this galaxy</title>
     <meta name="description" content="Linkest Foundation is a decentralized non-profit collaborative foundation for open-source security and modern web infrastructure.">
     
-    <!-- Favicon: The Kunpeng Logo -->
-    <link rel="icon" href="/logo.svg" type="image/svg+xml">
-    
     <!-- SEO and Social Meta -->
     <meta property="og:title" content="Linkest Foundation">
     <meta property="og:description" content="Link this galaxy, with your content.">
@@ -36,6 +33,8 @@
             --brand-600: #2563eb;
             --font-sans: 'Inter', system-ui, -apple-system, sans-serif;
             --font-mono: 'Fira Code', monospace;
+            --shape-start: #8da4f1;
+            --shape-end: #6c7ee5;
         }
 
         * { box-sizing: border-box; margin: 0; padding: 0; }
@@ -90,11 +89,10 @@
             font-weight: 600; display: flex; align-items: center; gap: 6px; cursor: pointer;
             transition: all 0.2s ease; font-size: 13px;
         }
-        .lang-btn:hover, .lang-btn.active { background-color: rgba(59,130,246,.2); border-color: var(--brand-400); color: #fff; }
+        .lang-btn:hover { background-color: rgba(59,130,246,.2); border-color: var(--brand-400); color: #fff; }
         
         .dropdown-content {
-            display: none;
-            position: absolute; right: 0; top: 100%; margin-top: 8px;
+            display: none; position: absolute; right: 0; top: 100%; margin-top: 8px;
             background-color: var(--bg-surface); border: 1px solid var(--border-color);
             border-radius: 8px; box-shadow: 0 10px 25px rgba(0,0,0,0.5); min-width: 140px; z-index: 101;
             max-height: 400px; overflow-y: auto;
@@ -160,10 +158,7 @@
         footer { border-top: 1px solid rgba(255,255,255,.05); padding: 32px 24px; font-size: 13px; color: var(--text-muted); margin-top: auto; }
         .footer-container { max-width: 1200px; margin: 0 auto; display: flex; flex-direction: column; gap: 16px; }
         
-        .footer-top {
-            display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 16px;
-        }
-
+        .footer-top { display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 16px; }
         .footer-links { display: flex; gap: 24px; }
         .footer-links a { color: var(--text-muted); font-weight: 500; }
         .footer-links a:hover { color: var(--brand-400); }
@@ -190,41 +185,37 @@
 </head>
 <body>
 
-    <!-- Header Navigation -->
+    <!-- Reusable SVG Gradients -->
+    <svg width="0" height="0" style="display: none;">
+        <defs>
+            <linearGradient id="brandShapeGradient" x1="0%" y1="0%" x2="100%" y2="100%">
+                <stop offset="0%" stop-color="#8da4f1" />
+                <stop offset="100%" stop-color="#6c7ee5" />
+            </linearGradient>
+        </defs>
+    </svg>
+
+    <!-- Header -->
     <header>
         <div class="header-container">
-            <a href="/" class="logo" id="logo-link">
+            <a href="index.html" class="logo">
                 <span class="logo-mark">
-                    <!-- Kunpeng Logo -->
-                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100" width="100%" height="100%">
-                      <defs>
-                        <linearGradient id="kunpengGradH" x1="10%" y1="10%" x2="90%" y2="90%">
-                          <stop offset="0%" stop-color="#a3aaff"/>
-                          <stop offset="100%" stop-color="#6971d8"/>
-                        </linearGradient>
-                        <mask id="linkCutoutH">
-                          <rect width="100" height="100" fill="white" />
-                          <rect x="25" y="48" width="38" height="14" rx="7" transform="rotate(35 44 55)" fill="none" stroke="black" stroke-width="7" />
-                          <rect x="36" y="36" width="38" height="14" rx="7" transform="rotate(35 55 43)" fill="none" stroke="black" stroke-width="7" />
-                          <circle cx="82" cy="35" r="3" fill="black" />
-                        </mask>
-                      </defs>
-                      <path d="M 10,60 C 10,30 50,10 80,20 C 100,30 95,65 75,80 C 50,100 15,85 10,60 Z" fill="url(#kunpengGradH)" mask="url(#linkCutoutH)" />
+                    <svg width="100%" height="100%" viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
+                        <path d="M 17.5 50 C 10 20, 80 5, 90 45 C 100 85, 25 95, 17.5 50 Z" fill="url(#brandShapeGradient)" />
                     </svg>
                 </span>
                 Linkest Foundation
             </a>
             <nav>
-                <!-- Navigation Links with clean URLs -->
-                <a id="link-contribution" href="/contribution" data-i18n="nav_contribution">Contribution</a>
-                <a id="link-security" href="/security" data-i18n="nav_security">Security</a>
-                <a id="link-projects" href="/projects" data-i18n="nav_projects">Projects</a>
-                <a id="link-sponsor" href="/sponsor" data-i18n="nav_sponsor">Sponsor</a>
-                <a id="link-about" href="/about" data-i18n="nav_about">About</a>
+                <a href="#" onclick="return false;" data-i18n="nav_contribution">Contribution</a>
+                <a href="security.html" data-i18n="nav_security">Security</a>
+                <a href="#" onclick="return false;" data-i18n="nav_projects">Projects</a>
+                <a href="#" onclick="return false;" data-i18n="nav_sponsor">Sponsor</a>
+                <a href="#" onclick="return false;" data-i18n="nav_about">About</a>
                 <a href="https://github.com/Linkest-FDT" target="_blank" rel="noopener">GitHub ↗</a>
                 
                 <div class="lang-switcher">
-                    <button class="lang-btn" id="lang-btn" aria-label="Choose Language" aria-expanded="false">
+                    <button class="lang-btn" aria-label="Choose Language" id="lang-btn">
                         <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
                             <circle cx="12" cy="12" r="10"></circle>
                             <line x1="2" y1="12" x2="22" y2="12"></line>
@@ -240,21 +231,8 @@
     <!-- Main Hero Content -->
     <main>
         <div class="hero-shape-container">
-            <!-- Giant Background Kunpeng -->
-            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100" width="100%" height="100%">
-              <defs>
-                <linearGradient id="kunpengGradHero" x1="10%" y1="10%" x2="90%" y2="90%">
-                  <stop offset="0%" stop-color="#a3aaff"/>
-                  <stop offset="100%" stop-color="#6971d8"/>
-                </linearGradient>
-                <mask id="linkCutoutHero">
-                  <rect width="100" height="100" fill="white" />
-                  <rect x="25" y="48" width="38" height="14" rx="7" transform="rotate(35 44 55)" fill="none" stroke="black" stroke-width="7" />
-                  <rect x="36" y="36" width="38" height="14" rx="7" transform="rotate(35 55 43)" fill="none" stroke="black" stroke-width="7" />
-                  <circle cx="82" cy="35" r="3" fill="black" />
-                </mask>
-              </defs>
-              <path d="M 10,60 C 10,30 50,10 80,20 C 100,30 95,65 75,80 C 50,100 15,85 10,60 Z" fill="url(#kunpengGradHero)" mask="url(#linkCutoutHero)" />
+            <svg width="100%" height="100%" viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
+                <path d="M 17.5 50 C 10 20, 80 5, 90 45 C 100 85, 25 95, 17.5 50 Z" fill="url(#brandShapeGradient)" />
             </svg>
         </div>
 
@@ -278,9 +256,8 @@
                 </div>
                 <div class="footer-links">
                     <a href="https://status.linkest.org" target="_blank" rel="noopener" data-i18n="footer_status">Status</a>
-                    <!-- Footer Links with clean URLs -->
-                    <a id="footer-policy" href="/policy" data-i18n="footer_policy">Policy</a>
-                    <a id="footer-contact" href="/contact" data-i18n="footer_contact">Contact Us</a>
+                    <a href="security.html" data-i18n="footer_policy">Policy</a>
+                    <a href="#" onclick="return false;" data-i18n="footer_contact">Contact Us</a>
                 </div>
             </div>
             <div class="footer-notice" id="machine-notice">
@@ -290,11 +267,13 @@
     </footer>
 
     <script>
+        // ==========================================
         // 1. Language Configuration
+        // ==========================================
         const languages = [
             { code: 'en-US', name: 'English', rtl: false, isMachine: false },
             { code: 'zh-CN', name: '简体中文', rtl: false, isMachine: false },
-            { code: 'zh-TW', name: '繁體中文', rtl: false, isMachine: false },
+            { code: 'zh-TW', name: '繁體中文', rtl: false, isMachine: true },
             { code: 'ja-JP', name: '日本語', rtl: false, isMachine: true },
             { code: 'ru-RU', name: 'Русский', rtl: false, isMachine: true },
             { code: 'de-DE', name: 'Deutsch', rtl: false, isMachine: true },
@@ -304,17 +283,19 @@
             { code: 'it-IT', name: 'Italiano', rtl: false, isMachine: true },
             { code: 'ko-KR', name: '한국어', rtl: false, isMachine: true },
             { code: 'pl-PL', name: 'Polski', rtl: false, isMachine: true },
-            { code: 'ar-SA', name: 'العربية', rtl: true, isMachine: true } 
+            { code: 'ar-SA', name: 'العربية', rtl: true, isMachine: true }
         ];
 
+        // ==========================================
         // 2. Language Dictionary
+        // ==========================================
         const i18n = {
             'en-US': {
                 nav_contribution: "Contribution", nav_security: "Security", nav_projects: "Projects", nav_sponsor: "Sponsor", nav_about: "About",
                 hero_subtitle: "Welcome to <span>Linkest Foundation</span>.",
                 btn_join: "Join Linkest Foundation", btn_github: "Visit GitHub",
                 footer_status: "Status", footer_policy: "Policy", footer_contact: "Contact Us",
-                machine_trans_notice: "", 
+                machine_trans_notice: "",
                 typewriter_text: "Link this galaxy, with your content."
             },
             'zh-CN': {
@@ -322,15 +303,15 @@
                 hero_subtitle: "欢迎来到 <span>Linkest Foundation</span>。",
                 btn_join: "加入 Linkest Foundation", btn_github: "访问 GitHub",
                 footer_status: "状态", footer_policy: "政策", footer_contact: "联系我们",
-                machine_trans_notice: "", 
-                typewriter_text: "乘尔造化，以连无穷。"
+                machine_trans_notice: "",
+                typewriter_text: "连接这片星系，用你的创作。"
             },
             'zh-TW': {
                 nav_contribution: "貢獻", nav_security: "安全", nav_projects: "專案", nav_sponsor: "贊助", nav_about: "關於",
                 hero_subtitle: "歡迎來到 <span>Linkest Foundation</span>。",
                 btn_join: "加入 Linkest Foundation", btn_github: "訪問 GitHub",
                 footer_status: "狀態", footer_policy: "政策", footer_contact: "聯繫我們",
-                machine_trans_notice: "", 
+                machine_trans_notice: "* 部分內容由機器翻譯提供，歡迎社區修正。",
                 typewriter_text: "連接這片星系，用你的創作。"
             },
             'ja-JP': {
@@ -338,7 +319,7 @@
                 hero_subtitle: "ようこそ、<span>Linkest Foundation</span> へ。",
                 btn_join: "参加する", btn_github: "GitHub を見る",
                 footer_status: "ステータス", footer_policy: "ポリシー", footer_contact: "お問い合わせ",
-                machine_trans_notice: "一部の言語は機械翻訳によって提供されています。コミュニティによる修正を歓迎します。",
+                machine_trans_notice: "* 一部の言語は機械翻訳によって提供されています。コミュニティによる修正を歓迎します。",
                 typewriter_text: "あなたのコンテンツで、この銀河をつなぐ。"
             },
             'ru-RU': {
@@ -346,105 +327,114 @@
                 hero_subtitle: "Добро пожаловать в <span>Linkest Foundation</span>.",
                 btn_join: "Присоединиться", btn_github: "Посетить GitHub",
                 footer_status: "Статус", footer_policy: "Политика", footer_contact: "Связаться с нами",
-                machine_trans_notice: "Некоторые языки предоставлены машинным переводом. Мы приветствуем вклад сообщества.",
+                machine_trans_notice: "* Некоторые языки предоставлены машинным переводом. Мы приветствуем исправления от сообщества.",
                 typewriter_text: "Свяжите эту галактику своим контентом."
             },
             'de-DE': { 
                 nav_contribution: "Beitragen", nav_security: "Sicherheit", nav_projects: "Projekte", nav_sponsor: "Sponsor", nav_about: "Über uns", 
                 hero_subtitle: "Willkommen bei <span>Linkest Foundation</span>.", btn_join: "Beitreten", btn_github: "GitHub besuchen", 
                 footer_status: "Status", footer_policy: "Richtlinie", footer_contact: "Kontakt", 
-                machine_trans_notice: "Einige Sprachen werden durch maschinelle Übersetzung bereitgestellt. Community-Beiträge sind willkommen.", 
+                machine_trans_notice: "* Einige Sprachen werden maschinell übersetzt. Korrekturen aus der Community sind willkommen.", 
                 typewriter_text: "Verbinde diese Galaxie mit deinem Inhalt." 
             },
             'fr-FR': { 
                 nav_contribution: "Contribution", nav_security: "Sécurité", nav_projects: "Projets", nav_sponsor: "Sponsor", nav_about: "À propos", 
                 hero_subtitle: "Bienvenue à <span>Linkest Foundation</span>.", btn_join: "Rejoindre", btn_github: "Visiter GitHub", 
                 footer_status: "Statut", footer_policy: "Politique", footer_contact: "Contact", 
-                machine_trans_notice: "Certaines langues sont fournies par traduction automatique. Les contributions de la communauté sont les bienvenues.", 
+                machine_trans_notice: "* Certaines langues sont traduites automatiquement. Les corrections de la communauté sont les bienvenues.", 
                 typewriter_text: "Connectez cette galaxie avec votre contenu." 
             },
             'es-ES': { 
                 nav_contribution: "Contribución", nav_security: "Seguridad", nav_projects: "Proyectos", nav_sponsor: "Patrocinador", nav_about: "Acerca de", 
                 hero_subtitle: "Bienvenido a <span>Linkest Foundation</span>.", btn_join: "Unirse", btn_github: "Visitar GitHub", 
                 footer_status: "Estado", footer_policy: "Política", footer_contact: "Contacto", 
-                machine_trans_notice: "Algunos idiomas son proporcionados por traducción automática. Las contribuciones de la comunidad son bienvenidas.", 
+                machine_trans_notice: "* Algunos idiomas están traducidos automáticamente. Se agradecen las correcciones de la comunidad.", 
                 typewriter_text: "Conecta esta galaxia con tu contenido." 
             },
             'pt-BR': { 
                 nav_contribution: "Contribuição", nav_security: "Segurança", nav_projects: "Projetos", nav_sponsor: "Patrocinador", nav_about: "Sobre", 
                 hero_subtitle: "Bem-vindo à <span>Linkest Foundation</span>.", btn_join: "Juntar-se", btn_github: "Visitar GitHub", 
                 footer_status: "Status", footer_policy: "Política", footer_contact: "Contato", 
-                machine_trans_notice: "Alguns idiomas são fornecidos por tradução automática. As contribuições da comunidade são bem-vindas.", 
+                machine_trans_notice: "* Alguns idiomas são traduzidos automaticamente. Correções da comunidade são bem-vindas.", 
                 typewriter_text: "Conecte esta galáxia com o seu conteúdo." 
             },
             'it-IT': { 
                 nav_contribution: "Contributo", nav_security: "Sicurezza", nav_projects: "Progetti", nav_sponsor: "Sponsor", nav_about: "Chi siamo", 
                 hero_subtitle: "Benvenuto in <span>Linkest Foundation</span>.", btn_join: "Unisciti", btn_github: "Visita GitHub", 
                 footer_status: "Stato", footer_policy: "Politica", footer_contact: "Contattaci", 
-                machine_trans_notice: "Alcune lingue sono fornite da traduzione automatica. I contributi della comunità sono benvenuti.", 
+                machine_trans_notice: "* Alcune lingue sono tradotte automaticamente. Le correzioni della community sono benvenute.", 
                 typewriter_text: "Collega questa galassia con i tuoi contenuti." 
             },
             'ko-KR': { 
                 nav_contribution: "기여", nav_security: "보안", nav_projects: "프로젝트", nav_sponsor: "후원", nav_about: "소개", 
                 hero_subtitle: "<span>Linkest Foundation</span>에 오신 것을 환영합니다.", btn_join: "참여하기", btn_github: "GitHub 방문", 
                 footer_status: "상태", footer_policy: "정책", footer_contact: "문의하기", 
-                machine_trans_notice: "일부 언어는 기계 번역으로 제공됩니다. 커뮤니티 기여를 환영합니다.", 
+                machine_trans_notice: "* 일부 언어는 기계 번역으로 제공됩니다. 커뮤니티의 수정을 환영합니다.", 
                 typewriter_text: "당신의 콘텐츠로 이 은하계를 연결하세요." 
             },
             'pl-PL': { 
                 nav_contribution: "Wkład", nav_security: "Bezpieczeństwo", nav_projects: "Projekty", nav_sponsor: "Sponsor", nav_about: "O nas", 
                 hero_subtitle: "Witamy w <span>Linkest Foundation</span>.", btn_join: "Dołącz", btn_github: "Odwiedź GitHub", 
                 footer_status: "Status", footer_policy: "Polityka", footer_contact: "Kontakt", 
-                machine_trans_notice: "Niektóre języki są dostarczane przez tłumaczenie maszynowe. Wkład społeczności jest mile widziany.", 
+                machine_trans_notice: "* Niektóre języki są tłumaczone maszynowo. Poprawki społeczności są mile widziane.", 
                 typewriter_text: "Połącz tę galaktykę swoją treścią." 
             },
             'ar-SA': { 
                 nav_contribution: "مساهمة", nav_security: "الأمن", nav_projects: "المشاريع", nav_sponsor: "الراعي", nav_about: "حول", 
                 hero_subtitle: "مرحبًا بك في <span>Linkest Foundation</span>.", btn_join: "انضم إلى", btn_github: "زيارة GitHub", 
                 footer_status: "الحالة", footer_policy: "سياسة", footer_contact: "اتصل بنا", 
-                machine_trans_notice: "يتم توفير بعض اللغات عن طريق الترجمة الآلية. مساهمات المجتمع مرحب بها.", 
+                machine_trans_notice: "* بعض اللغات مترجمة آلياً. نرحب بتصحيحات المجتمع.", 
                 typewriter_text: "اربط هذه المجرة بمحتواك." 
             }
         };
 
         let typewriterTimeout;
 
-        // Update URL without reloading the page
+        // ==========================================
+        // 3. Core Functions
+        // ==========================================
+        
+        // Use query parameters (?lang=zh-CN) to avoid 404 on GitHub Pages
         function updateURL(langCode) {
-            const newPath = langCode === 'en-US' ? '/' : `/${langCode}`;
-            window.history.pushState({ lang: langCode }, '', newPath);
+            const url = new URL(window.location);
+            if (langCode === 'en-US') {
+                url.searchParams.delete('lang'); // Clean URL for default English
+            } else {
+                url.searchParams.set('lang', langCode);
+            }
+            window.history.replaceState({ lang: langCode }, '', url);
         }
 
-        // Set the active language and update UI elements
+        // Mobile-friendly dropdown toggle
+        document.getElementById('lang-btn').addEventListener('click', (e) => {
+            e.stopPropagation();
+            const menu = document.getElementById('lang-menu');
+            menu.classList.toggle('show');
+        });
+
+        // Close dropdown when clicking outside
+        document.addEventListener('click', (e) => {
+            const menu = document.getElementById('lang-menu');
+            const btn = document.getElementById('lang-btn');
+            if (menu.classList.contains('show') && !btn.contains(e.target) && !menu.contains(e.target)) {
+                menu.classList.remove('show');
+            }
+        });
+
         function setLanguage(langCode, updateUrl = true) {
             document.cookie = `linkest_lang=${langCode}; path=/; max-age=31536000`;
             
             const langConfig = languages.find(l => l.code === langCode) || languages[0];
-            const dict = i18n[langCode] || i18n['en-US'];
+            const dict = Object.assign({}, i18n['en-US'], i18n[langCode] || {});
 
-            // Apply RTL direction for Arabic
             document.documentElement.setAttribute('dir', langConfig.rtl ? 'rtl' : 'ltr');
             document.documentElement.setAttribute('lang', langCode);
 
-            // Replace text content using data-i18n attributes
             document.querySelectorAll('[data-i18n]').forEach(el => {
                 const key = el.getAttribute('data-i18n');
                 if (dict[key] !== undefined) el.innerHTML = dict[key];
             });
 
-            // Dynamically update all navigation and footer links based on selected language
-            const prefix = langCode === 'en-US' ? '' : `/${langCode}`;
-            
-            document.getElementById('logo-link').href = prefix || '/';
-            document.getElementById('link-contribution').href = `${prefix}/contribution`;
-            document.getElementById('link-security').href = `${prefix}/security`;
-            document.getElementById('link-projects').href = `${prefix}/projects`;
-            document.getElementById('link-sponsor').href = `${prefix}/sponsor`;
-            document.getElementById('link-about').href = `${prefix}/about`;
-            document.getElementById('footer-policy').href = `${prefix}/policy`;
-            document.getElementById('footer-contact').href = `${prefix}/contact`;
-
-            // Show machine translation notice for non-EN/ZH languages
             const machineNotice = document.getElementById('machine-notice');
             if (langConfig.isMachine) {
                 machineNotice.style.display = 'block';
@@ -458,10 +448,10 @@
 
             if (updateUrl) updateURL(langCode);
             renderMenu(langCode);
-            closeLangMenu();
+            
+            document.getElementById('lang-menu').classList.remove('show');
         }
 
-        // Typewriter effect logic
         function runTypewriter(text) {
             const typewriterElement = document.getElementById('typewriter');
             const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
@@ -484,89 +474,51 @@
             typewriterTimeout = setTimeout(type, 300);
         }
 
-        // Render the language dropdown menu
         function renderMenu(currentLang) {
             const menu = document.getElementById('lang-menu');
             menu.innerHTML = '';
             languages.forEach(lang => {
                 const a = document.createElement('a');
+                // Add asterisk for machine-translated languages (except EN and ZH)
                 a.innerHTML = lang.name + (lang.isMachine ? '<span class="machine-ast">*</span>' : '');
                 
                 if (lang.code === currentLang) {
                     a.style.color = 'var(--brand-400)';
                     a.style.backgroundColor = 'rgba(59,130,246,.1)';
                 }
-                a.onclick = () => setLanguage(lang.code);
+                
+                a.addEventListener('click', (e) => {
+                    e.preventDefault();
+                    e.stopPropagation();
+                    setLanguage(lang.code);
+                });
+                
                 menu.appendChild(a);
             });
         }
 
-        const langBtn = document.getElementById('lang-btn');
-        const langMenu = document.getElementById('lang-menu');
-
-        function closeLangMenu() {
-            langMenu.classList.remove('show');
-            langBtn.classList.remove('active');
-            langBtn.setAttribute('aria-expanded', 'false');
-        }
-
-        // Toggle menu on button click
-        langBtn.addEventListener('click', (e) => {
-            e.stopPropagation();
-            const isShowing = langMenu.classList.contains('show');
-            if (isShowing) {
-                closeLangMenu();
-            } else {
-                langMenu.classList.add('show');
-                langBtn.classList.add('active');
-                langBtn.setAttribute('aria-expanded', 'true');
-            }
-        });
-
-        // Close menu when clicking outside
-        document.addEventListener('click', (e) => {
-            if (!langMenu.contains(e.target) && e.target !== langBtn) {
-                closeLangMenu();
-            }
-        });
-
-        // Initialize language based on URL, cookie, or browser settings
         function initLanguage() {
+            // Priority 1: Check URL Query Parameter (?lang=...)
             const urlParams = new URLSearchParams(window.location.search);
-            const redirectPath = urlParams.get('redirect');
-            
-            if (redirectPath) {
-                window.history.replaceState({}, '', redirectPath);
+            const urlLang = urlParams.get('lang');
+            if (urlLang && languages.some(l => l.code === urlLang)) {
+                return urlLang;
             }
 
-            const pathSegments = window.location.pathname.split('/').filter(Boolean);
-            if (pathSegments.length > 0) {
-                const urlLang = pathSegments[0];
-                if (languages.some(l => l.code === urlLang)) {
-                    return urlLang;
-                }
-            }
-
+            // Priority 2: Cookie
             const match = document.cookie.match(/(^| )linkest_lang=([^;]+)/);
             if (match) return match[2];
             
-            const browserLang = navigator.language || navigator.userAgent;
+            // Priority 3: Browser Language
+            const browserLang = navigator.language || navigator.userLanguage;
             const matchedLang = languages.find(l => browserLang.startsWith(l.code.split('-')[0]));
-            if (matchedLang) return matchedLang.code;
-            
-            return 'en-US';
+            return matchedLang ? matchedLang.code : 'en-US';
         }
 
         document.addEventListener('DOMContentLoaded', () => {
             document.getElementById('year').textContent = new Date().getFullYear();
             const initialLang = initLanguage();
             setLanguage(initialLang, false); 
-        });
-
-        // Handle browser back/forward navigation
-        window.addEventListener('popstate', () => {
-            const initialLang = initLanguage();
-            setLanguage(initialLang, false);
         });
     </script>
 </body>
