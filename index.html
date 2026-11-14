@@ -6,7 +6,7 @@
     <title>Linkest Foundation | Link this galaxy</title>
     <meta name="description" content="Linkest Foundation is a decentralized non-profit collaborative foundation for open-source security and modern web infrastructure.">
     
-    <!-- 🐟 Favicon: Tells the browser to use logo.svg in the tab -->
+    <!-- 🐟 Favicon: The Kunpeng Logo -->
     <link rel="icon" href="/logo.svg" type="image/svg+xml">
     
     <!-- SEO and Social Meta -->
@@ -36,8 +36,6 @@
             --brand-600: #2563eb;
             --font-sans: 'Inter', system-ui, -apple-system, sans-serif;
             --font-mono: 'Fira Code', monospace;
-            --shape-start: #8da4f1;
-            --shape-end: #6c7ee5;
         }
 
         * { box-sizing: border-box; margin: 0; padding: 0; }
@@ -197,25 +195,32 @@
         <div class="header-container">
             <a href="/" class="logo" id="logo-link">
                 <span class="logo-mark">
-                    <!-- 🐟 Fish Logo: Gradient moved INLINE to prevent rendering issues -->
-                    <svg width="100%" height="100%" viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
-                        <defs>
-                            <linearGradient id="brandGradientHeader" x1="0%" y1="0%" x2="100%" y2="100%">
-                                <stop offset="0%" stop-color="#8da4f1" />
-                                <stop offset="100%" stop-color="#6c7ee5" />
-                            </linearGradient>
-                        </defs>
-                        <path d="M 17.5 50 C 10 20, 80 5, 90 45 C 100 85, 25 95, 17.5 50 Z" fill="url(#brandGradientHeader)" />
+                    <!-- 鲲鹏 Logo -->
+                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100" width="100%" height="100%">
+                      <defs>
+                        <linearGradient id="kunpengGradH" x1="10%" y1="10%" x2="90%" y2="90%">
+                          <stop offset="0%" stop-color="#a3aaff"/>
+                          <stop offset="100%" stop-color="#6971d8"/>
+                        </linearGradient>
+                        <mask id="linkCutoutH">
+                          <rect width="100" height="100" fill="white" />
+                          <rect x="25" y="48" width="38" height="14" rx="7" transform="rotate(35 44 55)" fill="none" stroke="black" stroke-width="7" />
+                          <rect x="36" y="36" width="38" height="14" rx="7" transform="rotate(35 55 43)" fill="none" stroke="black" stroke-width="7" />
+                          <circle cx="82" cy="35" r="3" fill="black" />
+                        </mask>
+                      </defs>
+                      <path d="M 10,60 C 10,30 50,10 80,20 C 100,30 95,65 75,80 C 50,100 15,85 10,60 Z" fill="url(#kunpengGradH)" mask="url(#linkCutoutH)" />
                     </svg>
                 </span>
                 Linkest Foundation
             </a>
             <nav>
-                <a href="#" onclick="return false;" data-i18n="nav_contribution">Contribution</a>
-                <a href="#" onclick="return false;" data-i18n="nav_security">Security</a>
-                <a href="#" onclick="return false;" data-i18n="nav_projects">Projects</a>
-                <a href="#" onclick="return false;" data-i18n="nav_sponsor">Sponsor</a>
-                <a href="#" onclick="return false;" data-i18n="nav_about">About</a>
+                <!-- 🚀 Navigation Links: Added IDs to dynamically update href based on language -->
+                <a id="link-contribution" href="/contribution.html" data-i18n="nav_contribution">Contribution</a>
+                <a id="link-security" href="/security.html" data-i18n="nav_security">Security</a>
+                <a id="link-projects" href="/projects.html" data-i18n="nav_projects">Projects</a>
+                <a id="link-sponsor" href="/sponsor.html" data-i18n="nav_sponsor">Sponsor</a>
+                <a id="link-about" href="/about.html" data-i18n="nav_about">About</a>
                 <a href="https://github.com/Linkest-FDT" target="_blank" rel="noopener">GitHub ↗</a>
                 
                 <div class="lang-switcher">
@@ -235,15 +240,21 @@
     <!-- Main Hero Content -->
     <main>
         <div class="hero-shape-container">
-            <!-- 🐟 Giant Background Fish: Gradient moved INLINE -->
-            <svg width="100%" height="100%" viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
-                <defs>
-                    <linearGradient id="brandGradientHero" x1="0%" y1="0%" x2="100%" y2="100%">
-                        <stop offset="0%" stop-color="#8da4f1" />
-                        <stop offset="100%" stop-color="#6c7ee5" />
-                    </linearGradient>
-                </defs>
-                <path d="M 17.5 50 C 10 20, 80 5, 90 45 C 100 85, 25 95, 17.5 50 Z" fill="url(#brandGradientHero)" />
+            <!-- Giant Background Kunpeng -->
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100" width="100%" height="100%">
+              <defs>
+                <linearGradient id="kunpengGradHero" x1="10%" y1="10%" x2="90%" y2="90%">
+                  <stop offset="0%" stop-color="#a3aaff"/>
+                  <stop offset="100%" stop-color="#6971d8"/>
+                </linearGradient>
+                <mask id="linkCutoutHero">
+                  <rect width="100" height="100" fill="white" />
+                  <rect x="25" y="48" width="38" height="14" rx="7" transform="rotate(35 44 55)" fill="none" stroke="black" stroke-width="7" />
+                  <rect x="36" y="36" width="38" height="14" rx="7" transform="rotate(35 55 43)" fill="none" stroke="black" stroke-width="7" />
+                  <circle cx="82" cy="35" r="3" fill="black" />
+                </mask>
+              </defs>
+              <path d="M 10,60 C 10,30 50,10 80,20 C 100,30 95,65 75,80 C 50,100 15,85 10,60 Z" fill="url(#kunpengGradHero)" mask="url(#linkCutoutHero)" />
             </svg>
         </div>
 
@@ -267,8 +278,9 @@
                 </div>
                 <div class="footer-links">
                     <a href="https://status.linkest.org" target="_blank" rel="noopener" data-i18n="footer_status">Status</a>
-                    <a href="#" onclick="return false;" data-i18n="footer_policy">Policy</a>
-                    <a href="#" onclick="return false;" data-i18n="footer_contact">Contact Us</a>
+                    <!-- 🚀 Also updated footer links with IDs -->
+                    <a id="footer-policy" href="/policy.html" data-i18n="footer_policy">Policy</a>
+                    <a id="footer-contact" href="/contact.html" data-i18n="footer_contact">Contact Us</a>
                 </div>
             </div>
             <div class="footer-notice" id="machine-notice">
@@ -414,8 +426,17 @@
                 if (dict[key] !== undefined) el.innerHTML = dict[key];
             });
 
-            const currentPath = langCode === 'en-US' ? '/' : `/${langCode}`;
-            document.getElementById('logo-link').href = currentPath;
+            // 🚀 Fix 1: Dynamically update ALL navigation and footer links based on selected language
+            const prefix = langCode === 'en-US' ? '' : `/${langCode}`;
+            
+            document.getElementById('logo-link').href = prefix || '/';
+            document.getElementById('link-contribution').href = `${prefix}/contribution.html`;
+            document.getElementById('link-security').href = `${prefix}/security.html`;
+            document.getElementById('link-projects').href = `${prefix}/projects.html`;
+            document.getElementById('link-sponsor').href = `${prefix}/sponsor.html`;
+            document.getElementById('link-about').href = `${prefix}/about.html`;
+            document.getElementById('footer-policy').href = `${prefix}/policy.html`;
+            document.getElementById('footer-contact').href = `${prefix}/contact.html`;
 
             const machineNotice = document.getElementById('machine-notice');
             if (langConfig.isMachine) {
