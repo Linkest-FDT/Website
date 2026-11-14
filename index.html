@@ -6,6 +6,9 @@
     <title>Linkest Foundation | Link this galaxy</title>
     <meta name="description" content="Linkest Foundation is a decentralized non-profit collaborative foundation for open-source security and modern web infrastructure.">
     
+    <!-- 🐟 Favicon: Tells the browser to use logo.svg in the tab -->
+    <link rel="icon" href="/logo.svg" type="image/svg+xml">
+    
     <!-- SEO and Social Meta -->
     <meta property="og:title" content="Linkest Foundation">
     <meta property="og:description" content="Link this galaxy, with your content.">
@@ -45,7 +48,7 @@
             overflow-x: hidden; -webkit-font-smoothing: antialiased;
         }
 
-        /* RTL Support (Right-To-Left languages like Arabic) */
+        /* RTL Support */
         html[dir="rtl"] body { direction: rtl; }
         html[dir="rtl"] nav { flex-direction: row-reverse; }
         html[dir="rtl"] .lang-switcher { margin-right: 16px; margin-left: 0; }
@@ -189,24 +192,20 @@
 </head>
 <body>
 
-    <!-- Reusable SVG Gradients -->
-    <svg width="0" height="0" style="display: none;">
-        <defs>
-            <linearGradient id="brandShapeGradient" x1="0%" y1="0%" x2="100%" y2="100%">
-                <stop offset="0%" stop-color="#8da4f1" />
-                <stop offset="100%" stop-color="#6c7ee5" />
-            </linearGradient>
-        </defs>
-    </svg>
-
     <!-- Header Navigation -->
     <header>
         <div class="header-container">
-            <!-- Added id="logo-link" -->
             <a href="/" class="logo" id="logo-link">
                 <span class="logo-mark">
+                    <!-- 🐟 Fish Logo: Gradient moved INLINE to prevent rendering issues -->
                     <svg width="100%" height="100%" viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
-                        <path d="M 17.5 50 C 10 20, 80 5, 90 45 C 100 85, 25 95, 17.5 50 Z" fill="url(#brandShapeGradient)" />
+                        <defs>
+                            <linearGradient id="brandGradientHeader" x1="0%" y1="0%" x2="100%" y2="100%">
+                                <stop offset="0%" stop-color="#8da4f1" />
+                                <stop offset="100%" stop-color="#6c7ee5" />
+                            </linearGradient>
+                        </defs>
+                        <path d="M 17.5 50 C 10 20, 80 5, 90 45 C 100 85, 25 95, 17.5 50 Z" fill="url(#brandGradientHeader)" />
                     </svg>
                 </span>
                 Linkest Foundation
@@ -236,8 +235,15 @@
     <!-- Main Hero Content -->
     <main>
         <div class="hero-shape-container">
+            <!-- 🐟 Giant Background Fish: Gradient moved INLINE -->
             <svg width="100%" height="100%" viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
-                <path d="M 17.5 50 C 10 20, 80 5, 90 45 C 100 85, 25 95, 17.5 50 Z" fill="url(#brandShapeGradient)" />
+                <defs>
+                    <linearGradient id="brandGradientHero" x1="0%" y1="0%" x2="100%" y2="100%">
+                        <stop offset="0%" stop-color="#8da4f1" />
+                        <stop offset="100%" stop-color="#6c7ee5" />
+                    </linearGradient>
+                </defs>
+                <path d="M 17.5 50 C 10 20, 80 5, 90 45 C 100 85, 25 95, 17.5 50 Z" fill="url(#brandGradientHero)" />
             </svg>
         </div>
 
@@ -272,9 +278,6 @@
     </footer>
 
     <script>
-        // ==========================================
-        // 1. Language Configuration
-        // ==========================================
         const languages = [
             { code: 'en-US', name: 'English', rtl: false, isMachine: false },
             { code: 'zh-CN', name: '简体中文', rtl: false, isMachine: false },
@@ -291,9 +294,6 @@
             { code: 'ar-SA', name: 'العربية', rtl: true, isMachine: true } 
         ];
 
-        // ==========================================
-        // 2. Language Dictionary
-        // ==========================================
         const i18n = {
             'en-US': {
                 nav_contribution: "Contribution", nav_security: "Security", nav_projects: "Projects", nav_sponsor: "Sponsor", nav_about: "About",
@@ -395,10 +395,6 @@
 
         let typewriterTimeout;
 
-        // ==========================================
-        // 3. Core Functions
-        // ==========================================
-        
         function updateURL(langCode) {
             const newPath = langCode === 'en-US' ? '/' : `/${langCode}`;
             window.history.pushState({ lang: langCode }, '', newPath);
@@ -418,7 +414,6 @@
                 if (dict[key] !== undefined) el.innerHTML = dict[key];
             });
 
-            // 🚀 修复 1：动态修改 Logo 的链接，防止点击 Logo 丢失当前语言
             const currentPath = langCode === 'en-US' ? '/' : `/${langCode}`;
             document.getElementById('logo-link').href = currentPath;
 
@@ -475,9 +470,6 @@
             });
         }
 
-        // ==========================================
-        // 4. Click Interaction for Language Menu
-        // ==========================================
         const langBtn = document.getElementById('lang-btn');
         const langMenu = document.getElementById('lang-menu');
 
@@ -505,10 +497,14 @@
             }
         });
 
-        // ==========================================
-        // 5. Initialization & Detection
-        // ==========================================
         function initLanguage() {
+            const urlParams = new URLSearchParams(window.location.search);
+            const redirectPath = urlParams.get('redirect');
+            
+            if (redirectPath) {
+                window.history.replaceState({}, '', redirectPath);
+            }
+
             const pathSegments = window.location.pathname.split('/').filter(Boolean);
             if (pathSegments.length > 0) {
                 const urlLang = pathSegments[0];
