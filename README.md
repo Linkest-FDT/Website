@@ -1,7 +1,6 @@
 # Linkest Foundation Official Website
 
 [![Static HTML](https://img.shields.io/badge/Architecture-Static%20HTML-blueviolet?style=flat-square)](#)
-[![Cloudflare Pages](https://img.shields.io/badge/Deployed%20on-Cloudflare%20Pages-orange?style=flat-square)](#)
 [![GitHub Pages](https://img.shields.io/badge/Deployed%20on-GitHub%20Pages-black?style=flat-square)](#)
 [![i18n](https://img.shields.io/badge/i18n-13%20Languages-success?style=flat-square)](#)
 [![License](https://img.shields.io/badge/License-MIT-blue?style=flat-square)](./LICENSE)
