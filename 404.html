@@ -12,7 +12,6 @@
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Fira+Code:wght@400;500&display=swap" rel="stylesheet" />
 
     <style>
-        /* Reuse the same CSS variables */
         :root {
             color-scheme: dark;
             --bg-base: #0b1020;
@@ -27,8 +26,6 @@
             --brand-600: #2563eb;
             --font-sans: 'Inter', system-ui, -apple-system, sans-serif;
             --font-mono: 'Fira Code', monospace;
-            --shape-start: #8da4f1;
-            --shape-end: #6c7ee5;
         }
 
         * { box-sizing: border-box; margin: 0; padding: 0; }
@@ -49,7 +46,7 @@
         a { color: var(--text-primary); text-decoration: none; transition: color 0.2s ease; }
         a:hover { color: var(--brand-400); }
 
-        /* Header & Navigation */
+        /* Header */
         header {
             position: sticky; top: 0; z-index: 100;
             background: linear-gradient(180deg, rgba(11,16,32,.98) 0%, rgba(30,41,59,.92) 100%);
@@ -63,7 +60,14 @@
         }
 
         .logo { display: flex; align-items: center; gap: 10px; font-weight: 800; font-size: 16px; letter-spacing: -0.5px; color: #fff; }
-        .logo-mark { width: 28px; height: 28px; display: flex; align-items: center; justify-content: center; filter: drop-shadow(0 4px 10px rgba(108, 126, 229, 0.5)); }
+        
+        /* Fix: Use img for logo */
+        .logo-mark {
+            width: 28px; height: 28px;
+            display: flex; align-items: center; justify-content: center;
+            filter: drop-shadow(0 4px 10px rgba(108, 126, 229, 0.5));
+        }
+        .logo-mark img { width: 100%; height: 100%; object-fit: contain; }
 
         nav { display: flex; gap: 24px; align-items: center; font-size: 13.5px; font-weight: 500; color: var(--text-secondary); }
         nav a { color: var(--text-secondary); }
@@ -95,6 +99,7 @@
             text-align: center; padding: 40px 24px 80px; position: relative;
         }
 
+        /* Fix: Use img for big background logo */
         .hero-shape-container {
             position: absolute; top: 10%; left: 50%;
             transform: translateX(-50%);
@@ -103,7 +108,9 @@
             filter: blur(30px);
             animation: float 8s ease-in-out infinite;
             pointer-events: none;
+            display: flex; align-items: center; justify-content: center;
         }
+        .hero-shape-container img { width: 100%; height: 100%; object-fit: contain; }
 
         .hero-title {
             font-size: clamp(4rem, 10vw, 8rem); font-weight: 800; color: #fff;
@@ -154,22 +161,11 @@
 </head>
 <body>
 
-    <svg width="0" height="0" style="display: none;">
-        <defs>
-            <linearGradient id="brandShapeGradient" x1="0%" y1="0%" x2="100%" y2="100%">
-                <stop offset="0%" stop-color="#8da4f1" />
-                <stop offset="100%" stop-color="#6c7ee5" />
-            </linearGradient>
-        </defs>
-    </svg>
-
     <header>
         <div class="header-container">
             <a href="index.html" class="logo">
                 <span class="logo-mark">
-                    <svg width="100%" height="100%" viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
-                        <path d="M 17.5 50 C 10 20, 80 5, 90 45 C 100 85, 25 95, 17.5 50 Z" fill="url(#brandShapeGradient)" />
-                    </svg>
+                    <img src="logo.svg" alt="Linkest Foundation Logo" />
                 </span>
                 Linkest Foundation
             </a>
@@ -197,9 +193,7 @@
 
     <main>
         <div class="hero-shape-container">
-            <svg width="100%" height="100%" viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
-                <path d="M 17.5 50 C 10 20, 80 5, 90 45 C 100 85, 25 95, 17.5 50 Z" fill="url(#brandShapeGradient)" />
-            </svg>
+            <img src="logo.svg" alt="" />
         </div>
 
         <h1 class="hero-title">404</h1>
@@ -229,9 +223,6 @@
     </footer>
 
     <script>
-        // ==========================================
-        // 1. Language Configuration
-        // ==========================================
         const languages = [
             { code: 'en-US', name: 'English', rtl: false, isMachine: false },
             { code: 'zh-CN', name: '简体中文', rtl: false, isMachine: false },
@@ -248,107 +239,85 @@
             { code: 'ar-SA', name: 'العربية', rtl: true, isMachine: true }
         ];
 
-        // ==========================================
-        // 2. Language Dictionary (Focus on 404 keys + Header/Footer)
-        // ==========================================
         const i18n = {
             'en-US': {
                 nav_contribution: "Contribution", nav_security: "Security", nav_projects: "Projects", nav_sponsor: "Sponsor", nav_about: "About",
                 footer_status: "Status", footer_policy: "Policy", footer_contact: "Contact Us",
-                machine_trans_notice: "",
-                "404_desc": "The page you are looking for has drifted into the void.",
-                "404_btn": "Return to Home"
+                machine_trans_notice: "", "404_desc": "The page you are looking for has drifted into the void.", "404_btn": "Return to Home"
             },
             'zh-CN': {
                 nav_contribution: "贡献", nav_security: "安全", nav_projects: "项目", nav_sponsor: "赞助", nav_about: "关于",
                 footer_status: "状态", footer_policy: "政策", footer_contact: "联系我们",
-                machine_trans_notice: "",
-                "404_desc": "您访问的页面已经迷失在虚空之中。",
-                "404_btn": "返回首页"
+                machine_trans_notice: "", "404_desc": "您访问的页面已经迷失在虚空之中。", "404_btn": "返回首页"
             },
             'zh-TW': { 
                 nav_contribution: "貢獻", nav_security: "安全", nav_projects: "專案", nav_sponsor: "贊助", nav_about: "關於",
                 footer_status: "狀態", footer_policy: "政策", footer_contact: "聯繫我們",
                 machine_trans_notice: "* 部分內容由機器翻譯提供，歡迎社區修正。",
-                "404_desc": "您訪問的頁面已經迷失在虛空之中。",
-                "404_btn": "返回首頁"
+                "404_desc": "您訪問的頁面已經迷失在虛空之中。", "404_btn": "返回首頁"
             },
             'ja-JP': { 
                 nav_contribution: "コントリビューション", nav_security: "セキュリティ", nav_projects: "プロジェクト", nav_sponsor: "スポンサー", nav_about: "概要",
                 footer_status: "ステータス", footer_policy: "ポリシー", footer_contact: "お問い合わせ",
                 machine_trans_notice: "* 一部の言語は機械翻訳によって提供されています。コミュニティによる修正を歓迎します。",
-                "404_desc": "お探しのページは虚空に消え去りました。",
-                "404_btn": "ホームに戻る"
+                "404_desc": "お探しのページは虚空に消え去りました。", "404_btn": "ホームに戻る"
             },
             'ru-RU': { 
                 nav_contribution: "Вклад", nav_security: "Безопасность", nav_projects: "Проекты", nav_sponsor: "Спонсор", nav_about: "О нас",
                 footer_status: "Статус", footer_policy: "Политика", footer_contact: "Связаться с нами",
                 machine_trans_notice: "* Некоторые языки предоставлены машинным переводом. Мы приветствуем исправления от сообщества.",
-                "404_desc": "Страница, которую вы ищете, исчезла в пустоте.",
-                "404_btn": "Вернуться на главную"
+                "404_desc": "Страница, которую вы ищете, исчезла в пустоте.", "404_btn": "Вернуться на главную"
             },
             'de-DE': { 
                 nav_contribution: "Beitragen", nav_security: "Sicherheit", nav_projects: "Projekte", nav_sponsor: "Sponsor", nav_about: "Über uns",
                 footer_status: "Status", footer_policy: "Richtlinie", footer_contact: "Kontakt",
                 machine_trans_notice: "* Einige Sprachen werden maschinell übersetzt. Korrekturen aus der Community sind willkommen.",
-                "404_desc": "Die gesuchte Seite ist in der Leere verschwunden.",
-                "404_btn": "Zurück zur Startseite"
+                "404_desc": "Die gesuchte Seite ist in der Leere verschwunden.", "404_btn": "Zurück zur Startseite"
             },
             'fr-FR': { 
                 nav_contribution: "Contribution", nav_security: "Sécurité", nav_projects: "Projets", nav_sponsor: "Sponsor", nav_about: "À propos",
                 footer_status: "Statut", footer_policy: "Politique", footer_contact: "Contact",
                 machine_trans_notice: "* Certaines langues sont traduites automatiquement. Les corrections de la communauté sont les bienvenues.",
-                "404_desc": "La page que vous recherchez a dérivé dans le vide.",
-                "404_btn": "Retour à l'accueil"
+                "404_desc": "La page que vous recherchez a dérivé dans le vide.", "404_btn": "Retour à l'accueil"
             },
             'es-ES': { 
                 nav_contribution: "Contribución", nav_security: "Seguridad", nav_projects: "Proyectos", nav_sponsor: "Patrocinador", nav_about: "Acerca de",
                 footer_status: "Estado", footer_policy: "Política", footer_contact: "Contacto",
                 machine_trans_notice: "* Algunos idiomas están traducidos automáticamente. Se agradecen las correcciones de la comunidad.",
-                "404_desc": "La página que buscas se ha desviado hacia el vacío.",
-                "404_btn": "Volver al inicio"
+                "404_desc": "La página que buscas se ha desviado hacia el vacío.", "404_btn": "Volver al inicio"
             },
             'pt-BR': { 
                 nav_contribution: "Contribuição", nav_security: "Segurança", nav_projects: "Projetos", nav_sponsor: "Patrocinador", nav_about: "Sobre",
                 footer_status: "Status", footer_policy: "Política", footer_contact: "Contato",
                 machine_trans_notice: "* Alguns idiomas são traduzidos automaticamente. Correções da comunidade são bem-vindas.",
-                "404_desc": "A página que você procura desapareceu no vazio.",
-                "404_btn": "Voltar ao início"
+                "404_desc": "A página que você procura desapareceu no vazio.", "404_btn": "Voltar ao início"
             },
             'it-IT': { 
                 nav_contribution: "Contributo", nav_security: "Sicurezza", nav_projects: "Progetti", nav_sponsor: "Sponsor", nav_about: "Chi siamo",
                 footer_status: "Stato", footer_policy: "Politica", footer_contact: "Contattaci",
                 machine_trans_notice: "* Alcune lingue sono tradotte automaticamente. Le correzioni della community sono benvenute.",
-                "404_desc": "La pagina che stai cercando è scomparsa nel vuoto.",
-                "404_btn": "Torna alla home"
+                "404_desc": "La pagina che stai cercando è scomparsa nel vuoto.", "404_btn": "Torna alla home"
             },
             'ko-KR': { 
                 nav_contribution: "기여", nav_security: "보안", nav_projects: "프로젝트", nav_sponsor: "후원", nav_about: "소개",
                 footer_status: "상태", footer_policy: "정책", footer_contact: "문의하기",
                 machine_trans_notice: "* 일부 언어는 기계 번역으로 제공됩니다. 커뮤니티의 수정을 환영합니다.",
-                "404_desc": "찾으시는 페이지가虚空(공허) 속으로 사라졌습니다.",
-                "404_btn": "홈으로 돌아가기"
+                "404_desc": "찾으시는 페이지가虚空(공허) 속으로 사라졌습니다.", "404_btn": "홈으로 돌아가기"
             },
             'pl-PL': { 
                 nav_contribution: "Wkład", nav_security: "Bezpieczeństwo", nav_projects: "Projekty", nav_sponsor: "Sponsor", nav_about: "O nas",
                 footer_status: "Status", footer_policy: "Polityka", footer_contact: "Kontakt",
                 machine_trans_notice: "* Niektóre języki są tłumaczone maszynowo. Poprawki społeczności są mile widziane.",
-                "404_desc": "Strona, której szukasz, odpłynęła w próżnię.",
-                "404_btn": "Powrót do domu"
+                "404_desc": "Strona, której szukasz, odpłynęła w próżnię.", "404_btn": "Powrót do domu"
             },
             'ar-SA': { 
                 nav_contribution: "مساهمة", nav_security: "الأمن", nav_projects: "المشاريع", nav_sponsor: "الراعي", nav_about: "حول",
                 footer_status: "الحالة", footer_policy: "سياسة", footer_contact: "اتصل بنا",
                 machine_trans_notice: "* بعض اللغات مترجمة آلياً. نرحب بتصحيحات المجتمع.",
-                "404_desc": "الصفحة التي تبحث عنها انجرفت إلى الفراغ.",
-                "404_btn": "العودة إلى الصفحة الرئيسية"
+                "404_desc": "الصفحة التي تبحث عنها انجرفت إلى الفراغ.", "404_btn": "العودة إلى الصفحة الرئيسية"
             }
         };
 
-        // ==========================================
-        // 3. Core Functions (Same routing logic)
-        // ==========================================
-        
         function updateURL(langCode) {
             const url = new URL(window.location);
             if (langCode === 'en-US') {
@@ -387,7 +356,7 @@
             });
 
             const machineNotice = document.getElementById('machine-notice');
-            if (langConfig.isMachine) {
+            if (langCode !== 'en-US' && dict.machine_trans_notice) {
                 machineNotice.style.display = 'block';
             } else {
                 machineNotice.style.display = 'none';
@@ -403,7 +372,7 @@
             menu.innerHTML = '';
             languages.forEach(lang => {
                 const a = document.createElement('a');
-                a.innerHTML = lang.name + (lang.isMachine ? '<span class="machine-ast">*</span>' : '');
+                a.innerHTML = lang.name + (lang.code !== 'en-US' ? '<span class="machine-ast">*</span>' : '');
                 
                 if (lang.code === currentLang) {
                     a.style.color = 'var(--brand-400)';
