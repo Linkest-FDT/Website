@@ -12,9 +12,6 @@
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Fira+Code:wght@400;500&display=swap" rel="stylesheet" />
 
     <style>
-        /* ==========================================================================
-           CSS Variables
-           ========================================================================== */
         :root {
             color-scheme: dark;
             --bg-base: #0b1020;
@@ -72,11 +69,7 @@
             display: flex; align-items: center; justify-content: center; 
             filter: drop-shadow(0 4px 10px rgba(108, 126, 229, 0.5));
         }
-        .logo-mark img {
-            width: 100%;
-            height: 100%;
-            object-fit: contain;
-        }
+        .logo-mark img { width: 100%; height: 100%; object-fit: contain; }
 
         nav { display: flex; gap: 24px; align-items: center; font-size: 13.5px; font-weight: 500; color: var(--text-secondary); }
         nav a { color: var(--text-secondary); }
@@ -104,7 +97,7 @@
         .dropdown-content a { display: block; padding: 8px 16px; font-size: 13px; color: var(--text-primary); cursor: pointer;}
         .dropdown-content a:hover { background-color: rgba(255,255,255,0.05); color: var(--brand-400); }
         
-        .machine-ast { font-size: 12px; color: var(--brand-400); margin-left: 2px; vertical-align: super;}
+        .machine-ast { font-size: 10px; color: var(--text-muted); margin-left: 2px; vertical-align: super;}
 
         /* Main Content */
         main { flex: 1; max-width: 900px; margin: 0 auto; padding: 60px 24px 80px; width: 100%; position: relative; }
@@ -227,6 +220,7 @@
             <p class="page-subtitle" data-i18n="policy_subtitle">Last Updated: November 14, 2026</p>
         </div>
 
+        <!-- 01 Scope -->
         <div class="policy-card">
             <h2><span class="num">01</span> <span data-i18n="p1_title">Scope & CNA Jurisdiction</span></h2>
             <p data-i18n="p1_desc">This policy applies strictly to assets officially maintained by Linkest Foundation.</p>
@@ -237,59 +231,82 @@
             <p data-i18n="p1_cna">In compliance with NIST and MITRE requirements for CVE Numbering Authorities (CNA), we only process reports for the Linkest Foundation ecosystem. We <strong>do not and cannot</strong> process reports for third-party projects. Please report those to their respective maintainers or CNAs.</p>
         </div>
 
+        <!-- 02 Affiliated Projects (NEW) -->
         <div class="policy-card">
-            <h2><span class="num">02</span> <span data-i18n="p2_title">Reporting Channels</span></h2>
-            <p data-i18n="p2_desc1"><strong>Primary Channel:</strong> Submit a private vulnerability report (GHSA) directly in our security repository:</p>
+            <h2><span class="num">02</span> <span data-i18n="p2_affiliated_title">Affiliated & Partnered Projects</span></h2>
+            <p data-i18n="p2_affiliated_desc">While the Linkest CNA primarily covers repositories under the Linkest-FDT organization, we also extend our CVE assignment and vulnerability triage services to specific Affiliated Projects. These projects are actively supported and maintained by our team but may belong to their own independent organizations or studios.</p>
+            
+            <p><strong data-i18n="p2_affiliated_elig_title">Eligibility for CNA Coverage:</strong></p>
+            <p data-i18n="p2_affiliated_elig_desc">To be recognized as an Affiliated Project eligible for Linkest CNA services, a project must meet <strong>BOTH</strong> of the following criteria simultaneously:</p>
+            
+            <ul>
+                <li data-i18n="p2_affiliated_li1"><strong>Mutual Declaration in README:</strong> The project's official repository must explicitly state its affiliation with Linkest Foundation in its README.md (or equivalent documentation).</li>
+                <li data-i18n="p2_affiliated_li2"><strong>Official Website Listing:</strong> The project must be officially listed on the Linkest Foundation website's "Projects" page.</li>
+            </ul>
+            
+            <p data-i18n="p2_affiliated_note"><em>Note: Affiliated Projects retain full ownership of their intellectual property. Linkest Foundation does not claim ownership but acts as a trusted security partner providing CNA coverage and triage support.</em></p>
+        </div>
+
+        <!-- 03 Reporting Channels -->
+        <div class="policy-card">
+            <h2><span class="num">03</span> <span data-i18n="p3_title">Reporting Channels</span></h2>
+            <p data-i18n="p3_desc1"><strong>Primary Channel:</strong> Submit a private vulnerability report (GHSA) directly in our security repository:</p>
             <div class="code-box">https://github.com/Linkest-FDT/Security/security/advisories/new</div>
-            <p data-i18n="p2_desc2"><strong>Backup Channel:</strong> If you cannot use GitHub, email us at:</p>
+            <p data-i18n="p3_desc2"><strong>Backup Channel:</strong> If you cannot use GitHub, email us at:</p>
             <div class="code-box">security@linkest.org</div>
-            <p data-i18n="p2_desc3">Do not disclose vulnerabilities publicly before a patch is released.</p>
+            <p data-i18n="p3_desc3">Do not disclose vulnerabilities publicly before a patch is released.</p>
         </div>
 
+        <!-- 04 Reporting Format -->
         <div class="policy-card">
-            <h2><span class="num">03</span> <span data-i18n="p3_title">Reporting Format</span></h2>
-            <p data-i18n="p3_desc">Please format your report (preferably matching the GHSA format) with the following details:</p>
+            <h2><span class="num">04</span> <span data-i18n="p4_title">Reporting Format</span></h2>
+            <p data-i18n="p4_desc">Please format your report (preferably matching the GHSA format) with the following details:</p>
             <ul>
-                <li data-i18n="p3_li1"><strong>Summary:</strong> A brief description of the vulnerability.</li>
-                <li data-i18n="p3_li2"><strong>Details:</strong> Affected repository, version/commit, CWE classification, and root cause.</li>
-                <li data-i18n="p3_li3"><strong>PoC:</strong> Step-by-step reproduction steps or a minimal executable script.</li>
-                <li data-i18n="p3_li4"><strong>Impact:</strong> Affected user scope (e.g., admin takeover).</li>
-                <li data-i18n="p3_li5"><strong>CVSS:</strong> v3.1/v4.0 vector string.</li>
+                <li data-i18n="p4_li1"><strong>Summary:</strong> A brief description of the vulnerability.</li>
+                <li data-i18n="p4_li2"><strong>Details:</strong> Affected repository, version/commit, CWE classification, and root cause.</li>
+                <li data-i18n="p4_li3"><strong>PoC:</strong> Step-by-step reproduction steps or a minimal executable script.</li>
+                <li data-i18n="p4_li4"><strong>Impact:</strong> Affected user scope (e.g., admin takeover).</li>
+                <li data-i18n="p4_li5"><strong>CVSS:</strong> v3.1/v4.0 vector string.</li>
             </ul>
         </div>
 
+        <!-- 05 Triage Priority & SLAs -->
         <div class="policy-card">
-            <h2><span class="num">04</span> <span data-i18n="p4_title">Triage Priority & SLAs</span></h2>
-            <p data-i18n="p4_desc">A reproducible PoC is a critical factor for our prioritization.</p>
+            <h2><span class="num">05</span> <span data-i18n="p5_title">Triage Priority & SLAs</span></h2>
+            <p data-i18n="p5_desc">A reproducible PoC is a critical factor for our prioritization.</p>
             <ul>
-                <li><span class="badge badge-p0">P0</span> <span data-i18n="p4_p0">CVSS >= 8.0 with PoC. Initial response within 7 days.</span></li>
-                <li><span class="badge badge-p1">P1</span> <span data-i18n="p4_p1">CVSS 4.0 - 7.9 or limited impact. Initial response within 14 days.</span></li>
-                <li><span class="badge badge-p2">P2</span> <span data-i18n="p4_p2">CVSS < 4.0 or incomplete info. Best effort response.</span></li>
+                <li><span class="badge badge-p0">P0</span> <span data-i18n="p5_p0">CVSS >= 8.0 with PoC. Initial response within 7 days.</span></li>
+                <li><span class="badge badge-p1">P1</span> <span data-i18n="p5_p1">CVSS 4.0 - 7.9 or limited impact. Initial response within 14 days.</span></li>
+                <li><span class="badge badge-p2">P2</span> <span data-i18n="p5_p2">CVSS < 4.0 or incomplete info. Best effort response.</span></li>
             </ul>
         </div>
 
+        <!-- 06 CVE Assignment & Disclosure -->
         <div class="policy-card">
-            <h2><span class="num">05</span> <span data-i18n="p5_title">CVE Assignment & Disclosure</span></h2>
-            <p data-i18n="p5_desc1">Once a vulnerability is verified, Linkest CNA will assign an official CVE ID. <em>(Note: GHSA serves as our collaborative tool for tracking and publishing, while CVE IDs are issued by Linkest CNA).</em></p>
-            <p data-i18n="p5_desc2">We enforce a strict <strong>90-day responsible disclosure</strong> timeline. Public advisories will be published jointly after a patch is available or the 90-day window expires.</p>
+            <h2><span class="num">06</span> <span data-i18n="p6_title">CVE Assignment & Disclosure</span></h2>
+            <p data-i18n="p6_desc1">Once a vulnerability is verified, Linkest CNA will assign an official CVE ID. <em>(Note: GHSA serves as our collaborative tool for tracking and publishing, while CVE IDs are issued by Linkest CNA).</em></p>
+            <p data-i18n="p6_desc2">We enforce a strict <strong>90-day responsible disclosure</strong> timeline. Public advisories will be published jointly after a patch is available or the 90-day window expires.</p>
         </div>
 
+        <!-- 07 Safe Harbor & Rules of Engagement -->
         <div class="policy-card">
-            <h2><span class="num">06</span> <span data-i18n="p6_title">Safe Harbor & Rules of Engagement</span></h2>
+            <h2><span class="num">07</span> <span data-i18n="p7_title">Safe Harbor & Rules of Engagement</span></h2>
             <ul>
-                <li data-i18n="p6_li1"><strong>Safe Harbor Commitment:</strong> We will not take legal action against researchers acting in good faith and following this policy. We will acknowledge your contribution publicly.</li>
-                <li data-i18n="p6_li2"><strong>Prohibited Destructive Attacks:</strong> We strictly reject intentional, volumetric attacks such as large-scale DDoS, brute-forcing, physical damage, or social engineering against staff.</li>
-                <li data-i18n="p6_li3"><strong>Crucial Exception (Vulnerability-Induced DoS):</strong> If you discover a resource exhaustion issue caused <strong>directly by a logic flaw</strong> in our code (e.g., ReDoS, memory leaks triggered by a single request), <strong>this is a valid vulnerability and will be triaged.</strong> However, you must demonstrate it with a controlled, minimal Proof of Concept (PoC). Unbounded stress testing is not allowed.</li>
-                <li data-i18n="p6_li4"><strong>Self-Hosted Testing Principle:</strong> Any potentially disruptive testing (including the logic-based DoS mentioned above) <strong>must be conducted in a local, self-hosted environment</strong>. Do not test against Linkest Foundation's production environment. If live verification is required, you must obtain prior written permission via security@linkest.org.</li>
-                <li data-i18n="p6_li5"><strong>Data Boundaries:</strong> You must not access, modify, download, or exfiltrate any real user data not generated by yourself. Any test data created during testing must be deleted immediately.</li>
+                <li data-i18n="p7_li1"><strong>Safe Harbor Commitment:</strong> We will not take legal action against researchers acting in good faith and following this policy. We will acknowledge your contribution publicly.</li>
+                <li data-i18n="p7_li2"><strong>Prohibited Destructive Attacks:</strong> We strictly reject intentional, volumetric attacks such as large-scale DDoS, brute-forcing, physical damage, or social engineering against staff.</li>
+                <li data-i18n="p7_li3"><strong>Crucial Exception (Vulnerability-Induced DoS):</strong> If you discover a resource exhaustion issue caused <strong>directly by a logic flaw</strong> in our code (e.g., ReDoS, memory leaks triggered by a single request), <strong>this is a valid vulnerability and will be triaged.</strong> However, you must demonstrate it with a controlled, minimal Proof of Concept (PoC). Unbounded stress testing is not allowed.</li>
+                <li data-i18n="p7_li4"><strong>Self-Hosted Testing Principle:</strong> Any potentially disruptive testing (including the logic-based DoS mentioned above) <strong>must be conducted in a local, self-hosted environment</strong>. Do not test against Linkest Foundation's production environment. If live verification is required, you must obtain prior written permission via security@linkest.org.</li>
+                <li data-i18n="p7_li5"><strong>Data Boundaries:</strong> You must not access, modify, download, or exfiltrate any real user data not generated by yourself. Any test data created during testing must be deleted immediately.</li>
             </ul>
         </div>
 
+        <!-- 08 Strict Disclaimer -->
         <div class="policy-card">
-            <h2><span class="num">07</span> <span data-i18n="p7_title">Strict Disclaimer</span></h2>
-            <p data-i18n="p7_desc">We reserve the right to reject reports for vulnerabilities that are clearly fabricated, maliciously inflated in severity, or submitted with destructive payloads. Attempts to defraud the CVE system will result in public disclosure of the abuse.</p>
+            <h2><span class="num">08</span> <span data-i18n="p8_title">Strict Disclaimer</span></h2>
+            <p data-i18n="p8_desc">We reserve the right to reject reports for vulnerabilities that are clearly fabricated, maliciously inflated in severity, or submitted with destructive payloads. Attempts to defraud the CVE system will result in public disclosure of the abuse.</p>
         </div>
 
+        <!-- Declaration -->
         <div class="declaration-box">
             <h2 data-i18n="dec_title">Our Declaration</h2>
             <p data-i18n="dec_text">Respect security research. Honor disclosure rules. Protect the open-source ecosystem. Practice responsible disclosure.</p>
@@ -344,38 +361,54 @@
                 footer_status: "Status", footer_policy: "Policy", footer_contact: "Contact Us",
                 trans_banner: "", machine_trans_notice: "",
                 policy_title: "Security & Disclosure Policy", policy_subtitle: "Last Updated: November 14, 2026",
+                
                 p1_title: "Scope & CNA Jurisdiction",
                 p1_desc: "This policy applies strictly to assets officially maintained by Linkest Foundation.",
                 p1_li1: "All official open-source repositories (github.com/Linkest-FDT/*)",
                 p1_li2: "Official infrastructure and websites (*.linkest.org)",
                 p1_cna: "In compliance with NIST and MITRE requirements for CVE Numbering Authorities (CNA), we only process reports for the Linkest Foundation ecosystem. We <strong>do not and cannot</strong> process reports for third-party projects. Please report those to their respective maintainers or CNAs.",
-                p2_title: "Reporting Channels",
-                p2_desc1: "<strong>Primary Channel:</strong> Submit a private vulnerability report (GHSA) directly in our security repository:",
-                p2_desc2: "<strong>Backup Channel:</strong> If you cannot use GitHub, email us at:",
-                p2_desc3: "Do not disclose vulnerabilities publicly before a patch is released.",
-                p3_title: "Reporting Format",
-                p3_desc: "Please format your report (preferably matching the GHSA format) with the following details:",
-                p3_li1: "<strong>Summary:</strong> A brief description of the vulnerability.",
-                p3_li2: "<strong>Details:</strong> Affected repository, version/commit, CWE classification, and root cause.",
-                p3_li3: "<strong>PoC:</strong> Step-by-step reproduction steps or a minimal executable script.",
-                p3_li4: "<strong>Impact:</strong> Affected user scope (e.g., admin takeover).",
-                p3_li5: "<strong>CVSS:</strong> v3.1/v4.0 vector string.",
-                p4_title: "Triage Priority & SLAs",
-                p4_desc: "A reproducible PoC is a critical factor for our prioritization.",
-                p4_p0: "CVSS >= 8.0 with PoC. Initial response within 7 days.",
-                p4_p1: "CVSS 4.0 - 7.9 or limited impact. Initial response within 14 days.",
-                p4_p2: "CVSS < 4.0 or incomplete info. Best effort response.",
-                p5_title: "CVE Assignment & Disclosure",
-                p5_desc1: "Once a vulnerability is verified, Linkest CNA will assign an official CVE ID. <em>(Note: GHSA serves as our collaborative tool for tracking and publishing, while CVE IDs are issued by Linkest CNA).</em>",
-                p5_desc2: "We enforce a strict <strong>90-day responsible disclosure</strong> timeline. Public advisories will be published jointly after a patch is available or the 90-day window expires.",
-                p6_title: "Safe Harbor & Rules of Engagement",
-                p6_li1: "<strong>Safe Harbor Commitment:</strong> We will not take legal action against researchers acting in good faith and following this policy. We will acknowledge your contribution publicly.",
-                p6_li2: "<strong>Prohibited Destructive Attacks:</strong> We strictly reject intentional, volumetric attacks such as large-scale DDoS, brute-forcing, physical damage, or social engineering against staff.",
-                p6_li3: "<strong>Crucial Exception (Vulnerability-Induced DoS):</strong> If you discover a resource exhaustion issue caused <strong>directly by a logic flaw</strong> in our code (e.g., ReDoS, memory leaks triggered by a single request), <strong>this is a valid vulnerability and will be triaged.</strong> However, you must demonstrate it with a controlled, minimal Proof of Concept (PoC). Unbounded stress testing is not allowed.",
-                p6_li4: "<strong>Self-Hosted Testing Principle:</strong> Any potentially disruptive testing (including the logic-based DoS mentioned above) <strong>must be conducted in a local, self-hosted environment</strong>. Do not test against Linkest Foundation's production environment. If live verification is required, you must obtain prior written permission via security@linkest.org.",
-                p6_li5: "<strong>Data Boundaries:</strong> You must not access, modify, download, or exfiltrate any real user data not generated by yourself. Any test data created during testing must be deleted immediately.",
-                p7_title: "Strict Disclaimer",
-                p7_desc: "We reserve the right to reject reports for vulnerabilities that are clearly fabricated, maliciously inflated in severity, or submitted with destructive payloads. Attempts to defraud the CVE system will result in public disclosure of the abuse.",
+                
+                p2_affiliated_title: "Affiliated & Partnered Projects",
+                p2_affiliated_desc: "While the Linkest CNA primarily covers repositories under the Linkest-FDT organization, we also extend our CVE assignment and vulnerability triage services to specific Affiliated Projects. These projects are actively supported and maintained by our team but may belong to their own independent organizations or studios.",
+                p2_affiliated_elig_title: "Eligibility for CNA Coverage:",
+                p2_affiliated_elig_desc: "To be recognized as an Affiliated Project eligible for Linkest CNA services, a project must meet <strong>BOTH</strong> of the following criteria simultaneously:",
+                p2_affiliated_li1: "<strong>Mutual Declaration in README:</strong> The project's official repository must explicitly state its affiliation with Linkest Foundation in its README.md (or equivalent documentation).",
+                p2_affiliated_li2: "<strong>Official Website Listing:</strong> The project must be officially listed on the Linkest Foundation website's \"Projects\" page.",
+                p2_affiliated_note: "<em>Note: Affiliated Projects retain full ownership of their intellectual property. Linkest Foundation does not claim ownership but acts as a trusted security partner providing CNA coverage and triage support.</em>",
+                
+                p3_title: "Reporting Channels",
+                p3_desc1: "<strong>Primary Channel:</strong> Submit a private vulnerability report (GHSA) directly in our security repository:",
+                p3_desc2: "<strong>Backup Channel:</strong> If you cannot use GitHub, email us at:",
+                p3_desc3: "Do not disclose vulnerabilities publicly before a patch is released.",
+                
+                p4_title: "Reporting Format",
+                p4_desc: "Please format your report (preferably matching the GHSA format) with the following details:",
+                p4_li1: "<strong>Summary:</strong> A brief description of the vulnerability.",
+                p4_li2: "<strong>Details:</strong> Affected repository, version/commit, CWE classification, and root cause.",
+                p4_li3: "<strong>PoC:</strong> Step-by-step reproduction steps or a minimal executable script.",
+                p4_li4: "<strong>Impact:</strong> Affected user scope (e.g., admin takeover).",
+                p4_li5: "<strong>CVSS:</strong> v3.1/v4.0 vector string.",
+                
+                p5_title: "Triage Priority & SLAs",
+                p5_desc: "A reproducible PoC is a critical factor for our prioritization.",
+                p5_p0: "CVSS >= 8.0 with PoC. Initial response within 7 days.",
+                p5_p1: "CVSS 4.0 - 7.9 or limited impact. Initial response within 14 days.",
+                p5_p2: "CVSS < 4.0 or incomplete info. Best effort response.",
+                
+                p6_title: "CVE Assignment & Disclosure",
+                p6_desc1: "Once a vulnerability is verified, Linkest CNA will assign an official CVE ID. <em>(Note: GHSA serves as our collaborative tool for tracking and publishing, while CVE IDs are issued by Linkest CNA).</em>",
+                p6_desc2: "We enforce a strict <strong>90-day responsible disclosure</strong> timeline. Public advisories will be published jointly after a patch is available or the 90-day window expires.",
+                
+                p7_title: "Safe Harbor & Rules of Engagement",
+                p7_li1: "<strong>Safe Harbor Commitment:</strong> We will not take legal action against researchers acting in good faith and following this policy. We will acknowledge your contribution publicly.",
+                p7_li2: "<strong>Prohibited Destructive Attacks:</strong> We strictly reject intentional, volumetric attacks such as large-scale DDoS, brute-forcing, physical damage, or social engineering against staff.",
+                p7_li3: "<strong>Crucial Exception (Vulnerability-Induced DoS):</strong> If you discover a resource exhaustion issue caused <strong>directly by a logic flaw</strong> in our code (e.g., ReDoS, memory leaks triggered by a single request), <strong>this is a valid vulnerability and will be triaged.</strong> However, you must demonstrate it with a controlled, minimal Proof of Concept (PoC). Unbounded stress testing is not allowed.",
+                p7_li4: "<strong>Self-Hosted Testing Principle:</strong> Any potentially disruptive testing (including the logic-based DoS mentioned above) <strong>must be conducted in a local, self-hosted environment</strong>. Do not test against Linkest Foundation's production environment. If live verification is required, you must obtain prior written permission via security@linkest.org.",
+                p7_li5: "<strong>Data Boundaries:</strong> You must not access, modify, download, or exfiltrate any real user data not generated by yourself. Any test data created during testing must be deleted immediately.",
+                
+                p8_title: "Strict Disclaimer",
+                p8_desc: "We reserve the right to reject reports for vulnerabilities that are clearly fabricated, maliciously inflated in severity, or submitted with destructive payloads. Attempts to defraud the CVE system will result in public disclosure of the abuse.",
+                
                 dec_title: "Our Declaration",
                 dec_text: "Respect security research. Honor disclosure rules. Protect the open-source ecosystem. Practice responsible disclosure.",
                 dec_subtext: "It starts with you and me, and it starts with every independent developer."
@@ -383,41 +416,56 @@
             'zh-CN': {
                 nav_contribution: "贡献", nav_security: "安全", nav_projects: "项目", nav_sponsor: "赞助", nav_about: "关于",
                 footer_status: "状态", footer_policy: "政策", footer_contact: "联系我们",
-                trans_banner: "本页面的非英语版本由机器翻译或社区提供，仅供参考。若与英文版存在歧义，请一律以英文版为准。", 
-                machine_trans_notice: "* 部分内容由机器翻译提供，欢迎社区修正。",
+                trans_banner: "本页面的非英语版本由机器翻译或社区提供，仅供参考。若与英文版存在歧义，请一律以英文版为准。", machine_trans_notice: "* 部分内容由机器翻译提供，欢迎社区修正。",
                 policy_title: "安全与漏洞披露政策", policy_subtitle: "最后更新：2026年11月14日",
+                
                 p1_title: "适用范围与 CNA 管辖权",
                 p1_desc: "本政策严格适用于由 Linkest Foundation 官方维护的资产。",
                 p1_li1: "所有官方开源仓库 (github.com/Linkest-FDT/*)",
                 p1_li2: "官方基础设施与网站 (*.linkest.org)",
                 p1_cna: "根据 NIST 和 MITRE 对 CVE 编号机构 (CNA) 的要求，我们<strong>仅受理</strong>属于 Linkest Foundation 生态内的漏洞报告。对于任何非 Linkest Foundation 维护的第三方项目或服务，我们<strong>不予受理且无权受理</strong>。请将相关报告提交给对应的项目维护者或相关 CNA。",
-                p2_title: "报告渠道",
-                p2_desc1: "<strong>首选渠道（安全且留痕）：</strong>请在 Linkest Foundation 的专用安全仓库中提交 GitHub 私密漏洞报告 (GHSA)：",
-                p2_desc2: "<strong>备用渠道：</strong>若您无法使用 GitHub，请发送邮件至：",
-                p2_desc3: "在补丁发布前，严禁在任何公开平台（如 Issue、论坛）披露未修复的漏洞。",
-                p3_title: "报告格式",
-                p3_desc: "为提高处理效率，请尽量参考 GHSA 格式提交，包含以下详细信息：",
-                p3_li1: "<strong>Summary (摘要)：</strong>漏洞简述。",
-                p3_li2: "<strong>Details (详情)：</strong>受影响的仓库/版本、CWE 分类、根本原因。",
-                p3_li3: "<strong>PoC (复现步骤)：</strong>详细步骤或最小化可执行脚本。",
-                p3_li4: "<strong>Impact (影响)：</strong>受影响的用户范围。",
-                p3_li5: "<strong>CVSS (评分)：</strong>提供 v3.1 / v4.0 向量字符串。",
-                p4_title: "响应优先级与时间表",
-                p4_desc: "可复现的 PoC 是定级的核心依据。",
-                p4_p0: "CVSS >= 8.0 且带 PoC。7天内初步响应。",
-                p4_p1: "CVSS 4.0 - 7.9 或影响有限。14天内初步响应。",
-                p4_p2: "CVSS < 4.0 或信息不全。尽力而为响应。",
-                p5_title: "CVE 分配与负责任披露",
-                p5_desc1: "漏洞确认后，Linkest CNA 将作为官方机构为其分配 CVE ID。<em>（注：GHSA 仅作为协作和公告工具，CVE 编号由 Linkest CNA 颁发）。</em>",
-                p5_desc2: "我们执行严格的 <strong>90 天</strong>负责任披露时间表，届时将联合发布安全公告。",
-                p6_title: "安全港与测试边界",
-                p6_li1: "<strong>安全港承诺：</strong>对善意遵守规则的研究员，承诺不采取法律行动，并予以公开致谢。",
-                p6_li2: "<strong>严禁纯破坏性攻击：</strong>绝对拒绝并谴责大流量 DDoS 攻击、暴力穷举、物理破坏或社工钓鱼等行为。",
-                p6_li3: "<strong>【关键例外：漏洞引起的 DoS】：</strong>若发现由<strong>系统逻辑缺陷直接导致</strong>的资源耗尽（如 ReDoS、单次请求引发的内存泄漏），<strong>属合法漏洞，我们将予受理</strong>。但必须提供受控、最小化的 PoC，严禁演变为无限制压测。",
-                p6_li4: "<strong>自建环境原则：</strong>所有具有破坏性的测试（含上述逻辑 DoS）<strong>必须在本地自建环境进行</strong>。如需在线上验证，必须提前获得 security@linkest.org 的书面授权。",
-                p6_li5: "<strong>数据红线：</strong>严禁窃取、篡改或泄露真实用户数据，测试产生的临时数据必须删除。",
-                p7_title: "严正声明",
-                p7_desc: "保留拒绝受理明显伪造、恶意夸大严重性或包含破坏性载荷报告的权利。对试图通过伪造材料骗取 CVE 编号的行为，保留向社区公开并列入黑名单的权利。",
+                
+                p2_affiliated_title: "合作与附属项目",
+                p2_affiliated_desc: "虽然 Linkest CNA 主要覆盖 Linkest-FDT 官方组织下的仓库，但我们也会为特定的“合作与附属项目”提供 CVE 编号分配和漏洞分类服务。这些项目受我们团队的积极支持与维护，但在归属上可能属于其独立的工作室或组织。",
+                p2_affiliated_elig_title: "CNA 覆盖准入标准：",
+                p2_affiliated_elig_desc: "要被认定为受 Linkest CNA 覆盖的合作项目，必须<strong>同时</strong>满足以下两个条件：",
+                p2_affiliated_li1: "<strong>README 互相声明：</strong>该项目的官方仓库<strong>必须在其 README.md</strong>（或等效文档）中<strong>明确声明</strong>与 Linkest Foundation 的合作/附属关系。",
+                p2_affiliated_li2: "<strong>官网正式列出：</strong>该项目<strong>必须被正式列入</strong> Linkest Foundation 官网的“Projects（项目）”页面中。",
+                p2_affiliated_note: "<em>注：合作项目保留其知识产权的完全所有权。Linkest Foundation 不主张对其的拥有权，而是作为可信的安全合作伙伴，提供 CNA 覆盖与漏洞分类支持。</em>",
+                
+                p3_title: "报告渠道",
+                p3_desc1: "<strong>首选渠道（安全且留痕）：</strong>请在 Linkest Foundation 的专用安全仓库中提交 GitHub 私密漏洞报告 (GHSA)：",
+                p3_desc2: "<strong>备用渠道：</strong>若您无法使用 GitHub，请发送邮件至：",
+                p3_desc3: "在补丁发布前，严禁在任何公开平台（如 Issue、论坛）披露未修复的漏洞。",
+                
+                p4_title: "报告格式",
+                p4_desc: "为提高处理效率，请尽量参考 GHSA 格式提交，包含以下详细信息：",
+                p4_li1: "<strong>Summary (摘要)：</strong>漏洞简述。",
+                p4_li2: "<strong>Details (详情)：</strong>受影响的仓库/版本、CWE 分类、根本原因。",
+                p4_li3: "<strong>PoC (复现步骤)：</strong>详细步骤或最小化可执行脚本。",
+                p4_li4: "<strong>Impact (影响)：</strong>受影响的用户范围。",
+                p4_li5: "<strong>CVSS (评分)：</strong>提供 v3.1 / v4.0 向量字符串。",
+                
+                p5_title: "响应优先级与时间表",
+                p5_desc: "可复现的 PoC 是定级的核心依据。",
+                p5_p0: "CVSS >= 8.0 且带 PoC。7天内初步响应。",
+                p5_p1: "CVSS 4.0 - 7.9 或影响有限。14天内初步响应。",
+                p5_p2: "CVSS < 4.0 或信息不全。尽力而为响应。",
+                
+                p6_title: "CVE 分配与负责任披露",
+                p6_desc1: "漏洞确认后，Linkest CNA 将作为官方机构为其分配 CVE ID。<em>（注：GHSA 仅作为协作和公告工具，CVE 编号由 Linkest CNA 颁发）。</em>",
+                p6_desc2: "我们执行严格的 <strong>90 天</strong>负责任披露时间表，届时将联合发布安全公告。",
+                
+                p7_title: "安全港与测试边界",
+                p7_li1: "<strong>安全港承诺：</strong>对善意遵守规则的研究员，承诺不采取法律行动，并予以公开致谢。",
+                p7_li2: "<strong>严禁纯破坏性攻击：</strong>绝对拒绝并谴责大流量 DDoS 攻击、暴力穷举、物理破坏或社工钓鱼等行为。",
+                p7_li3: "<strong>【关键例外：漏洞引起的 DoS】：</strong>若发现由<strong>系统逻辑缺陷直接导致</strong>的资源耗尽（如 ReDoS、单次请求引发的内存泄漏），<strong>属合法漏洞，我们将予受理</strong>。但必须提供受控、最小化的 PoC，严禁演变为无限制压测。",
+                p7_li4: "<strong>自建环境原则：</strong>所有具有破坏性的测试（含上述逻辑 DoS）<strong>必须在本地自建环境进行</strong>。如需在线上验证，必须提前获得 security@linkest.org 的书面授权。",
+                p7_li5: "<strong>数据红线：</strong>严禁窃取、篡改或泄露真实用户数据，测试产生的临时数据必须删除。",
+                
+                p8_title: "严正声明",
+                p8_desc: "保留拒绝受理明显伪造、恶意夸大严重性或包含破坏性载荷报告的权利。对试图通过伪造材料骗取 CVE 编号的行为，保留向社区公开并列入黑名单的权利。",
+                
                 dec_title: "结语宣言",
                 dec_text: "尊重安全研究，敬畏披露规则，维护开源生态，践行负责任披露。",
                 dec_subtext: "从你我做起，从每一个独立开发者做起。"
@@ -425,41 +473,56 @@
             'zh-TW': {
                 nav_contribution: "貢獻", nav_security: "安全", nav_projects: "專案", nav_sponsor: "贊助", nav_about: "關於",
                 footer_status: "狀態", footer_policy: "政策", footer_contact: "聯繫我們",
-                trans_banner: "本頁面的非英語版本由機器翻譯或社區提供，僅供參考。若與英文版存在歧義，請一律以英文版為準。", 
-                machine_trans_notice: "* 部分內容由機器翻譯提供，歡迎社區修正。",
+                trans_banner: "本頁面的非英語版本由機器翻譯或社區提供，僅供參考。若與英文版存在歧義，請一律以英文版為準。", machine_trans_notice: "* 部分內容由機器翻譯提供，歡迎社區修正。",
                 policy_title: "安全與漏洞披露政策", policy_subtitle: "最後更新：2026年11月14日",
+                
                 p1_title: "適用範圍與 CNA 管轄權",
                 p1_desc: "本政策嚴格適用於由 Linkest Foundation 官方維護的資產。",
                 p1_li1: "所有官方開源倉庫 (github.com/Linkest-FDT/*)",
                 p1_li2: "官方基礎設施與網站 (*.linkest.org)",
                 p1_cna: "根據 NIST 和 MITRE 對 CVE 編號機構 (CNA) 的要求，我們<strong>僅受理</strong>屬於 Linkest Foundation 生態內的漏洞報告。對於任何非 Linkest Foundation 維護的第三方專案或服務，我們<strong>不予受理且無權受理</strong>。請將相關報告提交給對應的專案維護者或相關 CNA。",
-                p2_title: "報告渠道",
-                p2_desc1: "<strong>首選渠道（安全且留痕）：</strong>請在 Linkest Foundation 的專用安全倉庫中提交 GitHub 私密漏洞報告 (GHSA)：",
-                p2_desc2: "<strong>備用渠道：</strong>若您無法使用 GitHub，請發送郵件至：",
-                p2_desc3: "在補丁發布前，嚴禁在任何公開平台（如 Issue、論壇）披露未修復的漏洞。",
-                p3_title: "報告格式",
-                p3_desc: "為提高處理效率，請盡量參考 GHSA 格式提交，包含以下詳細資訊：",
-                p3_li1: "<strong>Summary (摘要)：</strong>漏洞簡述。",
-                p3_li2: "<strong>Details (詳情)：</strong>受影響的倉庫/版本、CWE 分類、根本原因。",
-                p3_li3: "<strong>PoC (復現步驟)：</strong>詳細步驟或最小化可執行腳本。",
-                p3_li4: "<strong>Impact (影響)：</strong>受影響的使用者範圍。",
-                p3_li5: "<strong>CVSS (評分)：</strong>提供 v3.1 / v4.0 向量字串。",
-                p4_title: "回應優先級與時間表",
-                p4_desc: "可復現的 PoC 是定級的核心依據。",
-                p4_p0: "CVSS >= 8.0 且帶 PoC。7天內初步回應。",
-                p4_p1: "CVSS 4.0 - 7.9 或影響有限。14天內初步回應。",
-                p4_p2: "CVSS < 4.0 或資訊不全。盡力而為回應。",
-                p5_title: "CVE 分配與負責任披露",
-                p5_desc1: "漏洞確認後，Linkest CNA 將作為官方機構為其分配 CVE ID。<em>（註：GHSA 僅作為協作和公告工具，CVE 編號由 Linkest CNA 頒發）。</em>",
-                p5_desc2: "我們執行嚴格的 <strong>90 天</strong>負責任披露時間表，屆時將聯合發布安全公告。",
-                p6_title: "安全港與測試邊界",
-                p6_li1: "<strong>安全港承諾：</strong>對善意遵守規則的研究員，承諾不採取法律行動，並予以公開致謝。",
-                p6_li2: "<strong>嚴禁純破壞性攻擊：</strong>絕對拒絕並譴責大流量 DDoS 攻擊、暴力窮舉、物理破壞或社工釣魚等行為。",
-                p6_li3: "<strong>【關鍵例外：漏洞引起的 DoS】：</strong>若發現由<strong>系統邏輯缺陷直接導致</strong>的資源耗盡（如 ReDoS、單次請求引發的記憶體洩漏），<strong>屬合法漏洞，我們將予受理</strong>。但必須提供受控、最小化的 PoC，嚴禁演變為無限制壓測。",
-                p6_li4: "<strong>自建環境原則：</strong>所有具有破壞性的測試（含上述邏輯 DoS）<strong>必須在本地自建環境進行</strong>。如需在線上驗證，必須提前獲得 security@linkest.org 的書面授權。",
-                p6_li5: "<strong>數據紅線：</strong>嚴禁竊取、篡改或洩露真實使用者數據，測試產生的臨時數據必須刪除。",
-                p7_title: "嚴正聲明",
-                p7_desc: "保留拒絕受理明顯偽造、惡意誇大嚴重性或包含破壞性載荷報告的權利。對試圖通過偽造材料騙取 CVE 編號的行為，保留向社區公開並列入黑名單的權利。",
+                
+                p2_affiliated_title: "合作與附屬專案",
+                p2_affiliated_desc: "雖然 Linkest CNA 主要覆蓋 Linkest-FDT 官方組織下的倉庫，但我們也會為特定的「合作與附屬專案」提供 CVE 編號分配和漏洞分類服務。這些專案受我們團隊的積極支持與維護，但在歸屬上可能屬於其獨立的工作室或組織。",
+                p2_affiliated_elig_title: "CNA 覆蓋准入標準：",
+                p2_affiliated_elig_desc: "要被認定為受 Linkest CNA 覆蓋的合作專案，必須<strong>同時</strong>滿足以下兩個條件：",
+                p2_affiliated_li1: "<strong>README 互相聲明：</strong>該專案的官方倉庫<strong>必須在其 README.md</strong>（或等效文檔）中<strong>明確聲明</strong>與 Linkest Foundation 的合作/附屬關係。",
+                p2_affiliated_li2: "<strong>官網正式列出：</strong>該專案<strong>必須被正式列入</strong> Linkest Foundation 官網的「Projects（專案）」頁面中。",
+                p2_affiliated_note: "<em>註：合作專案保留其知識產權的完全所有權。Linkest Foundation 不主張對其的擁有權，而是作為可信的安全合作夥伴，提供 CNA 覆蓋與漏洞分類支持。</em>",
+                
+                p3_title: "報告渠道",
+                p3_desc1: "<strong>首選渠道（安全且留痕）：</strong>請在 Linkest Foundation 的專用安全倉庫中提交 GitHub 私密漏洞報告 (GHSA)：",
+                p3_desc2: "<strong>備用渠道：</strong>若您無法使用 GitHub，請發送郵件至：",
+                p3_desc3: "在補丁發布前，嚴禁在任何公開平台（如 Issue、論壇）披露未修復的漏洞。",
+                
+                p4_title: "報告格式",
+                p4_desc: "為提高處理效率，請盡量參考 GHSA 格式提交，包含以下詳細資訊：",
+                p4_li1: "<strong>Summary (摘要)：</strong>漏洞簡述。",
+                p4_li2: "<strong>Details (詳情)：</strong>受影響的倉庫/版本、CWE 分類、根本原因。",
+                p4_li3: "<strong>PoC (復現步驟)：</strong>詳細步驟或最小化可執行腳本。",
+                p4_li4: "<strong>Impact (影響)：</strong>受影響的使用者範圍。",
+                p4_li5: "<strong>CVSS (評分)：</strong>提供 v3.1 / v4.0 向量字串。",
+                
+                p5_title: "回應優先級與時間表",
+                p5_desc: "可復現的 PoC 是定級的核心依據。",
+                p5_p0: "CVSS >= 8.0 且帶 PoC。7天內初步回應。",
+                p5_p1: "CVSS 4.0 - 7.9 或影響有限。14天內初步回應。",
+                p5_p2: "CVSS < 4.0 或資訊不全。盡力而為回應。",
+                
+                p6_title: "CVE 分配與負責任披露",
+                p6_desc1: "漏洞確認後，Linkest CNA 將作為官方機構為其分配 CVE ID。<em>（註：GHSA 僅作為協作和公告工具，CVE 編號由 Linkest CNA 頒發）。</em>",
+                p6_desc2: "我們執行嚴格的 <strong>90 天</strong>負責任披露時間表，屆時將聯合發布安全公告。",
+                
+                p7_title: "安全港與測試邊界",
+                p7_li1: "<strong>安全港承諾：</strong>對善意遵守規則的研究員，承諾不採取法律行動，並予以公開致謝。",
+                p7_li2: "<strong>嚴禁純破壞性攻擊：</strong>絕對拒絕並譴責大流量 DDoS 攻擊、暴力窮舉、物理破壞或社工釣魚等行為。",
+                p7_li3: "<strong>【關鍵例外：漏洞引起的 DoS】：</strong>若發現由<strong>系統邏輯缺陷直接導致</strong>的資源耗盡（如 ReDoS、單次請求引發的記憶體洩漏），<strong>屬合法漏洞，我們將予受理</strong>。但必須提供受控、最小化的 PoC，嚴禁演變為無限制壓測。",
+                p7_li4: "<strong>自建環境原則：</strong>所有具有破壞性的測試（含上述邏輯 DoS）<strong>必須在本地自建環境進行</strong>。如需在線上驗證，必須提前獲得 security@linkest.org 的書面授權。",
+                p7_li5: "<strong>數據紅線：</strong>嚴禁竊取、篡改或洩露真實使用者數據，測試產生的臨時數據必須刪除。",
+                
+                p8_title: "嚴正聲明",
+                p8_desc: "保留拒絕受理明顯偽造、惡意誇大嚴重性或包含破壞性載荷報告的權利。對試圖通過偽造材料騙取 CVE 編號的行為，保留向社區公開並列入黑名單的權利。",
+                
                 dec_title: "結語宣言",
                 dec_text: "尊重安全研究，敬畏披露規則，維護開源生態，踐行負責任披露。",
                 dec_subtext: "從你我做起，從每一個獨立開發者做起。"
@@ -469,38 +532,54 @@
                 footer_status: "ステータス", footer_policy: "ポリシー", footer_contact: "お問い合わせ",
                 trans_banner: "このページの非英語版は、機械翻訳またはコミュニティによって提供されており、参考用です。英語版と相違がある場合は、英語版が優先されます。", machine_trans_notice: "* 一部の言語は機械翻訳によって提供されています。コミュニティによる修正を歓迎します。",
                 policy_title: "セキュリティと開示ポリシー", policy_subtitle: "最終更新日：2026年11月14日",
+                
                 p1_title: "適用範囲と CNA の管轄",
                 p1_desc: "このポリシーは、Linkest Foundation が公式に管理する資産に厳密に適用されます。",
                 p1_li1: "すべての公式オープンソースリポジトリ (github.com/Linkest-FDT/*)",
                 p1_li2: "公式インフラストラクチャとウェブサイト (*.linkest.org)",
                 p1_cna: "CVE 番号発行機関 (CNA) に対する NIST および MITRE の要件に準拠し、当財団は Linkest Foundation エコシステムに関する報告のみを処理します。第三者プロジェクトの報告は<strong>処理できません</strong>。該当するメンテナーまたは CNA に報告してください。",
-                p2_title: "報告チャネル",
-                p2_desc1: "<strong>主要チャネル：</strong>セキュリティリポジトリで非公開の脆弱性レポート (GHSA) を直接送信してください：",
-                p2_desc2: "<strong>バックアップチャネル：</strong>GitHub が使用できない場合は、メールでご連絡ください：",
-                p2_desc3: "パッチがリリースされる前に脆弱性を公開しないでください。",
-                p3_title: "報告フォーマット",
-                p3_desc: "処理効率を高めるため、GHSA 形式に従って以下の詳細を含めてください：",
-                p3_li1: "<strong>Summary (概要)：</strong>脆弱性の簡単な説明。",
-                p3_li2: "<strong>Details (詳細)：</strong>影響を受けるリポジトリ、バージョン/コミット、CWE 分類、根本原因。",
-                p3_li3: "<strong>PoC (実証コード)：</strong>段階的な再現手順または最小限の実行可能スクリプト。",
-                p3_li4: "<strong>Impact (影響)：</strong>影響を受けるユーザーの範囲（管理者権限の奪取など）。",
-                p3_li5: "<strong>CVSS (評価)：</strong>v3.1 / v4.0 のベクトル文字列。",
-                p4_title: "トリアージの優先順位と SLA",
-                p4_desc: "再現可能な PoC は優先順位付けの重要な要素です。",
-                p4_p0: "CVSS >= 8.0 かつ PoC あり。7日以内に初期対応。",
-                p4_p1: "CVSS 4.0 - 7.9 または影響が限定的。14日以内に初期対応。",
-                p4_p2: "CVSS < 4.0 または情報不足。ベストエフォートで対応。",
-                p5_title: "CVE の割り当てと開示",
-                p5_desc1: "脆弱性が確認されると、Linkest CNA が公式の CVE ID を割り当てます。<em>（注：GHSA は追跡と公開のための共同ツールであり、CVE ID は Linkest CNA によって発行されます）。</em>",
-                p5_desc2: "厳格な<strong>90日間の責任ある開示</strong>タイムラインを適用します。パッチの準備ができた後、または90日間の期間が終了した後に、公開アドバイザリが共同で公開されます。",
-                p6_title: "セーフハーバーとテスト境界",
-                p6_li1: "<strong>セーフハーバーの約束：</strong>善意でこのポリシーに従う研究者に対して法的措置を取ることはなく、貢献を公に認めます。",
-                p6_li2: "<strong>破壊的攻撃の禁止：</strong>大規模な DDoS、ブルートフォース、物理的損害、またはスタッフに対するソーシャルエンジニアリングなどの意図的な攻撃を厳しく拒否します。",
-                p6_li3: "<strong>【重要な例外：脆弱性による DoS】：</strong><strong>コード内の論理的な欠陥に直接起因する</strong>リソース枯渇（ReDoS、単一のリクエストによるメモリリークなど）を発見した場合、<strong>これは有効な脆弱性であり、トリアージの対象となります。</strong>ただし、制御された最小限の PoC で実証する必要があります。無制限のストレステストは許可されません。",
-                p6_li4: "<strong>自己ホストテストの原則：</strong>潜在的に破壊的なテスト（上記の論理ベースの DoS を含む）は、<strong>ローカルの自己ホスト環境で実行する必要があります</strong>。Linkest Foundation の本番環境に対してテストを行わないでください。実際の検証が必要な場合は、security@linkest.org を介して事前に書面による許可を取得する必要があります。",
-                p6_li5: "<strong>データの境界：</strong>自分で生成したものではない実際のユーザーデータにアクセス、変更、ダウンロード、または持ち出してはなりません。テスト中に作成されたテストデータは直ちに削除する必要があります。",
-                p7_title: "厳格な免責事項",
-                p7_desc: "明らかに捏造された、悪意を持って重大度を誇張された、または破壊的なペイロードで提出された報告を拒否する権利を留保します。CVE システムを欺く試みは、その悪用の公開開示につながります。",
+                
+                p2_affiliated_title: "提携・パートナープロジェクト",
+                p2_affiliated_desc: "Linkest CNA は主に Linkest-FDT 組織下のリポジトリを対象としていますが、特定の提携プロジェクトに対しても CVE の割り当てと脆弱性のトリアージサービスを提供しています。これらのプロジェクトは当チームによって積極的にサポートおよび維持されていますが、独立した組織やスタジオに属している場合があります。",
+                p2_affiliated_elig_title: "CNA 対象となるための要件：",
+                p2_affiliated_elig_desc: "Linkest CNA サービスを受ける提携プロジェクトとして認定されるには、以下の<strong>両方</strong>の基準を同時に満たす必要があります：",
+                p2_affiliated_li1: "<strong>README での相互宣言：</strong>プロジェクトの公式リポジトリは、README.md（または同等のドキュメント）で Linkest Foundation との提携関係を<strong>明示的に宣言</strong>する必要があります。",
+                p2_affiliated_li2: "<strong>公式ウェブサイトへの掲載：</strong>プロジェクトは、Linkest Foundation ウェブサイトの「プロジェクト」ページに<strong>公式に掲載</strong>されている必要があります。",
+                p2_affiliated_note: "<em>注：提携プロジェクトは知的財産権の完全な所有権を保持します。Linkest Foundation は所有権を主張せず、CNA の適用範囲とトリアージサポートを提供する信頼できるセキュリティパートナーとして機能します。</em>",
+                
+                p3_title: "報告チャネル",
+                p3_desc1: "<strong>主要チャネル：</strong>セキュリティリポジトリで非公開の脆弱性レポート (GHSA) を直接送信してください：",
+                p3_desc2: "<strong>バックアップチャネル：</strong>GitHub が使用できない場合は、メールでご連絡ください：",
+                p3_desc3: "パッチがリリースされる前に脆弱性を公開しないでください。",
+                
+                p4_title: "報告フォーマット",
+                p4_desc: "処理効率を高めるため、GHSA 形式に従って以下の詳細を含めてください：",
+                p4_li1: "<strong>Summary (概要)：</strong>脆弱性の簡単な説明。",
+                p4_li2: "<strong>Details (詳細)：</strong>影響を受けるリポジトリ、バージョン/コミット、CWE 分類、根本原因。",
+                p4_li3: "<strong>PoC (実証コード)：</strong>段階的な再現手順または最小限の実行可能スクリプト。",
+                p4_li4: "<strong>Impact (影響)：</strong>影響を受けるユーザーの範囲（管理者権限の奪取など）。",
+                p4_li5: "<strong>CVSS (評価)：</strong>v3.1 / v4.0 のベクトル文字列。",
+                
+                p5_title: "トリアージの優先順位と SLA",
+                p5_desc: "再現可能な PoC は優先順位付けの重要な要素です。",
+                p5_p0: "CVSS >= 8.0 かつ PoC あり。7日以内に初期対応。",
+                p5_p1: "CVSS 4.0 - 7.9 または影響が限定的。14日以内に初期対応。",
+                p5_p2: "CVSS < 4.0 または情報不足。ベストエフォートで対応。",
+                
+                p6_title: "CVE の割り当てと開示",
+                p6_desc1: "脆弱性が確認されると、Linkest CNA が公式の CVE ID を割り当てます。<em>（注：GHSA は追跡と公開のための共同ツールであり、CVE ID は Linkest CNA によって発行されます）。</em>",
+                p6_desc2: "厳格な<strong>90日間の責任ある開示</strong>タイムラインを適用します。パッチの準備ができた後、または90日間の期間が終了した後に、公開アドバイザリが共同で公開されます。",
+                
+                p7_title: "セーフハーバーとテスト境界",
+                p7_li1: "<strong>セーフハーバーの約束：</strong>善意でこのポリシーに従う研究者に対して法的措置を取ることはなく、貢献を公に認めます。",
+                p7_li2: "<strong>破壊的攻撃の禁止：</strong>大規模な DDoS、ブルートフォース、物理的損害、またはスタッフに対するソーシャルエンジニアリングなどの意図的な攻撃を厳しく拒否します。",
+                p7_li3: "<strong>【重要な例外：脆弱性による DoS】：</strong><strong>コード内の論理的な欠陥に直接起因する</strong>リソース枯渇（ReDoS、単一のリクエストによるメモリリークなど）を発見した場合、<strong>これは有効な脆弱性であり、トリアージの対象となります。</strong>ただし、制御された最小限の PoC で実証する必要があります。無制限のストレステストは許可されません。",
+                p7_li4: "<strong>自己ホストテストの原則：</strong>潜在的に破壊的なテスト（上記の論理ベースの DoS を含む）は、<strong>ローカルの自己ホスト環境で実行する必要があります</strong>。Linkest Foundation の本番環境に対してテストを行わないでください。実際の検証が必要な場合は、security@linkest.org を介して事前に書面による許可を取得する必要があります。",
+                p7_li5: "<strong>データの境界：</strong>自分で生成したものではない実際のユーザーデータにアクセス、変更、ダウンロード、または持ち出してはなりません。テスト中に作成されたテストデータは直ちに削除する必要があります。",
+                
+                p8_title: "厳格な免責事項",
+                p8_desc: "明らかに捏造された、悪意を持って重大度を誇張された、または破壊的なペイロードで提出された報告を拒否する権利を留保します。CVE システムを欺く試みは、その悪用の公開開示につながります。",
+                
                 dec_title: "私たちの宣言",
                 dec_text: "セキュリティ研究を尊重する。開示ルールを守る。オープンソースエコシステムを保護する。責任ある開示を実践する。",
                 dec_subtext: "それはあなたと私から始まり、すべての独立した開発者から始まります。"
@@ -510,38 +589,54 @@
                 footer_status: "Статус", footer_policy: "Политика", footer_contact: "Связаться с нами",
                 trans_banner: "Неанглийские версии этой страницы предоставлены машинным переводом или сообществом и предназначены только для справки. В случае расхождений преимущественную силу имеет английская версия.", machine_trans_notice: "* Некоторые языки предоставлены машинным переводом. Мы приветствуем исправления от сообщества.",
                 policy_title: "Политика безопасности и раскрытия информации", policy_subtitle: "Последнее обновление: 14 ноября 2026 г.",
+                
                 p1_title: "Сфера применения и юрисдикция CNA",
                 p1_desc: "Настоящая политика строго применяется к активам, официально поддерживаемым Linkest Foundation.",
                 p1_li1: "Все официальные репозитории с открытым исходным кодом (github.com/Linkest-FDT/*)",
                 p1_li2: "Официальная инфраструктура и веб-сайты (*.linkest.org)",
                 p1_cna: "В соответствии с требованиями NIST и MITRE к органам по присвоению номеров CVE (CNA), мы обрабатываем отчеты только по экосистеме Linkest Foundation. Мы <strong>не обрабатываем и не можем обрабатывать</strong> отчеты по сторонним проектам. Пожалуйста, сообщайте о них их соответствующим сопровождающим или CNA.",
-                p2_title: "Каналы отчетности",
-                p2_desc1: "<strong>Основной канал:</strong> Отправьте конфиденциальный отчет об уязвимости (GHSA) непосредственно в наш репозиторий безопасности:",
-                p2_desc2: "<strong>Резервный канал:</strong> Если вы не можете использовать GitHub, напишите нам по адресу:",
-                p2_desc3: "Не раскрывайте уязвимости публично до выпуска исправления.",
-                p3_title: "Формат отчета",
-                p3_desc: "Пожалуйста, оформите отчет (желательно в формате GHSA) со следующими деталями:",
-                p3_li1: "<strong>Summary (Краткое описание):</strong> Краткое описание уязвимости.",
-                p3_li2: "<strong>Details (Детали):</strong> Затронутый репозиторий, версия/коммит, классификация CWE и первопричина.",
-                p3_li3: "<strong>PoC (Доказательство концепции):</strong> Пошаговые инструкции по воспроизведению или минимальный исполняемый скрипт.",
-                p3_li4: "<strong>Impact (Влияние):</strong> Затронутая область пользователей (например, захват прав администратора).",
-                p3_li5: "<strong>CVSS (Оценка):</strong> Векторная строка v3.1/v4.0.",
-                p4_title: "Приоритеты сортировки и SLA",
-                p4_desc: "Воспроизводимый PoC является критическим фактором для определения приоритета.",
-                p4_p0: "CVSS >= 8.0 с PoC. Первоначальный ответ в течение 7 дней.",
-                p4_p1: "CVSS 4.0 - 7.9 или ограниченное воздействие. Первоначальный ответ в течение 14 дней.",
-                p4_p2: "CVSS < 4.0 или неполная информация. Ответ по мере возможности.",
-                p5_title: "Назначение CVE и раскрытие",
-                p5_desc1: "После проверки уязвимости Linkest CNA присвоит официальный идентификатор CVE. <em>(Примечание: GHSA служит нашим инструментом для отслеживания и публикации, а идентификаторы CVE выдаются Linkest CNA).</em>",
-                p5_desc2: "Мы применяем строгий график <strong>ответственного раскрытия в течение 90 дней</strong>. Публичные уведомления будут опубликованы после выпуска исправления или истечения 90-дневного срока.",
-                p6_title: "Безопасная гавань и правила взаимодействия",
-                p6_li1: "<strong>Обязательство безопасной гавани:</strong> Мы не будем принимать юридические меры против исследователей, действующих добросовестно и соблюдающих эту политику. Мы публично признаем ваш вклад.",
-                p6_li2: "<strong>Запрещенные деструктивные атаки:</strong> Мы строго отвергаем преднамеренные объемные атаки, такие как крупномасштабные DDoS-атаки, брутфорс, физический ущерб или социальная инженерия в отношении сотрудников.",
-                p6_li3: "<strong>Важное исключение (DoS, вызванный уязвимостью):</strong> Если вы обнаружите проблему исчерпания ресурсов, вызванную <strong>непосредственно логической ошибкой</strong> в нашем коде (например, ReDoS, утечки памяти, вызванные одним запросом), <strong>это действительная уязвимость, и она будет рассмотрена.</strong> Однако вы должны продемонстрировать ее с помощью контролируемого минимального PoC. Неограниченное стресс-тестирование запрещено.",
-                p6_li4: "<strong>Принцип тестирования на собственных серверах:</strong> Любое потенциально разрушительное тестирование (включая логический DoS, упомянутый выше) <strong>должно проводиться в локальной среде, развернутой вами</strong>. Не тестируйте производственную среду Linkest Foundation. Если требуется проверка в реальных условиях, вы должны получить предварительное письменное разрешение по адресу security@linkest.org.",
-                p6_li5: "<strong>Границы данных:</strong> Вы не должны получать доступ, изменять, загружать или передавать какие-либо реальные пользовательские данные, не созданные вами. Любые тестовые данные, созданные во время тестирования, должны быть немедленно удалены.",
-                p7_title: "Строгий отказ от ответственности",
-                p7_desc: "Мы оставляем за собой право отклонять отчеты об уязвимостях, которые явно сфабрикованы, злонамеренно завышены по серьезности или представлены с деструктивными полезными нагрузками. Попытки обмануть систему CVE приведут к публичному раскрытию злоупотребления.",
+                
+                p2_affiliated_title: "Аффилированные и партнерские проекты",
+                p2_affiliated_desc: "Хотя Linkest CNA в первую очередь охватывает репозитории организации Linkest-FDT, мы также предоставляем услуги по присвоению CVE и сортировке уязвимостей определенным аффилированным проектам. Эти проекты активно поддерживаются и обслуживаются нашей командой, но могут принадлежать их собственным независимым организациям или студиям.",
+                p2_affiliated_elig_title: "Право на покрытие CNA:",
+                p2_affiliated_elig_desc: "Чтобы быть признанным аффилированным проектом, имеющим право на услуги Linkest CNA, проект должен <strong>ОДНОВРЕМЕННО</strong> соответствовать обоим следующим критериям:",
+                p2_affiliated_li1: "<strong>Взаимная декларация в README:</strong> Официальный репозиторий проекта должен явно указывать его affiliation с Linkest Foundation в файле README.md (или эквивалентной документации).",
+                p2_affiliated_li2: "<strong>Официальный список на веб-сайте:</strong> Проект должен быть официально указан на странице \"Проекты\" веб-сайта Linkest Foundation.",
+                p2_affiliated_note: "<em>Примечание. Аффилированные проекты сохраняют полное право собственности на свою интеллектуальную собственность. Linkest Foundation не претендует на право собственности, а выступает в качестве надежного партнера по безопасности, обеспечивая покрытие CNA и поддержку сортировки.</em>",
+                
+                p3_title: "Каналы отчетности",
+                p3_desc1: "<strong>Основной канал:</strong> Отправьте конфиденциальный отчет об уязвимости (GHSA) непосредственно в наш репозиторий безопасности:",
+                p3_desc2: "<strong>Резервный канал:</strong> Если вы не можете использовать GitHub, напишите нам по адресу:",
+                p3_desc3: "Не раскрывайте уязвимости публично до выпуска исправления.",
+                
+                p4_title: "Формат отчета",
+                p4_desc: "Пожалуйста, оформите отчет (желательно в формате GHSA) со следующими деталями:",
+                p4_li1: "<strong>Summary (Краткое описание):</strong> Краткое описание уязвимости.",
+                p4_li2: "<strong>Details (Детали):</strong> Затронутый репозиторий, версия/коммит, классификация CWE и первопричина.",
+                p4_li3: "<strong>PoC (Доказательство концепции):</strong> Пошаговые инструкции по воспроизведению или минимальный исполняемый скрипт.",
+                p4_li4: "<strong>Impact (Влияние):</strong> Затронутая область пользователей (например, захват прав администратора).",
+                p4_li5: "<strong>CVSS (Оценка):</strong> Векторная строка v3.1/v4.0.",
+                
+                p5_title: "Приоритеты сортировки и SLA",
+                p5_desc: "Воспроизводимый PoC является критическим фактором для определения приоритета.",
+                p5_p0: "CVSS >= 8.0 с PoC. Первоначальный ответ в течение 7 дней.",
+                p5_p1: "CVSS 4.0 - 7.9 или ограниченное воздействие. Первоначальный ответ в течение 14 дней.",
+                p5_p2: "CVSS < 4.0 или неполная информация. Ответ по мере возможности.",
+                
+                p6_title: "Назначение CVE и раскрытие",
+                p6_desc1: "После проверки уязвимости Linkest CNA присвоит официальный идентификатор CVE. <em>(Примечание: GHSA служит нашим инструментом для отслеживания и публикации, а идентификаторы CVE выдаются Linkest CNA).</em>",
+                p6_desc2: "Мы применяем строгий график <strong>ответственного раскрытия в течение 90 дней</strong>. Публичные уведомления будут опубликованы после выпуска исправления или истечения 90-дневного срока.",
+                
+                p7_title: "Безопасная гавань и правила взаимодействия",
+                p7_li1: "<strong>Обязательство безопасной гавани:</strong> Мы не будем принимать юридические меры против исследователей, действующих добросовестно и соблюдающих эту политику. Мы публично признаем ваш вклад.",
+                p7_li2: "<strong>Запрещенные деструктивные атаки:</strong> Мы строго отвергаем преднамеренные объемные атаки, такие как крупномасштабные DDoS-атаки, брутфорс, физический ущерб или социальная инженерия в отношении сотрудников.",
+                p7_li3: "<strong>Важное исключение (DoS, вызванный уязвимостью):</strong> Если вы обнаружите проблему исчерпания ресурсов, вызванную <strong>непосредственно логической ошибкой</strong> в нашем коде (например, ReDoS, утечки памяти, вызванные одним запросом), <strong>это действительная уязвимость, и она будет рассмотрена.</strong> Однако вы должны продемонстрировать ее с помощью контролируемого минимального PoC. Неограниченное стресс-тестирование запрещено.",
+                p7_li4: "<strong>Принцип тестирования на собственных серверах:</strong> Любое потенциально разрушительное тестирование (включая логический DoS, упомянутый выше) <strong>должно проводиться в локальной среде, развернутой вами</strong>. Не тестируйте производственную среду Linkest Foundation. Если требуется проверка в реальных условиях, вы должны получить предварительное письменное разрешение по адресу security@linkest.org.",
+                p7_li5: "<strong>Границы данных:</strong> Вы не должны получать доступ, изменять, загружать или передавать какие-либо реальные пользовательские данные, не созданные вами. Любые тестовые данные, созданные во время тестирования, должны быть немедленно удалены.",
+                
+                p8_title: "Строгий отказ от ответственности",
+                p8_desc: "Мы оставляем за собой право отклонять отчеты об уязвимостях, которые явно сфабрикованы, злонамеренно завышены по серьезности или представлены с деструктивными полезными нагрузками. Попытки обмануть систему CVE приведут к публичному раскрытию злоупотребления.",
+                
                 dec_title: "Наша декларация",
                 dec_text: "Уважайте исследования в области безопасности. Соблюдайте правила раскрытия. Защищайте экосистему открытого исходного кода. Практикуйте ответственное раскрытие.",
                 dec_subtext: "Это начинается с вас и меня, и это начинается с каждого независимого разработчика."
@@ -551,38 +646,54 @@
                 footer_status: "Status", footer_policy: "Richtlinie", footer_contact: "Kontakt",
                 trans_banner: "Die nicht-englischen Versionen dieser Seite werden durch maschinelle Übersetzung oder die Community bereitgestellt und dienen nur als Referenz. Bei Abweichungen ist die englische Version maßgeblich.", machine_trans_notice: "* Einige Sprachen werden maschinell übersetzt. Korrekturen aus der Community sind willkommen.",
                 policy_title: "Sicherheits- und Offenlegungsrichtlinie", policy_subtitle: "Zuletzt aktualisiert: 14. November 2026",
+                
                 p1_title: "Geltungsbereich & CNA-Zuständigkeit",
                 p1_desc: "Diese Richtlinie gilt streng für Assets, die offiziell von der Linkest Foundation verwaltet werden.",
                 p1_li1: "Alle offiziellen Open-Source-Repositories (github.com/Linkest-FDT/*)",
                 p1_li2: "Offizielle Infrastruktur und Websites (*.linkest.org)",
                 p1_cna: "In Übereinstimmung mit den Anforderungen von NIST und MITRE an CVE-Nummerierungsbehörden (CNA) bearbeiten wir nur Meldungen für das Linkest Foundation-Ökosystem. Wir <strong>bearbeiten keine</strong> Meldungen für Projekte Dritter. Bitte melden Sie diese an die jeweiligen Maintainer oder CNAs.",
-                p2_title: "Meldekanäle",
-                p2_desc1: "<strong>Primärer Kanal:</strong> Reichen Sie einen vertraulichen Schwachstellenbericht (GHSA) direkt in unserem Sicherheits-Repository ein:",
-                p2_desc2: "<strong>Backup-Kanal:</strong> Wenn Sie GitHub nicht nutzen können, senden Sie uns eine E-Mail an:",
-                p2_desc3: "Geben Sie Schwachstellen nicht öffentlich bekannt, bevor ein Patch veröffentlicht wurde.",
-                p3_title: "Meldeformat",
-                p3_desc: "Bitte formatieren Sie Ihren Bericht (vorzugsweise im GHSA-Format) mit den folgenden Details:",
-                p3_li1: "<strong>Summary (Zusammenfassung):</strong> Eine kurze Beschreibung der Schwachstelle.",
-                p3_li2: "<strong>Details:</strong> Betroffenes Repository, Version/Commit, CWE-Klassifizierung und Grundursache.",
-                p3_li3: "<strong>PoC (Proof of Concept):</strong> Schritt-für-Schritt-Reproduktionsschritte oder ein minimales ausführbares Skript.",
-                p3_li4: "<strong>Impact (Auswirkung):</strong> Betroffener Benutzerbereich (z. B. Übernahme des Administrators).",
-                p3_li5: "<strong>CVSS (Bewertung):</strong> v3.1/v4.0 Vektor-String.",
-                p4_title: "Triage-Priorität & SLAs",
-                p4_desc: "Ein reproduzierbarer PoC ist ein kritischer Faktor für unsere Priorisierung.",
-                p4_p0: "CVSS >= 8.0 mit PoC. Erste Antwort innerhalb von 7 Tagen.",
-                p4_p1: "CVSS 4.0 - 7.9 oder begrenzte Auswirkung. Erste Antwort innerhalb von 14 Tagen.",
-                p4_p2: "CVSS < 4.0 oder unvollständige Informationen. Best-Effort-Antwort.",
-                p5_title: "CVE-Zuweisung & Offenlegung",
-                p5_desc1: "Sobald eine Schwachstelle verifiziert ist, weist die Linkest CNA eine offizielle CVE-ID zu. <em>(Hinweis: GHSA dient als unser kollaboratives Tool zur Verfolgung und Veröffentlichung, während CVE-IDs von der Linkest CNA ausgestellt werden).</em>",
-                p5_desc2: "Wir erzwingen eine strikte <strong>90-tägige Frist für verantwortungsvolle Offenlegung</strong>. Öffentliche Sicherheitshinweise werden gemeinsam veröffentlicht, nachdem ein Patch verfügbar ist oder die 90-Tage-Frist abgelaufen ist.",
-                p6_title: "Safe Harbor & Verhaltensregeln",
-                p6_li1: "<strong>Safe-Harbor-Verpflichtung:</strong> Wir werden keine rechtlichen Schritte gegen Forscher unternehmen, die in gutem Glauben handeln und diese Richtlinie befolgen. Wir werden Ihren Beitrag öffentlich anerkennen.",
-                p6_li2: "<strong>Verbotene destruktive Angriffe:</strong> Wir lehnen vorsätzliche volumetrische Angriffe wie groß angelegte DDoS-Angriffe, Brute-Forcing, physische Schäden oder Social Engineering gegen Mitarbeiter strikt ab.",
-                p6_li3: "<strong>Wichtige Ausnahme (durch Schwachstelle verursachter DoS):</strong> Wenn Sie ein Problem der Ressourcenerschöpfung entdecken, das <strong>direkt durch einen Logikfehler</strong> in unserem Code verursacht wird (z. B. ReDoS, Speicherlecks, die durch eine einzelne Anfrage ausgelöst werden), <strong>ist dies eine gültige Schwachstelle und wird triagiert.</strong> Sie müssen es jedoch mit einem kontrollierten, minimalen Proof of Concept (PoC) demonstrieren. Unbegrenztes Stresstesting ist nicht erlaubt.",
-                p6_li4: "<strong>Prinzip des Self-Hosted-Tests:</strong> Jegliche potenziell störenden Tests (einschließlich des oben genannten logikbasierten DoS) <strong>müssen in einer lokalen, selbst gehosteten Umgebung durchgeführt werden</strong>. Testen Sie nicht gegen die Produktionsumgebung der Linkest Foundation. Wenn eine Live-Verifizierung erforderlich ist, müssen Sie eine vorherige schriftliche Genehmigung über security@linkest.org einholen.",
-                p6_li5: "<strong>Datengrenzen:</strong> Sie dürfen keine echten Benutzerdaten, die nicht von Ihnen generiert wurden, abrufen, ändern, herunterladen oder exfiltrieren. Alle während des Tests erstellten Testdaten müssen sofort gelöscht werden.",
-                p7_title: "Strikter Haftungsausschluss",
-                p7_desc: "Wir behalten uns das Recht vor, Berichte über Schwachstellen abzulehnen, die offensichtlich erfunden, böswillig in der Schwere übertrieben oder mit destruktiven Payloads eingereicht wurden. Versuche, das CVE-System zu betrügen, führen zur öffentlichen Offenlegung des Missbrauchs.",
+                
+                p2_affiliated_title: "Verbundene & Partnerprojekte",
+                p2_affiliated_desc: "Während die Linkest CNA hauptsächlich Repositories der Linkest-FDT-Organisation abdeckt, bieten wir auch bestimmten verbundenen Projekten unsere CVE-Zuweisungs- und Schwachstellen-Triage-Dienste an. Diese Projekte werden von unserem Team aktiv unterstützt und gepflegt, gehören aber möglicherweise ihren eigenen unabhängigen Organisationen oder Studios.",
+                p2_affiliated_elig_title: "Berechtigung für CNA-Abdeckung:",
+                p2_affiliated_elig_desc: "Um als verbundenes Projekt anerkannt zu werden, das für Linkest CNA-Dienste in Frage kommt, muss ein Projekt <strong>BEIDE</strong> der folgenden Kriterien gleichzeitig erfüllen:",
+                p2_affiliated_li1: "<strong>Gegenseitige Erklärung im README:</strong> Das offizielle Repository des Projekts muss seine Verbindung zur Linkest Foundation in seiner README.md (oder einer gleichwertigen Dokumentation) ausdrücklich angeben.",
+                p2_affiliated_li2: "<strong>Offizielle Website-Auflistung:</strong> Das Projekt muss offiziell auf der Seite „Projekte“ der Website der Linkest Foundation aufgeführt sein.",
+                p2_affiliated_note: "<em>Hinweis: Verbundene Projekte behalten das volle Eigentum an ihrem geistigen Eigentum. Die Linkest Foundation erhebt keinen Anspruch auf Eigentum, sondern fungiert als vertrauenswürdiger Sicherheitspartner, der CNA-Abdeckung und Triage-Unterstützung bietet.</em>",
+                
+                p3_title: "Meldekanäle",
+                p3_desc1: "<strong>Primärer Kanal:</strong> Reichen Sie einen vertraulichen Schwachstellenbericht (GHSA) direkt in unserem Sicherheits-Repository ein:",
+                p3_desc2: "<strong>Backup-Kanal:</strong> Wenn Sie GitHub nicht nutzen können, senden Sie uns eine E-Mail an:",
+                p3_desc3: "Geben Sie Schwachstellen nicht öffentlich bekannt, bevor ein Patch veröffentlicht wurde.",
+                
+                p4_title: "Meldeformat",
+                p4_desc: "Bitte formatieren Sie Ihren Bericht (vorzugsweise im GHSA-Format) mit den folgenden Details:",
+                p4_li1: "<strong>Summary (Zusammenfassung):</strong> Eine kurze Beschreibung der Schwachstelle.",
+                p4_li2: "<strong>Details:</strong> Betroffenes Repository, Version/Commit, CWE-Klassifizierung und Grundursache.",
+                p4_li3: "<strong>PoC (Proof of Concept):</strong> Schritt-für-Schritt-Reproduktionsschritte oder ein minimales ausführbares Skript.",
+                p4_li4: "<strong>Impact (Auswirkung):</strong> Betroffener Benutzerbereich (z. B. Übernahme des Administrators).",
+                p4_li5: "<strong>CVSS (Bewertung):</strong> v3.1/v4.0 Vektor-String.",
+                
+                p5_title: "Triage-Priorität & SLAs",
+                p5_desc: "Ein reproduzierbarer PoC ist ein kritischer Faktor für unsere Priorisierung.",
+                p5_p0: "CVSS >= 8.0 mit PoC. Erste Antwort innerhalb von 7 Tagen.",
+                p5_p1: "CVSS 4.0 - 7.9 oder begrenzte Auswirkung. Erste Antwort innerhalb von 14 Tagen.",
+                p5_p2: "CVSS < 4.0 oder unvollständige Informationen. Best-Effort-Antwort.",
+                
+                p6_title: "CVE-Zuweisung & Offenlegung",
+                p6_desc1: "Sobald eine Schwachstelle verifiziert ist, weist die Linkest CNA eine offizielle CVE-ID zu. <em>(Hinweis: GHSA dient als unser kollaboratives Tool zur Verfolgung und Veröffentlichung, während CVE-IDs von der Linkest CNA ausgestellt werden).</em>",
+                p6_desc2: "Wir erzwingen eine strikte <strong>90-tägige Frist für verantwortungsvolle Offenlegung</strong>. Öffentliche Sicherheitshinweise werden gemeinsam veröffentlicht, nachdem ein Patch verfügbar ist oder die 90-Tage-Frist abgelaufen ist.",
+                
+                p7_title: "Safe Harbor & Verhaltensregeln",
+                p7_li1: "<strong>Safe-Harbor-Verpflichtung:</strong> Wir werden keine rechtlichen Schritte gegen Forscher unternehmen, die in gutem Glauben handeln und diese Richtlinie befolgen. Wir werden Ihren Beitrag öffentlich anerkennen.",
+                p7_li2: "<strong>Verbotene destruktive Angriffe:</strong> Wir lehnen vorsätzliche volumetrische Angriffe wie groß angelegte DDoS-Angriffe, Brute-Forcing, physische Schäden oder Social Engineering gegen Mitarbeiter strikt ab.",
+                p7_li3: "<strong>Wichtige Ausnahme (durch Schwachstelle verursachter DoS):</strong> Wenn Sie ein Problem der Ressourcenerschöpfung entdecken, das <strong>direkt durch einen Logikfehler</strong> in unserem Code verursacht wird (z. B. ReDoS, Speicherlecks, die durch eine einzelne Anfrage ausgelöst werden), <strong>ist dies eine gültige Schwachstelle und wird triagiert.</strong> Sie müssen es jedoch mit einem kontrollierten, minimalen Proof of Concept (PoC) demonstrieren. Unbegrenztes Stresstesting ist nicht erlaubt.",
+                p7_li4: "<strong>Prinzip des Self-Hosted-Tests:</strong> Jegliche potenziell störenden Tests (einschließlich des oben genannten logikbasierten DoS) <strong>müssen in einer lokalen, selbst gehosteten Umgebung durchgeführt werden</strong>. Testen Sie nicht gegen die Produktionsumgebung der Linkest Foundation. Wenn eine Live-Verifizierung erforderlich ist, müssen Sie eine vorherige schriftliche Genehmigung über security@linkest.org einholen.",
+                p7_li5: "<strong>Datengrenzen:</strong> Sie dürfen keine echten Benutzerdaten, die nicht von Ihnen generiert wurden, abrufen, ändern, herunterladen oder exfiltrieren. Alle während des Tests erstellten Testdaten müssen sofort gelöscht werden.",
+                
+                p8_title: "Strikter Haftungsausschluss",
+                p8_desc: "Wir behalten uns das Recht vor, Berichte über Schwachstellen abzulehnen, die offensichtlich erfunden, böswillig in der Schwere übertrieben oder mit destruktiven Payloads eingereicht wurden. Versuche, das CVE-System zu betrügen, führen zur öffentlichen Offenlegung des Missbrauchs.",
+                
                 dec_title: "Unsere Erklärung",
                 dec_text: "Respektieren Sie die Sicherheitsforschung. Ehren Sie die Offenlegungsregeln. Schützen Sie das Open-Source-Ökosystem. Praktizieren Sie verantwortungsvolle Offenlegung.",
                 dec_subtext: "Es beginnt mit dir und mir, und es beginnt mit jedem unabhängigen Entwickler."
@@ -592,38 +703,54 @@
                 footer_status: "Statut", footer_policy: "Politique", footer_contact: "Contact",
                 trans_banner: "Les versions non anglaises de cette page sont fournies par traduction automatique ou par la communauté et sont fournies à titre indicatif. En cas de divergence, la version anglaise prévaut.", machine_trans_notice: "* Certaines langues sont traduites automatiquement. Les corrections de la communauté sont les bienvenues.",
                 policy_title: "Politique de Sécurité et de Divulgation", policy_subtitle: "Dernière mise à jour : 14 novembre 2026",
+                
                 p1_title: "Portée et compétence CNA",
                 p1_desc: "Cette politique s'applique strictement aux actifs officiellement maintenus par la Linkest Foundation.",
                 p1_li1: "Tous les référentiels open source officiels (github.com/Linkest-FDT/*)",
                 p1_li2: "Infrastructure et sites Web officiels (*.linkest.org)",
                 p1_cna: "Conformément aux exigences du NIST et du MITRE pour les autorités de numérotation CVE (CNA), nous ne traitons que les rapports concernant l'écosystème de la Linkest Foundation. Nous <strong>ne traitons pas et ne pouvons pas</strong> traiter les rapports pour des projets tiers. Veuillez les signaler à leurs mainteneurs ou CNA respectifs.",
-                p2_title: "Canaux de signalement",
-                p2_desc1: "<strong>Canal principal :</strong> Soumettez un rapport de vulnérabilité privé (GHSA) directement dans notre référentiel de sécurité :",
-                p2_desc2: "<strong>Canal de secours :</strong> Si vous ne pouvez pas utiliser GitHub, envoyez-nous un e-mail à :",
-                p2_desc3: "Ne divulguez pas publiquement les vulnérabilités avant la publication d'un correctif.",
-                p3_title: "Format de signalement",
-                p3_desc: "Veuillez formater votre rapport (de préférence selon le format GHSA) avec les détails suivants :",
-                p3_li1: "<strong>Summary (Résumé) :</strong> Une brève description de la vulnérabilité.",
-                p3_li2: "<strong>Details (Détails) :</strong> Référentiel affecté, version/commit, classification CWE et cause profonde.",
-                p3_li3: "<strong>PoC (Preuve de concept) :</strong> Étapes de reproduction détaillées ou script exécutable minimal.",
-                p3_li4: "<strong>Impact :</strong> Portée des utilisateurs affectés (par exemple, prise de contrôle de l'administrateur).",
-                p3_li5: "<strong>CVSS (Score) :</strong> Chaîne vectorielle v3.1/v4.0.",
-                p4_title: "Priorité de triage et SLA",
-                p4_desc: "Un PoC reproductible est un facteur critique pour notre priorisation.",
-                p4_p0: "CVSS >= 8.0 avec PoC. Réponse initiale sous 7 jours.",
-                p4_p1: "CVSS 4.0 - 7.9 ou impact limité. Réponse initiale sous 14 jours.",
-                p4_p2: "CVSS < 4.0 ou informations incomplètes. Réponse au mieux.",
-                p5_title: "Attribution et divulgation des CVE",
-                p5_desc1: "Une fois une vulnérabilité vérifiée, le CNA Linkest attribuera un identifiant CVE officiel. <em>(Remarque : GHSA sert d'outil collaboratif pour le suivi et la publication, tandis que les identifiants CVE sont délivrés par le CNA Linkest).</em>",
-                p5_desc2: "Nous appliquons une stricte <strong>période de divulgation responsable de 90 jours</strong>. Les avis publics seront publiés conjointement après la disponibilité d'un correctif ou l'expiration du délai de 90 jours.",
-                p6_title: "Safe Harbor et règles d'engagement",
-                p6_li1: "<strong>Engagement Safe Harbor :</strong> Nous n'engagerons aucune action en justice contre les chercheurs agissant de bonne foi et suivant cette politique. Nous reconnaîtrons publiquement votre contribution.",
-                p6_li2: "<strong>Attaques destructrices interdites :</strong> Nous rejetons strictement les attaques volumétriques intentionnelles telles que les DDoS à grande échelle, le brute-forcing, les dommages physiques ou l'ingénierie sociale contre le personnel.",
-                p6_li3: "<strong>Exception cruciale (DoS induit par une vulnérabilité) :</strong> Si vous découvrez un problème d'épuisement des ressources causé <strong>directement par un défaut de logique</strong> dans notre code (par exemple, ReDoS, fuites de mémoire déclenchées par une seule requête), <strong>il s'agit d'une vulnérabilité valide qui sera triée.</strong> Cependant, vous devez le démontrer avec un PoC contrôlé et minimal. Les tests de stress illimités ne sont pas autorisés.",
-                p6_li4: "<strong>Principe de test auto-hébergé :</strong> Tout test potentiellement perturbateur (y compris le DoS logique mentionné ci-dessus) <strong>doit être effectué dans un environnement local auto-hébergé</strong>. Ne testez pas l'environnement de production de la Linkest Foundation. Si une vérification en direct est requise, vous devez obtenir une autorisation écrite préalable via security@linkest.org.",
-                p6_li5: "<strong>Limites des données :</strong> Vous ne devez pas accéder, modifier, télécharger ou exfiltrer de données utilisateur réelles non générées par vous-même. Toutes les données de test créées pendant les tests doivent être supprimées immédiatement.",
-                p7_title: "Clause de non-responsabilité stricte",
-                p7_desc: "Nous nous réservons le droit de rejeter les rapports de vulnérabilités clairement fabriqués, dont la gravité est malveillamment gonflée ou soumis avec des charges utiles destructrices. Les tentatives de fraude au système CVE entraîneront la divulgation publique de l'abus.",
+                
+                p2_affiliated_title: "Projets affiliés et partenaires",
+                p2_affiliated_desc: "Bien que le CNA Linkest couvre principalement les référentiels de l'organisation Linkest-FDT, nous étendons également nos services d'attribution de CVE et de triage des vulnérabilités à des projets affiliés spécifiques. Ces projets sont activement soutenus et maintenus par notre équipe, mais peuvent appartenir à leurs propres organisations ou studios indépendants.",
+                p2_affiliated_elig_title: "Éligibilité à la couverture CNA :",
+                p2_affiliated_elig_desc: "Pour être reconnu comme un projet affilié éligible aux services du CNA Linkest, un projet doit remplir <strong>LES DEUX</strong> critères suivants simultanément :",
+                p2_affiliated_li1: "<strong>Déclaration mutuelle dans le README :</strong> Le référentiel officiel du projet doit déclarer explicitement son affiliation à la Linkest Foundation dans son README.md (ou documentation équivalente).",
+                p2_affiliated_li2: "<strong>Inscription sur le site officiel :</strong> Le projet doit être officiellement répertorié sur la page \"Projets\" du site Web de la Linkest Foundation.",
+                p2_affiliated_note: "<em>Remarque : Les projets affiliés conservent la pleine propriété de leur propriété intellectuelle. La Linkest Foundation ne revendique pas la propriété mais agit en tant que partenaire de sécurité de confiance fournissant une couverture CNA et un soutien au triage.</em>",
+                
+                p3_title: "Canaux de signalement",
+                p3_desc1: "<strong>Canal principal :</strong> Soumettez un rapport de vulnérabilité privé (GHSA) directement dans notre référentiel de sécurité :",
+                p3_desc2: "<strong>Canal de secours :</strong> Si vous ne pouvez pas utiliser GitHub, envoyez-nous un e-mail à :",
+                p3_desc3: "Ne divulguez pas publiquement les vulnérabilités avant la publication d'un correctif.",
+                
+                p4_title: "Format de signalement",
+                p4_desc: "Veuillez formater votre rapport (de préférence selon le format GHSA) avec les détails suivants :",
+                p4_li1: "<strong>Summary (Résumé) :</strong> Une brève description de la vulnérabilité.",
+                p4_li2: "<strong>Details (Détails) :</strong> Référentiel affecté, version/commit, classification CWE et cause profonde.",
+                p4_li3: "<strong>PoC (Preuve de concept) :</strong> Étapes de reproduction détaillées ou script exécutable minimal.",
+                p4_li4: "<strong>Impact :</strong> Portée des utilisateurs affectés (par exemple, prise de contrôle de l'administrateur).",
+                p4_li5: "<strong>CVSS (Score) :</strong> Chaîne vectorielle v3.1/v4.0.",
+                
+                p5_title: "Priorité de triage et SLA",
+                p5_desc: "Un PoC reproductible est un facteur critique pour notre priorisation.",
+                p5_p0: "CVSS >= 8.0 avec PoC. Réponse initiale sous 7 jours.",
+                p5_p1: "CVSS 4.0 - 7.9 ou impact limité. Réponse initiale sous 14 jours.",
+                p5_p2: "CVSS < 4.0 ou informations incomplètes. Réponse au mieux.",
+                
+                p6_title: "Attribution et divulgation des CVE",
+                p6_desc1: "Une fois une vulnérabilité vérifiée, le CNA Linkest attribuera un identifiant CVE officiel. <em>(Remarque : GHSA sert d'outil collaboratif pour le suivi et la publication, tandis que les identifiants CVE sont délivrés par le CNA Linkest).</em>",
+                p6_desc2: "Nous appliquons une stricte <strong>période de divulgation responsable de 90 jours</strong>. Les avis publics seront publiés conjointement après la disponibilité d'un correctif ou l'expiration du délai de 90 jours.",
+                
+                p7_title: "Safe Harbor et règles d'engagement",
+                p7_li1: "<strong>Engagement Safe Harbor :</strong> Nous n'engagerons aucune action en justice contre les chercheurs agissant de bonne foi et suivant cette politique. Nous reconnaîtrons publiquement votre contribution.",
+                p7_li2: "<strong>Attaques destructrices interdites :</strong> Nous rejetons strictement les attaques volumétriques intentionnelles telles que les DDoS à grande échelle, le brute-forcing, les dommages physiques ou l'ingénierie sociale contre le personnel.",
+                p7_li3: "<strong>Exception cruciale (DoS induit par une vulnérabilité) :</strong> Si vous découvrez un problème d'épuisement des ressources causé <strong>directement par un défaut de logique</strong> dans notre code (par exemple, ReDoS, fuites de mémoire déclenchées par une seule requête), <strong>il s'agit d'une vulnérabilité valide qui sera triée.</strong> Cependant, vous devez le démontrer avec un PoC contrôlé et minimal. Les tests de stress illimités ne sont pas autorisés.",
+                p7_li4: "<strong>Principe de test auto-hébergé :</strong> Tout test potentiellement perturbateur (y compris le DoS logique mentionné ci-dessus) <strong>doit être effectué dans un environnement local auto-hébergé</strong>. Ne testez pas l'environnement de production de la Linkest Foundation. Si une vérification en direct est requise, vous devez obtenir une autorisation écrite préalable via security@linkest.org.",
+                p7_li5: "<strong>Limites des données :</strong> Vous ne devez pas accéder, modifier, télécharger ou exfiltrer de données utilisateur réelles non générées par vous-même. Toutes les données de test créées pendant les tests doivent être supprimées immédiatement.",
+                
+                p8_title: "Clause de non-responsabilité stricte",
+                p8_desc: "Nous nous réservons le droit de rejeter les rapports de vulnérabilités clairement fabriqués, dont la gravité est malveillamment gonflée ou soumis avec des charges utiles destructrices. Les tentatives de fraude au système CVE entraîneront la divulgation publique de l'abus.",
+                
                 dec_title: "Notre Déclaration",
                 dec_text: "Respectez la recherche en sécurité. Honorez les règles de divulgation. Protégez l'écosystème open source. Pratiquez une divulgation responsable.",
                 dec_subtext: "Cela commence par vous et moi, et cela commence par chaque développeur indépendant."
@@ -633,38 +760,54 @@
                 footer_status: "Estado", footer_policy: "Política", footer_contact: "Contacto",
                 trans_banner: "Las versiones no inglesas de esta página son proporcionadas por traducción automática o por la comunidad y son solo para referencia. En caso de discrepancia, prevalecerá la versión en inglés.", machine_trans_notice: "* Algunos idiomas están traducidos automáticamente. Se agradecen las correcciones de la comunidad.",
                 policy_title: "Política de Seguridad y Divulgación", policy_subtitle: "Última actualización: 14 de noviembre de 2026",
+                
                 p1_title: "Alcance y jurisdicción de CNA",
                 p1_desc: "Esta política se aplica estrictamente a los activos mantenidos oficialmente por la Linkest Foundation.",
                 p1_li1: "Todos los repositorios oficiales de código abierto (github.com/Linkest-FDT/*)",
                 p1_li2: "Infraestructura y sitios web oficiales (*.linkest.org)",
                 p1_cna: "En cumplimiento con los requisitos de NIST y MITRE para las Autoridades de Numeración de CVE (CNA), solo procesamos informes para el ecosistema de la Linkest Foundation. <strong>No procesamos ni podemos procesar</strong> informes de proyectos de terceros. Informe esos casos a sus respectivos mantenedores o CNA.",
-                p2_title: "Canales de reporte",
-                p2_desc1: "<strong>Canal principal:</strong> Envíe un informe privado de vulnerabilidad (GHSA) directamente en nuestro repositorio de seguridad:",
-                p2_desc2: "<strong>Canal de respaldo:</strong> Si no puede usar GitHub, envíenos un correo a:",
-                p2_desc3: "No divulgue vulnerabilidades públicamente antes de que se publique un parche.",
-                p3_title: "Formato de reporte",
-                p3_desc: "Formatee su informe (preferiblemente según el formato GHSA) con los siguientes detalles:",
-                p3_li1: "<strong>Summary (Resumen):</strong> Una breve descripción de la vulnerabilidad.",
-                p3_li2: "<strong>Details (Detalles):</strong> Repositorio afectado, versión/commit, clasificación CWE y causa raíz.",
-                p3_li3: "<strong>PoC (Prueba de concepto):</strong> Pasos de reproducción paso a paso o un script ejecutable mínimo.",
-                p3_li4: "<strong>Impact (Impacto):</strong> Alcance del usuario afectado (por ejemplo, toma de control del administrador).",
-                p3_li5: "<strong>CVSS (Puntuación):</strong> Cadena de vector v3.1/v4.0.",
-                p4_title: "Prioridad de triaje y SLA",
-                p4_desc: "Un PoC reproducible es un factor crítico para nuestra priorización.",
-                p4_p0: "CVSS >= 8.0 con PoC. Respuesta inicial en 7 días.",
-                p4_p1: "CVSS 4.0 - 7.9 o impacto limitado. Respuesta inicial en 14 días.",
-                p4_p2: "CVSS < 4.0 o información incompleta. Respuesta de mejor esfuerzo.",
-                p5_title: "Asignación y divulgación de CVE",
-                p5_desc1: "Una vez verificada una vulnerabilidad, Linkest CNA asignará un ID CVE oficial. <em>(Nota: GHSA sirve como nuestra herramienta colaborativa para el seguimiento y la publicación, mientras que los ID CVE son emitidos por Linkest CNA).</em>",
-                p5_desc2: "Aplicamos un estricto plazo de <strong>divulgación responsable de 90 días</strong>. Los avisos públicos se publicarán conjuntamente después de que haya un parche disponible o expire el plazo de 90 días.",
-                p6_title: "Puerto seguro y reglas de participación",
-                p6_li1: "<strong>Compromiso de puerto seguro:</strong> No tomaremos acciones legales contra investigadores que actúen de buena fe y sigan esta política. Reconoceremos públicamente su contribución.",
-                p6_li2: "<strong>Ataques destructivos prohibidos:</strong> Rechazamos estrictamente los ataques volumétricos intencionales como DDoS a gran escala, fuerza bruta, daños físicos o ingeniería social contra el personal.",
-                p6_li3: "<strong>Excepción crucial (DoS inducido por vulnerabilidad):</strong> Si descubre un problema de agotamiento de recursos causado <strong>directamente por un fallo lógico</strong> en nuestro código (por ejemplo, ReDoS, fugas de memoria desencadenadas por una sola solicitud), <strong>esta es una vulnerabilidad válida y será triada.</strong> Sin embargo, debe demostrarlo con una Prueba de Concepto (PoC) controlada y mínima. No se permiten pruebas de estrés ilimitadas.",
-                p6_li4: "<strong>Principio de prueba autoalojada:</strong> Cualquier prueba potencialmente disruptiva (incluido el DoS lógico mencionado anteriormente) <strong>debe realizarse en un entorno local autoalojado</strong>. No realice pruebas contra el entorno de producción de la Linkest Foundation. Si se requiere verificación en vivo, debe obtener permiso previo por escrito a través de security@linkest.org.",
-                p6_li5: "<strong>Límites de datos:</strong> No debe acceder, modificar, descargar o exfiltrar datos reales de usuarios que no haya generado usted mismo. Cualquier dato de prueba creado durante las pruebas debe eliminarse de inmediato.",
-                p7_title: "Descargo de responsabilidad estricto",
-                p7_desc: "Nos reservamos el derecho de rechazar informes de vulnerabilidades que sean claramente fabricados, inflados maliciosamente en gravedad o enviados con cargas destructivas. Los intentos de defraudar el sistema CVE resultarán en la divulgación pública del abuso.",
+                
+                p2_affiliated_title: "Proyectos afiliados y asociados",
+                p2_affiliated_desc: "Si bien el CNA de Linkest cubre principalmente repositorios de la organización Linkest-FDT, también ampliamos nuestros servicios de asignación de CVE y triaje de vulnerabilidades a Proyectos Afiliados específicos. Estos proyectos son apoyados y mantenidos activamente por nuestro equipo, pero pueden pertenecer a sus propias organizaciones o estudios independientes.",
+                p2_affiliated_elig_title: "Elegibilidad para la cobertura de CNA:",
+                p2_affiliated_elig_desc: "Para ser reconocido como un Proyecto Afiliado elegible para los servicios del CNA de Linkest, un proyecto debe cumplir <strong>AMBOS</strong> de los siguientes criterios simultáneamente:",
+                p2_affiliated_li1: "<strong>Declaración mutua en el README:</strong> El repositorio oficial del proyecto debe declarar explícitamente su afiliación con la Linkest Foundation en su README.md (o documentación equivalente).",
+                p2_affiliated_li2: "<strong>Listado en el sitio web oficial:</strong> El proyecto debe estar listado oficialmente en la página \"Proyectos\" del sitio web de la Linkest Foundation.",
+                p2_affiliated_note: "<em>Nota: Los Proyectos Afiliados conservan la plena propiedad de su propiedad intelectual. La Linkest Foundation no reclama la propiedad, sino que actúa como un socio de seguridad de confianza que proporciona cobertura de CNA y soporte de triaje.</em>",
+                
+                p3_title: "Canales de reporte",
+                p3_desc1: "<strong>Canal principal:</strong> Envíe un informe privado de vulnerabilidad (GHSA) directamente en nuestro repositorio de seguridad:",
+                p3_desc2: "<strong>Canal de respaldo:</strong> Si no puede usar GitHub, envíenos un correo a:",
+                p3_desc3: "No divulgue vulnerabilidades públicamente antes de que se publique un parche.",
+                
+                p4_title: "Formato de reporte",
+                p4_desc: "Formatee su informe (preferiblemente según el formato GHSA) con los siguientes detalles:",
+                p4_li1: "<strong>Summary (Resumen):</strong> Una breve descripción de la vulnerabilidad.",
+                p4_li2: "<strong>Details (Detalles):</strong> Repositorio afectado, versión/commit, clasificación CWE y causa raíz.",
+                p4_li3: "<strong>PoC (Prueba de concepto):</strong> Pasos de reproducción paso a paso o un script ejecutable mínimo.",
+                p4_li4: "<strong>Impact (Impacto):</strong> Alcance del usuario afectado (por ejemplo, toma de control del administrador).",
+                p4_li5: "<strong>CVSS (Puntuación):</strong> Cadena de vector v3.1/v4.0.",
+                
+                p5_title: "Prioridad de triaje y SLA",
+                p5_desc: "Un PoC reproducible es un factor crítico para nuestra priorización.",
+                p5_p0: "CVSS >= 8.0 con PoC. Respuesta inicial en 7 días.",
+                p5_p1: "CVSS 4.0 - 7.9 o impacto limitado. Respuesta inicial en 14 días.",
+                p5_p2: "CVSS < 4.0 o información incompleta. Respuesta de mejor esfuerzo.",
+                
+                p6_title: "Asignación y divulgación de CVE",
+                p6_desc1: "Una vez verificada una vulnerabilidad, Linkest CNA asignará un ID CVE oficial. <em>(Nota: GHSA sirve como nuestra herramienta colaborativa para el seguimiento y la publicación, mientras que los ID CVE son emitidos por Linkest CNA).</em>",
+                p6_desc2: "Aplicamos un estricto plazo de <strong>divulgación responsable de 90 días</strong>. Los avisos públicos se publicarán conjuntamente después de que haya un parche disponible o expire el plazo de 90 días.",
+                
+                p7_title: "Puerto seguro y reglas de participación",
+                p7_li1: "<strong>Compromiso de puerto seguro:</strong> No tomaremos acciones legales contra investigadores que actúen de buena fe y sigan esta política. Reconoceremos públicamente su contribución.",
+                p7_li2: "<strong>Ataques destructivos prohibidos:</strong> Rechazamos estrictamente los ataques volumétricos intencionales como DDoS a gran escala, fuerza bruta, daños físicos o ingeniería social contra el personal.",
+                p7_li3: "<strong>Excepción crucial (DoS inducido por vulnerabilidad):</strong> Si descubre un problema de agotamiento de recursos causado <strong>directamente por un fallo lógico</strong> en nuestro código (por ejemplo, ReDoS, fugas de memoria desencadenadas por una sola solicitud), <strong>esta es una vulnerabilidad válida y será triada.</strong> Sin embargo, debe demostrarlo con una Prueba de Concepto (PoC) controlada y mínima. No se permiten pruebas de estrés ilimitadas.",
+                p7_li4: "<strong>Principio de prueba autoalojada:</strong> Cualquier prueba potencialmente disruptiva (incluido el DoS lógico mencionado anteriormente) <strong>debe realizarse en un entorno local autoalojado</strong>. No realice pruebas contra el entorno de producción de la Linkest Foundation. Si se requiere verificación en vivo, debe obtener permiso previo por escrito a través de security@linkest.org.",
+                p7_li5: "<strong>Límites de datos:</strong> No debe acceder, modificar, descargar o exfiltrar datos reales de usuarios que no haya generado usted mismo. Cualquier dato de prueba creado durante las pruebas debe eliminarse de inmediato.",
+                
+                p8_title: "Descargo de responsabilidad estricto",
+                p8_desc: "Nos reservamos el derecho de rechazar informes de vulnerabilidades que sean claramente fabricados, inflados maliciosamente en gravedad o enviados con cargas destructivas. Los intentos de defraudar el sistema CVE resultarán en la divulgación pública del abuso.",
+                
                 dec_title: "Nuestra Declaración",
                 dec_text: "Respeta la investigación de seguridad. Honra las reglas de divulgación. Protege el ecosistema de código abierto. Practica la divulgación responsable.",
                 dec_subtext: "Comienza contigo y conmigo, y comienza con cada desarrollador independiente."
@@ -674,38 +817,54 @@
                 footer_status: "Status", footer_policy: "Política", footer_contact: "Contato",
                 trans_banner: "As versões não-inglesas desta página são fornecidas por tradução automática ou pela comunidade e servem apenas como referência. Em caso de discrepância, a versão em inglês prevalecerá.", machine_trans_notice: "* Alguns idiomas são traduzidos automaticamente. Correções da comunidade são bem-vindas.",
                 policy_title: "Política de Segurança e Divulgação", policy_subtitle: "Última atualização: 14 de novembro de 2026",
+                
                 p1_title: "Escopo e jurisdição da CNA",
                 p1_desc: "Esta política aplica-se estritamente aos ativos mantidos oficialmente pela Linkest Foundation.",
                 p1_li1: "Todos os repositórios oficiais de código aberto (github.com/Linkest-FDT/*)",
                 p1_li2: "Infraestrutura e sites oficiais (*.linkest.org)",
                 p1_cna: "Em conformidade com os requisitos do NIST e MITRE para Autoridades de Numeração CVE (CNA), processamos apenas relatórios para o ecossistema Linkest Foundation. <strong>Não processamos e não podemos</strong> processar relatórios de projetos de terceiros. Por favor, reporte-os aos seus respectivos mantenedores ou CNAs.",
-                p2_title: "Canais de reporte",
-                p2_desc1: "<strong>Canal principal:</strong> Envie um relatório de vulnerabilidade privado (GHSA) diretamente em nosso repositório de segurança:",
-                p2_desc2: "<strong>Canal de backup:</strong> Se você não puder usar o GitHub, envie um e-mail para:",
-                p2_desc3: "Não divulgue vulnerabilidades publicamente antes do lançamento de um patch.",
-                p3_title: "Formato do relatório",
-                p3_desc: "Formate seu relatório (preferencialmente no formato GHSA) com os seguintes detalhes:",
-                p3_li1: "<strong>Summary (Resumo):</strong> Uma breve descrição da vulnerabilidade.",
-                p3_li2: "<strong>Details (Detalhes):</strong> Repositório afetado, versão/commit, classificação CWE e causa raiz.",
-                p3_li3: "<strong>PoC (Prova de Conceito):</strong> Passos de reprodução passo a passo ou um script executável mínimo.",
-                p3_li4: "<strong>Impact (Impacto):</strong> Escopo do usuário afetado (por exemplo, tomada de controle do administrador).",
-                p3_li5: "<strong>CVSS (Pontuação):</strong> String de vetor v3.1/v4.0.",
-                p4_title: "Prioridade de triagem e SLAs",
-                p4_desc: "Um PoC reproduzível é um fator crítico para a nossa priorização.",
-                p4_p0: "CVSS >= 8.0 com PoC. Resposta inicial em 7 dias.",
-                p4_p1: "CVSS 4.0 - 7.9 ou impacto limitado. Resposta inicial em 14 dias.",
-                p4_p2: "CVSS < 4.0 ou informações incompletas. Resposta de melhor esforço.",
-                p5_title: "Atribuição e divulgação de CVE",
-                p5_desc1: "Uma vez verificada uma vulnerabilidade, a Linkest CNA atribuirá um ID CVE oficial. <em>(Nota: O GHSA serve como nossa ferramenta colaborativa para rastreamento e publicação, enquanto os IDs CVE são emitidos pela Linkest CNA).</em>",
-                p5_desc2: "Aplicamos um rigoroso prazo de <strong>divulgação responsável de 90 dias</strong>. Avisos públicos serão publicados em conjunto após a disponibilidade de um patch ou o término da janela de 90 dias.",
-                p6_title: "Porto Seguro e Regras de Engajamento",
-                p6_li1: "<strong>Compromisso de Porto Seguro:</strong> Não tomaremos medidas legais contra pesquisadores que atuarem de boa fé e seguirem esta política. Reconheceremos publicamente sua contribuição.",
-                p6_li2: "<strong>Ataques destrutivos proibidos:</strong> Rejeitamos estritamente ataques volumétricos intencionais, como DDoS em larga escala, força bruta, danos físicos ou engenharia social contra a equipe.",
-                p6_li3: "<strong>Exceção crucial (DoS induzido por vulnerabilidade):</strong> Se você descobrir um problema de esgotamento de recursos causado <strong>diretamente por uma falha lógica</strong> em nosso código (por exemplo, ReDoS, vazamentos de memória acionados por uma única solicitação), <strong>esta é uma vulnerabilidade válida e será triada.</strong> No entanto, você deve demonstrá-lo com uma Prova de Conceito (PoC) controlada e mínima. Testes de estresse ilimitados não são permitidos.",
-                p6_li4: "<strong>Princípio de teste auto-hospedado:</strong> Qualquer teste potencialmente disruptivo (incluindo o DoS lógico mencionado acima) <strong>deve ser conduzido em um ambiente local auto-hospedado</strong>. Não teste no ambiente de produção da Linkest Foundation. Se a verificação ao vivo for necessária, você deve obter permissão prévia por escrito via security@linkest.org.",
-                p6_li5: "<strong>Limites de dados:</strong> Você não deve acessar, modificar, baixar ou exfiltrar quaisquer dados reais de usuários não gerados por você. Quaisquer dados de teste criados durante o teste devem ser excluídos imediatamente.",
-                p7_title: "Aviso legal estrito",
-                p7_desc: "Reservamo-nos o direito de rejeitar relatórios de vulnerabilidades que sejam claramente fabricados, inflados maliciosamente em gravidade ou enviados com cargas destrutivas. Tentativas de fraudar o sistema CVE resultarão em divulgação pública do abuso.",
+                
+                p2_affiliated_title: "Projetos afiliados e parceiros",
+                p2_affiliated_desc: "Embora a CNA da Linkest cubra principalmente repositórios da organização Linkest-FDT, também estendemos nossos serviços de atribuição de CVE e triagem de vulnerabilidades a Projetos Afiliados específicos. Esses projetos são ativamente apoiados e mantidos por nossa equipe, mas podem pertencer às suas próprias organizações ou estúdios independentes.",
+                p2_affiliated_elig_title: "Elegibilidade para cobertura da CNA:",
+                p2_affiliated_elig_desc: "Para ser reconhecido como um Projeto Afiliado elegível para os serviços da Linkest CNA, um projeto deve atender a <strong>AMBOS</strong> os seguintes critérios simultaneamente:",
+                p2_affiliated_li1: "<strong>Declaração mútua no README:</strong> O repositório oficial do projeto deve declarar explicitamente sua afiliação com a Linkest Foundation em seu README.md (ou documentação equivalente).",
+                p2_affiliated_li2: "<strong>Listagem no site oficial:</strong> O projeto deve estar oficialmente listado na página \"Projetos\" do site da Linkest Foundation.",
+                p2_affiliated_note: "<em>Nota: Os Projetos Afiliados mantêm a propriedade total de sua propriedade intelectual. A Linkest Foundation não reivindica a propriedade, mas atua como um parceiro de segurança confiável, fornecendo cobertura da CNA e suporte de triagem.</em>",
+                
+                p3_title: "Canais de reporte",
+                p3_desc1: "<strong>Canal principal:</strong> Envie um relatório de vulnerabilidade privado (GHSA) diretamente em nosso repositório de segurança:",
+                p3_desc2: "<strong>Canal de backup:</strong> Se você não puder usar o GitHub, envie um e-mail para:",
+                p3_desc3: "Não divulgue vulnerabilidades publicamente antes do lançamento de um patch.",
+                
+                p4_title: "Formato do relatório",
+                p4_desc: "Formate seu relatório (preferencialmente no formato GHSA) com os seguintes detalhes:",
+                p4_li1: "<strong>Summary (Resumo):</strong> Uma breve descrição da vulnerabilidade.",
+                p4_li2: "<strong>Details (Detalhes):</strong> Repositório afetado, versão/commit, classificação CWE e causa raiz.",
+                p4_li3: "<strong>PoC (Prova de Conceito):</strong> Passos de reprodução passo a passo ou um script executável mínimo.",
+                p4_li4: "<strong>Impact (Impacto):</strong> Escopo do usuário afetado (por exemplo, tomada de controle do administrador).",
+                p4_li5: "<strong>CVSS (Pontuação):</strong> String de vetor v3.1/v4.0.",
+                
+                p5_title: "Prioridade de triagem e SLAs",
+                p5_desc: "Um PoC reproduzível é um fator crítico para a nossa priorização.",
+                p5_p0: "CVSS >= 8.0 com PoC. Resposta inicial em 7 dias.",
+                p5_p1: "CVSS 4.0 - 7.9 ou impacto limitado. Resposta inicial em 14 dias.",
+                p5_p2: "CVSS < 4.0 ou informações incompletas. Resposta de melhor esforço.",
+                
+                p6_title: "Atribuição e divulgação de CVE",
+                p6_desc1: "Uma vez verificada uma vulnerabilidade, a Linkest CNA atribuirá um ID CVE oficial. <em>(Nota: O GHSA serve como nossa ferramenta colaborativa para rastreamento e publicação, enquanto os IDs CVE são emitidos pela Linkest CNA).</em>",
+                p6_desc2: "Aplicamos um rigoroso prazo de <strong>divulgação responsável de 90 dias</strong>. Avisos públicos serão publicados em conjunto após a disponibilidade de um patch ou o término da janela de 90 dias.",
+                
+                p7_title: "Porto Seguro e Regras de Engajamento",
+                p7_li1: "<strong>Compromisso de Porto Seguro:</strong> Não tomaremos medidas legais contra pesquisadores que atuarem de boa fé e seguirem esta política. Reconheceremos publicamente sua contribuição.",
+                p7_li2: "<strong>Ataques destrutivos proibidos:</strong> Rejeitamos estritamente ataques volumétricos intencionais, como DDoS em larga escala, força bruta, danos físicos ou engenharia social contra a equipe.",
+                p7_li3: "<strong>Exceção crucial (DoS induzido por vulnerabilidade):</strong> Se você descobrir um problema de esgotamento de recursos causado <strong>diretamente por uma falha lógica</strong> em nosso código (por exemplo, ReDoS, vazamentos de memória acionados por uma única solicitação), <strong>esta é uma vulnerabilidade válida e será triada.</strong> No entanto, você deve demonstrá-lo com uma Prova de Conceito (PoC) controlada e mínima. Testes de estresse ilimitados não são permitidos.",
+                p7_li4: "<strong>Princípio de teste auto-hospedado:</strong> Qualquer teste potencialmente disruptivo (incluindo o DoS lógico mencionado acima) <strong>deve ser conduzido em um ambiente local auto-hospedado</strong>. Não teste no ambiente de produção da Linkest Foundation. Se a verificação ao vivo for necessária, você deve obter permissão prévia por escrito via security@linkest.org.",
+                p7_li5: "<strong>Limites de dados:</strong> Você não deve acessar, modificar, baixar ou exfiltrar quaisquer dados reais de usuários não gerados por você. Quaisquer dados de teste criados durante o teste devem ser excluídos imediatamente.",
+                
+                p8_title: "Aviso legal estrito",
+                p8_desc: "Reservamo-nos o direito de rejeitar relatórios de vulnerabilidades que sejam claramente fabricados, inflados maliciosamente em gravidade ou enviados com cargas destrutivas. Tentativas de fraudar o sistema CVE resultarão em divulgação pública do abuso.",
+                
                 dec_title: "Nossa Declaração",
                 dec_text: "Respeite a pesquisa de segurança. Honre as regras de divulgação. Proteja o ecossistema de código aberto. Pratique a divulgação responsável.",
                 dec_subtext: "Começa com você e comigo, e começa com cada desenvolvedor independente."
@@ -715,38 +874,54 @@
                 footer_status: "Stato", footer_policy: "Politica", footer_contact: "Contattaci",
                 trans_banner: "Le versioni non inglesi di questa pagina sono fornite da traduzione automatica o dalla community e sono solo di riferimento. In caso di discrepanze, prevarrà la versione inglese.", machine_trans_notice: "* Alcune lingue sono tradotte automaticamente. Le correzioni della community sono benvenute.",
                 policy_title: "Politica di Sicurezza e Divulgazione", policy_subtitle: "Ultimo aggiornamento: 14 novembre 2026",
+                
                 p1_title: "Ambito e giurisdizione CNA",
                 p1_desc: "Questa politica si applica rigorosamente alle risorse ufficialmente gestite dalla Linkest Foundation.",
                 p1_li1: "Tutti i repository open source ufficiali (github.com/Linkest-FDT/*)",
                 p1_li2: "Infrastruttura e siti Web ufficiali (*.linkest.org)",
                 p1_cna: "In conformità con i requisiti NIST e MITRE per le Autorità di Numerazione CVE (CNA), elaboriamo solo segnalazioni per l'ecosistema Linkest Foundation. <strong>Non elaboriamo e non possiamo</strong> elaborare segnalazioni per progetti di terze parti. Si prega di segnalarli ai rispettivi manutentori o CNA.",
-                p2_title: "Canali di segnalazione",
-                p2_desc1: "<strong>Canale principale:</strong> Invia un rapporto privato sulla vulnerabilità (GHSA) direttamente nel nostro repository di sicurezza:",
-                p2_desc2: "<strong>Canale di backup:</strong> Se non puoi utilizzare GitHub, inviaci un'e-mail a:",
-                p2_desc3: "Non divulgare pubblicamente le vulnerabilità prima del rilascio di una patch.",
-                p3_title: "Formato di segnalazione",
-                p3_desc: "Formatta il tuo rapporto (preferibilmente secondo il formato GHSA) con i seguenti dettagli:",
-                p3_li1: "<strong>Summary (Riepilogo):</strong> Una breve descrizione della vulnerabilità.",
-                p3_li2: "<strong>Details (Dettagli):</strong> Repository interessato, versione/commit, classificazione CWE e causa principale.",
-                p3_li3: "<strong>PoC (Proof of Concept):</strong> Passaggi di riproduzione dettagliati o script eseguibile minimo.",
-                p3_li4: "<strong>Impact (Impatto):</strong> Ambito dell'utente interessato (ad esempio, takeover dell'amministratore).",
-                p3_li5: "<strong>CVSS (Punteggio):</strong> Stringa vettoriale v3.1/v4.0.",
-                p4_title: "Priorità di triage e SLA",
-                p4_desc: "Un PoC riproducibile è un fattore critico per la nostra prioritizzazione.",
-                p4_p0: "CVSS >= 8.0 con PoC. Risposta iniziale entro 7 giorni.",
-                p4_p1: "CVSS 4.0 - 7.9 o impatto limitato. Risposta iniziale entro 14 giorni.",
-                p4_p2: "CVSS < 4.0 o informazioni incomplete. Risposta best effort.",
-                p5_title: "Assegnazione e divulgazione CVE",
-                p5_desc1: "Una volta verificata una vulnerabilità, Linkest CNA assegnerà un ID CVE ufficiale. <em>(Nota: GHSA funge da nostro strumento collaborativo per il monitoraggio e la pubblicazione, mentre gli ID CVE sono emessi da Linkest CNA).</em>",
-                p5_desc2: "Applichiamo una rigorosa tempistica di <strong>divulgazione responsabile di 90 giorni</strong>. Gli avvisi pubblici saranno pubblicati congiuntamente dopo che una patch sarà disponibile o dopo la scadenza dei 90 giorni.",
-                p6_title: "Porto sicuro e regole di ingaggio",
-                p6_li1: "<strong>Impegno di porto sicuro:</strong> Non intraprenderemo azioni legali contro ricercatori che agiscono in buona fede e seguono questa politica. Riconosceremo pubblicamente il tuo contributo.",
-                p6_li2: "<strong>Attacchi distruttivi proibiti:</strong> Rifiutiamo rigorosamente attacchi volumetrici intenzionali come DDoS su larga scala, brute-forcing, danni fisici o ingegneria sociale contro il personale.",
-                p6_li3: "<strong>Eccezione cruciale (DoS indotto da vulnerabilità):</strong> Se scopri un problema di esaurimento delle risorse causato <strong>direttamente da un difetto logico</strong> nel nostro codice (ad esempio, ReDoS, perdite di memoria innescate da una singola richiesta), <strong>questa è una vulnerabilità valida e sarà analizzata.</strong> Tuttavia, devi dimostrarlo con un Proof of Concept (PoC) controllato e minimo. I test di stress illimitati non sono consentiti.",
-                p6_li4: "<strong>Principio di test self-hosted:</strong> Qualsiasi test potenzialmente dirompente (incluso il DoS logico menzionato sopra) <strong>deve essere condotto in un ambiente locale self-hosted</strong>. Non testare contro l'ambiente di produzione della Linkest Foundation. Se è richiesta la verifica live, è necessario ottenere il previo permesso scritto tramite security@linkest.org.",
-                p6_li5: "<strong>Limiti dei dati:</strong> Non devi accedere, modificare, scaricare o esfiltrare dati utente reali non generati da te. Eventuali dati di test creati durante i test devono essere eliminati immediatamente.",
-                p7_title: "Dichiarazione di non responsabilità rigorosa",
-                p7_desc: "Ci riserviamo il diritto di rifiutare rapporti su vulnerabilità chiaramente fabbricati, gonfiati maliziosamente in gravità o inviati con payload distruttivi. I tentativi di frodare il sistema CVE comporteranno la divulgazione pubblica dell'abuso.",
+                
+                p2_affiliated_title: "Progetti affiliati e partner",
+                p2_affiliated_desc: "Sebbene il CNA Linkest copra principalmente i repository dell'organizzazione Linkest-FDT, estendiamo i nostri servizi di assegnazione CVE e triage delle vulnerabilità anche a specifici Progetti Affiliati. Questi progetti sono attivamente supportati e mantenuti dal nostro team, ma possono appartenere alle loro organizzazioni o studi indipendenti.",
+                p2_affiliated_elig_title: "Idoneità per la copertura CNA:",
+                p2_affiliated_elig_desc: "Per essere riconosciuto come Progetto Affiliato idoneo ai servizi del CNA Linkest, un progetto deve soddisfare <strong>ENTRAMBI</strong> i seguenti criteri contemporaneamente:",
+                p2_affiliated_li1: "<strong>Dichiarazione reciproca nel README:</strong> Il repository ufficiale del progetto deve dichiarare esplicitamente la sua affiliazione con la Linkest Foundation nel suo README.md (o documentazione equivalente).",
+                p2_affiliated_li2: "<strong>Inserimento nel sito ufficiale:</strong> Il progetto deve essere ufficialmente elencato nella pagina \"Progetti\" del sito web della Linkest Foundation.",
+                p2_affiliated_note: "<em>Nota: I Progetti Affiliati mantengono la piena proprietà della loro proprietà intellettuale. La Linkest Foundation non rivendica la proprietà ma agisce come un partner di sicurezza fidato che fornisce copertura CNA e supporto al triage.</em>",
+                
+                p3_title: "Canali di segnalazione",
+                p3_desc1: "<strong>Canale principale:</strong> Invia un rapporto privato sulla vulnerabilità (GHSA) direttamente nel nostro repository di sicurezza:",
+                p3_desc2: "<strong>Canale di backup:</strong> Se non puoi utilizzare GitHub, inviaci un'e-mail a:",
+                p3_desc3: "Non divulgare pubblicamente le vulnerabilità prima del rilascio di una patch.",
+                
+                p4_title: "Formato di segnalazione",
+                p4_desc: "Formatta il tuo rapporto (preferibilmente secondo il formato GHSA) con i seguenti dettagli:",
+                p4_li1: "<strong>Summary (Riepilogo):</strong> Una breve descrizione della vulnerabilità.",
+                p4_li2: "<strong>Details (Dettagli):</strong> Repository interessato, versione/commit, classificazione CWE e causa principale.",
+                p4_li3: "<strong>PoC (Proof of Concept):</strong> Passaggi di riproduzione dettagliati o script eseguibile minimo.",
+                p4_li4: "<strong>Impact (Impatto):</strong> Ambito dell'utente interessato (ad esempio, takeover dell'amministratore).",
+                p4_li5: "<strong>CVSS (Punteggio):</strong> Stringa vettoriale v3.1/v4.0.",
+                
+                p5_title: "Priorità di triage e SLA",
+                p5_desc: "Un PoC riproducibile è un fattore critico per la nostra prioritizzazione.",
+                p5_p0: "CVSS >= 8.0 con PoC. Risposta iniziale entro 7 giorni.",
+                p5_p1: "CVSS 4.0 - 7.9 o impatto limitato. Risposta iniziale entro 14 giorni.",
+                p5_p2: "CVSS < 4.0 o informazioni incomplete. Risposta best effort.",
+                
+                p6_title: "Assegnazione e divulgazione CVE",
+                p6_desc1: "Una volta verificata una vulnerabilità, Linkest CNA assegnerà un ID CVE ufficiale. <em>(Nota: GHSA funge da nostro strumento collaborativo per il monitoraggio e la pubblicazione, mentre gli ID CVE sono emessi da Linkest CNA).</em>",
+                p6_desc2: "Applichiamo una rigorosa tempistica di <strong>divulgazione responsabile di 90 giorni</strong>. Gli avvisi pubblici saranno pubblicati congiuntamente dopo che una patch sarà disponibile o dopo la scadenza dei 90 giorni.",
+                
+                p7_title: "Porto sicuro e regole di ingaggio",
+                p7_li1: "<strong>Impegno di porto sicuro:</strong> Non intraprenderemo azioni legali contro ricercatori che agiscono in buona fede e seguono questa politica. Riconosceremo pubblicamente il tuo contributo.",
+                p7_li2: "<strong>Attacchi distruttivi proibiti:</strong> Rifiutiamo rigorosamente attacchi volumetrici intenzionali come DDoS su larga scala, brute-forcing, danni fisici o ingegneria sociale contro il personale.",
+                p7_li3: "<strong>Eccezione cruciale (DoS indotto da vulnerabilità):</strong> Se scopri un problema di esaurimento delle risorse causato <strong>direttamente da un difetto logico</strong> nel nostro codice (ad esempio, ReDoS, perdite di memoria innescate da una singola richiesta), <strong>questa è una vulnerabilità valida e sarà analizzata.</strong> Tuttavia, devi dimostrarlo con un Proof of Concept (PoC) controllato e minimo. I test di stress illimitati non sono consentiti.",
+                p7_li4: "<strong>Principio di test self-hosted:</strong> Qualsiasi test potenzialmente dirompente (incluso il DoS logico menzionato sopra) <strong>deve essere condotto in un ambiente locale self-hosted</strong>. Non testare contro l'ambiente di produzione della Linkest Foundation. Se è richiesta la verifica live, è necessario ottenere il previo permesso scritto tramite security@linkest.org.",
+                p7_li5: "<strong>Limiti dei dati:</strong> Non devi accedere, modificare, scaricare o esfiltrare dati utente reali non generati da te. Eventuali dati di test creati durante i test devono essere eliminati immediatamente.",
+                
+                p8_title: "Dichiarazione di non responsabilità rigorosa",
+                p8_desc: "Ci riserviamo il diritto di rifiutare rapporti su vulnerabilità chiaramente fabbricati, gonfiati maliziosamente in gravità o inviati con payload distruttivi. I tentativi di frodare il sistema CVE comporteranno la divulgazione pubblica dell'abuso.",
+                
                 dec_title: "La Nostra Dichiarazione",
                 dec_text: "Rispetta la ricerca sulla sicurezza. Onora le regole di divulgazione. Proteggi l'ecosistema open source. Pratica la divulgazione responsabile.",
                 dec_subtext: "Inizia con te e me, e inizia con ogni sviluppatore indipendente."
@@ -756,38 +931,54 @@
                 footer_status: "상태", footer_policy: "정책", footer_contact: "문의하기",
                 trans_banner: "이 페이지의 비영어 버전은 기계 번역 또는 커뮤니티에서 제공하며 참고용입니다. 영어 버전과 차이가 있을 경우 영어 버전이 우선합니다.", machine_trans_notice: "* 일부 언어는 기계 번역으로 제공됩니다. 커뮤니티의 수정을 환영합니다.",
                 policy_title: "보안 및 공개 정책", policy_subtitle: "최종 업데이트: 2026년 11월 14일",
+                
                 p1_title: "적용 범위 및 CNA 관할권",
                 p1_desc: "이 정책은 Linkest Foundation이 공식적으로 유지 관리하는 자산에 엄격하게 적용됩니다.",
                 p1_li1: "모든 공식 오픈 소스 저장소 (github.com/Linkest-FDT/*)",
                 p1_li2: "공식 인프라 및 웹사이트 (*.linkest.org)",
                 p1_cna: "CVE 번호 부여 기관(CNA)에 대한 NIST 및 MITRE 요구 사항에 따라 당사는 Linkest Foundation 생태계에 대한 보고서만 처리합니다. 타사 프로젝트에 대한 보고서는 <strong>처리하지 않으며 처리할 수 없습니다</strong>. 해당 유지 관리자 또는 CNA에 보고해 주십시오.",
-                p2_title: "보고 채널",
-                p2_desc1: "<strong>기본 채널:</strong> 보안 저장소에 비공개 취약점 보고서(GHSA)를 직접 제출하십시오:",
-                p2_desc2: "<strong>백업 채널:</strong> GitHub를 사용할 수 없는 경우 다음 주소로 이메일을 보내주십시오:",
-                p2_desc3: "패치가 출시되기 전에 취약점을 공개적으로 공개하지 마십시오.",
-                p3_title: "보고 형식",
-                p3_desc: "처리 효율성을 높이기 위해 다음 세부 정보를 포함하여 GHSA 형식으로 보고서를 작성해 주십시오:",
-                p3_li1: "<strong>Summary (요약):</strong> 취약점에 대한 간략한 설명.",
-                p3_li2: "<strong>Details (세부 사항):</strong> 영향을 받는 저장소, 버전/커밋, CWE 분류 및 근본 원인.",
-                p3_li3: "<strong>PoC (개념 증명):</strong> 단계별 재현 단계 또는 최소 실행 가능 스크립트.",
-                p3_li4: "<strong>Impact (영향):</strong> 영향을 받는 사용자 범위 (예: 관리자 권한 탈취).",
-                p3_li5: "<strong>CVSS (점수):</strong> v3.1/v4.0 벡터 문자열.",
-                p4_title: "분류 우선 순위 및 SLA",
-                p4_desc: "재현 가능한 PoC는 우선 순위를 결정하는 중요한 요소입니다.",
-                p4_p0: "CVSS >= 8.0 및 PoC 포함. 7일 이내 초기 응답.",
-                p4_p1: "CVSS 4.0 - 7.9 또는 제한적 영향. 14일 이내 초기 응답.",
-                p4_p2: "CVSS < 4.0 또는 정보 부족. 최선의 노력으로 응답.",
-                p5_title: "CVE 할당 및 공개",
-                p5_desc1: "취약점이 확인되면 Linkest CNA가 공식 CVE ID를 할당합니다. <em>(참고: GHSA는 추적 및 게시를 위한 협업 도구이며 CVE ID는 Linkest CNA에서 발급합니다).</em>",
-                p5_desc2: "당사는 엄격한 <strong>90일 책임 있는 공개</strong> 일정을 시행합니다. 패치가 제공되거나 90일 기간이 만료된 후 공개 권고안이 공동으로 게시됩니다.",
-                p6_title: "세이프 하버 및 교전 규칙",
-                p6_li1: "<strong>세이프 하버 약속:</strong> 선의로 이 정책을 준수하는 연구원에 대해 법적 조치를 취하지 않으며 기여도를 공개적으로 인정합니다.",
-                p6_li2: "<strong>파괴적인 공격 금지:</strong> 대규모 DDoS, 무차별 대입, 물리적 손상 또는 직원에 대한 사회 공학과 같은 의도적인 볼류메트릭 공격을 엄격히 거부합니다.",
-                p6_li3: "<strong>중요 예외 (취약점으로 인한 DoS):</strong> 코드의 <strong>논리적 결함으로 직접 인해</strong> 발생하는 리소스 고갈 문제 (예: ReDoS, 단일 요청으로 인한 메모리 누수)를 발견한 경우 <strong>이는 유효한 취약점이며 분류 대상입니다.</strong> 그러나 통제된 최소한의 PoC로 입증해야 합니다. 무제한 스트레스 테스트는 허용되지 않습니다.",
-                p6_li4: "<strong>자체 호스팅 테스트 원칙:</strong> 잠재적으로 파괴적인 모든 테스트 (위에서 언급한 논리 기반 DoS 포함)는 <strong>로컬 자체 호스팅 환경에서 수행해야 합니다</strong>. Linkest Foundation의 프로덕션 환경에 대해 테스트하지 마십시오. 실시간 확인이 필요한 경우 security@linkest.org를 통해 사전 서면 승인을 받아야 합니다.",
-                p6_li5: "<strong>데이터 경계:</strong> 자신이 생성하지 않은 실제 사용자 데이터에 액세스, 수정, 다운로드 또는 유출해서는 안 됩니다. 테스트 중 생성된 모든 테스트 데이터는 즉시 삭제해야 합니다.",
-                p7_title: "엄격한 면책 조항",
-                p7_desc: "당사는 명백히 조작되었거나, 악의적으로 심각성이 부풀려졌거나, 파괴적인 페이로드와 함께 제출된 취약점 보고서를 거부할 권리를 보유합니다. CVE 시스템을 사기하려는 시도는 남용 행위의 공개 공개로 이어집니다.",
+                
+                p2_affiliated_title: "제휴 및 파트너 프로젝트",
+                p2_affiliated_desc: "Linkest CNA는 주로 Linkest-FDT 조직의 저장소를 다루지만, 특정 제휴 프로젝트에도 CVE 할당 및 취약점 분류 서비스를 제공합니다. 이러한 프로젝트는 우리 팀의 적극적인 지원과 유지 관리를 받지만, 독립적인 조직이나 스튜디오에 속할 수 있습니다.",
+                p2_affiliated_elig_title: "CNA 적용 자격:",
+                p2_affiliated_elig_desc: "Linkest CNA 서비스를 받을 수 있는 제휴 프로젝트로 인정받으려면 다음 두 가지 기준을 <strong>모두</strong> 동시에 충족해야 합니다:",
+                p2_affiliated_li1: "<strong>README의 상호 선언:</strong> 프로젝트의 공식 저장소는 README.md(또는 동등한 문서)에 Linkest Foundation과의 제휴 관계를 명시적으로 선언해야 합니다.",
+                p2_affiliated_li2: "<strong>공식 웹사이트 등재:</strong> 프로젝트는 Linkest Foundation 웹사이트의 \"프로젝트\" 페이지에 공식적으로 등재되어야 합니다.",
+                p2_affiliated_note: "<em>참고: 제휴 프로젝트는 지식 재산권의 완전한 소유권을 유지합니다. Linkest Foundation은 소유권을 주장하지 않지만 CNA 적용 범위와 분류 지원을 제공하는 신뢰할 수 있는 보안 파트너 역할을 합니다.</em>",
+                
+                p3_title: "보고 채널",
+                p3_desc1: "<strong>기본 채널:</strong> 보안 저장소에 비공개 취약점 보고서(GHSA)를 직접 제출하십시오:",
+                p3_desc2: "<strong>백업 채널:</strong> GitHub를 사용할 수 없는 경우 다음 주소로 이메일을 보내주십시오:",
+                p3_desc3: "패치가 출시되기 전에 취약점을 공개적으로 공개하지 마십시오.",
+                
+                p4_title: "보고 형식",
+                p4_desc: "처리 효율성을 높이기 위해 다음 세부 정보를 포함하여 GHSA 형식으로 보고서를 작성해 주십시오:",
+                p4_li1: "<strong>Summary (요약):</strong> 취약점에 대한 간략한 설명.",
+                p4_li2: "<strong>Details (세부 사항):</strong> 영향을 받는 저장소, 버전/커밋, CWE 분류 및 근본 원인.",
+                p4_li3: "<strong>PoC (개념 증명):</strong> 단계별 재현 단계 또는 최소 실행 가능 스크립트.",
+                p4_li4: "<strong>Impact (영향):</strong> 영향을 받는 사용자 범위 (예: 관리자 권한 탈취).",
+                p4_li5: "<strong>CVSS (점수):</strong> v3.1/v4.0 벡터 문자열.",
+                
+                p5_title: "분류 우선 순위 및 SLA",
+                p5_desc: "재현 가능한 PoC는 우선 순위를 결정하는 중요한 요소입니다.",
+                p5_p0: "CVSS >= 8.0 및 PoC 포함. 7일 이내 초기 응답.",
+                p5_p1: "CVSS 4.0 - 7.9 또는 제한적 영향. 14일 이내 초기 응답.",
+                p5_p2: "CVSS < 4.0 또는 정보 부족. 최선의 노력으로 응답.",
+                
+                p6_title: "CVE 할당 및 공개",
+                p6_desc1: "취약점이 확인되면 Linkest CNA가 공식 CVE ID를 할당합니다. <em>(참고: GHSA는 추적 및 게시를 위한 협업 도구이며 CVE ID는 Linkest CNA에서 발급합니다).</em>",
+                p6_desc2: "당사는 엄격한 <strong>90일 책임 있는 공개</strong> 일정을 시행합니다. 패치가 제공되거나 90일 기간이 만료된 후 공개 권고안이 공동으로 게시됩니다.",
+                
+                p7_title: "세이프 하버 및 교전 규칙",
+                p7_li1: "<strong>세이프 하버 약속:</strong> 선의로 이 정책을 준수하는 연구원에 대해 법적 조치를 취하지 않으며 기여도를 공개적으로 인정합니다.",
+                p7_li2: "<strong>파괴적인 공격 금지:</strong> 대규모 DDoS, 무차별 대입, 물리적 손상 또는 직원에 대한 사회 공학과 같은 의도적인 볼류메트릭 공격을 엄격히 거부합니다.",
+                p7_li3: "<strong>중요 예외 (취약점으로 인한 DoS):</strong> 코드의 <strong>논리적 결함으로 직접 인해</strong> 발생하는 리소스 고갈 문제 (예: ReDoS, 단일 요청으로 인한 메모리 누수)를 발견한 경우 <strong>이는 유효한 취약점이며 분류 대상입니다.</strong> 그러나 통제된 최소한의 PoC로 입증해야 합니다. 무제한 스트레스 테스트는 허용되지 않습니다.",
+                p7_li4: "<strong>자체 호스팅 테스트 원칙:</strong> 잠재적으로 파괴적인 모든 테스트 (위에서 언급한 논리 기반 DoS 포함)는 <strong>로컬 자체 호스팅 환경에서 수행해야 합니다</strong>. Linkest Foundation의 프로덕션 환경에 대해 테스트하지 마십시오. 실시간 확인이 필요한 경우 security@linkest.org를 통해 사전 서면 승인을 받아야 합니다.",
+                p7_li5: "<strong>데이터 경계:</strong> 자신이 생성하지 않은 실제 사용자 데이터에 액세스, 수정, 다운로드 또는 유출해서는 안 됩니다. 테스트 중 생성된 모든 테스트 데이터는 즉시 삭제해야 합니다.",
+                
+                p8_title: "엄격한 면책 조항",
+                p8_desc: "당사는 명백히 조작되었거나, 악의적으로 심각성이 부풀려졌거나, 파괴적인 페이로드와 함께 제출된 취약점 보고서를 거부할 권리를 보유합니다. CVE 시스템을 사기하려는 시도는 남용 행위의 공개 공개로 이어집니다.",
+                
                 dec_title: "우리의 선언",
                 dec_text: "보안 연구를 존중하십시오. 공개 규칙을 준수하십시오. 오픈 소스 생태계를 보호하십시오. 책임 있는 공개를 실천하십시오.",
                 dec_subtext: "그것은 당신과 나로부터 시작되며, 모든 독립 개발자로부터 시작됩니다."
@@ -797,38 +988,54 @@
                 footer_status: "Status", footer_policy: "Polityka", footer_contact: "Kontakt",
                 trans_banner: "Wersje tej strony w językach innych niż angielski są dostarczane przez tłumaczenie maszynowe lub społeczność i służą wyłącznie celom informacyjnym. W przypadku rozbieżności obowiązuje wersja angielska.", machine_trans_notice: "* Niektóre języki są tłumaczone maszynowo. Poprawki społeczności są mile widziane.",
                 policy_title: "Polityka Bezpieczeństwa i Ujawniania", policy_subtitle: "Ostatnia aktualizacja: 14 listopada 2026 r.",
+                
                 p1_title: "Zakres i jurysdykcja CNA",
                 p1_desc: "Ta polityka ma zastosowanie wyłącznie do zasobów oficjalnie utrzymywanych przez Linkest Foundation.",
                 p1_li1: "Wszystkie oficjalne repozytoria open source (github.com/Linkest-FDT/*)",
                 p1_li2: "Oficjalna infrastruktura i strony internetowe (*.linkest.org)",
                 p1_cna: "Zgodnie z wymogami NIST i MITRE dla Organów Numeracji CVE (CNA) przetwarzamy tylko raporty dotyczące ekosystemu Linkest Foundation. <strong>Nie przetwarzamy i nie możemy</strong> przetwarzać raportów dotyczących projektów stron trzecich. Zgłoś je odpowiednim opiekunom lub CNA.",
-                p2_title: "Kanały zgłaszania",
-                p2_desc1: "<strong>Główny kanał:</strong> Prześlij prywatny raport o podatności (GHSA) bezpośrednio do naszego repozytorium bezpieczeństwa:",
-                p2_desc2: "<strong>Kanał zapasowy:</strong> Jeśli nie możesz użyć GitHub, wyślij do nas e-mail na adres:",
-                p2_desc3: "Nie ujawniaj podatności publicznie przed wydaniem poprawki.",
-                p3_title: "Format zgłoszenia",
-                p3_desc: "Sformatuj swój raport (najlepiej zgodnie z formatem GHSA) z następującymi szczegółami:",
-                p3_li1: "<strong>Summary (Podsumowanie):</strong> Krótki opis podatności.",
-                p3_li2: "<strong>Details (Szczegóły):</strong> Dotknięte repozytorium, wersja/zatwierdzenie, klasyfikacja CWE i główna przyczyna.",
-                p3_li3: "<strong>PoC (Dowód koncepcji):</strong> Szczegółowe kroki reprodukcji lub minimalny skrypt wykonywalny.",
-                p3_li4: "<strong>Impact (Wpływ):</strong> Zakres dotkniętych użytkowników (np. przejęcie konta administratora).",
-                p3_li5: "<strong>CVSS (Ocena):</strong> Ciąg wektorowy v3.1/v4.0.",
-                p4_title: "Priorytet segregacji i SLA",
-                p4_desc: "Odtwarzalny PoC jest kluczowym czynnikiem naszej priorytetyzacji.",
-                p4_p0: "CVSS >= 8.0 z PoC. Wstępna odpowiedź w ciągu 7 dni.",
-                p4_p1: "CVSS 4.0 - 7.9 lub ograniczony wpływ. Wstępna odpowiedź w ciągu 14 dni.",
-                p4_p2: "CVSS < 4.0 lub niekompletne informacje. Odpowiedź w miarę możliwości.",
-                p5_title: "Przydzielanie i ujawnianie CVE",
-                p5_desc1: "Po zweryfikowaniu podatności Linkest CNA przydzieli oficjalny identyfikator CVE. <em>(Uwaga: GHSA służy jako nasze narzędzie do współpracy przy śledzeniu i publikowaniu, podczas gdy identyfikatory CVE są wydawane przez Linkest CNA).</em>",
-                p5_desc2: "Egzekwujemy ścisły harmonogram <strong>90-dniowego odpowiedzialnego ujawniania</strong>. Publiczne ostrzeżenia zostaną opublikowane wspólnie po udostępnieniu poprawki lub wygaśnięciu 90-dniowego okresu.",
-                p6_title: "Bezpieczna przystań i zasady współpracy",
-                p6_li1: "<strong>Zobowiązanie bezpiecznej przystani:</strong> Nie podejmiemy działań prawnych przeciwko badaczom działającym w dobrej wierze i przestrzegającym tej polityki. Publicznie docenimy Twój wkład.",
-                p6_li2: "<strong>Zabronione ataki destrukcyjne:</strong> Stanowczo odrzucamy celowe ataki wolumetryczne, takie jak ataki DDoS na dużą skalę, ataki siłowe, uszkodzenia fizyczne lub inżynierię społeczną wymierzoną w pracowników.",
-                p6_li3: "<strong>Kluczowy wyjątek (DoS wywołany podatnością):</strong> Jeśli odkryjesz problem wyczerpania zasobów spowodowany <strong>bezpośrednio przez wadę logiczną</strong> w naszym kodzie (np. ReDoS, wycieki pamięci wywołane pojedynczym żądaniem), <strong>jest to ważna podatność i zostanie poddana segregacji.</strong> Musisz jednak zademonstrować to za pomocą kontrolowanego, minimalnego Dowodu Koncepcji (PoC). Nieograniczone testy obciążeniowe są niedozwolone.",
-                p6_li4: "<strong>Zasada testowania na własnym hostingu:</strong> Wszelkie potencjalnie zakłócające testy (w tym wspomniany powyżej logiczny DoS) <strong>muszą być przeprowadzane w lokalnym środowisku hostowanym na własnym serwerze</strong>. Nie testuj środowiska produkcyjnego Linkest Foundation. Jeśli wymagana jest weryfikacja na żywo, musisz uzyskać uprzednią pisemną zgodę za pośrednictwem security@linkest.org.",
-                p6_li5: "<strong>Granice danych:</strong> Nie wolno uzyskiwać dostępu, modyfikować, pobierać ani eksfiltrować rzeczywistych danych użytkowników, które nie zostały przez Ciebie wygenerowane. Wszelkie dane testowe utworzone podczas testów należy natychmiast usunąć.",
-                p7_title: "Ścisłe zrzeczenie się odpowiedzialności",
-                p7_desc: "Zastrzegamy sobie prawo do odrzucania raportów o podatnościach, które są wyraźnie sfabrykowane, złośliwie zawyżone pod względem wagi lub przesłane z destrukcyjnymi ładunkami. Próby oszukania systemu CVE skutkują publicznym ujawnieniem nadużycia.",
+                
+                p2_affiliated_title: "Projekty stowarzyszone i partnerskie",
+                p2_affiliated_desc: "Chociaż Linkest CNA obejmuje przede wszystkim repozytoria organizacji Linkest-FDT, rozszerzamy również nasze usługi w zakresie przypisywania CVE i segregacji podatności na wybrane Projekty Stowarzyszone. Projekty te są aktywnie wspierane i utrzymywane przez nasz zespół, ale mogą należeć do własnych niezależnych organizacji lub studiów.",
+                p2_affiliated_elig_title: "Kwalifikowalność do objęcia CNA:",
+                p2_affiliated_elig_desc: "Aby zostać uznanym za Projekt Stowarzyszony kwalifikujący się do usług Linkest CNA, projekt musi jednocześnie spełniać <strong>OBA</strong> następujące kryteria:",
+                p2_affiliated_li1: "<strong>Wzajemna deklaracja w README:</strong> Oficjalne repozytorium projektu musi wyraźnie deklarować powiązanie z Linkest Foundation w pliku README.md (lub równoważnej dokumentacji).",
+                p2_affiliated_li2: "<strong>Oficjalna lista na stronie internetowej:</strong> Projekt musi być oficjalnie wymieniony na stronie \"Projekty\" w witrynie Linkest Foundation.",
+                p2_affiliated_note: "<em>Uwaga: Projekty Stowarzyszone zachowują pełną własność swojej własności intelektualnej. Linkest Foundation nie rości sobie prawa własności, ale działa jako zaufany partner ds. bezpieczeństwa, zapewniając objęcie CNA i wsparcie w segregacji.</em>",
+                
+                p3_title: "Kanały zgłaszania",
+                p3_desc1: "<strong>Główny kanał:</strong> Prześlij prywatny raport o podatności (GHSA) bezpośrednio do naszego repozytorium bezpieczeństwa:",
+                p3_desc2: "<strong>Kanał zapasowy:</strong> Jeśli nie możesz użyć GitHub, wyślij do nas e-mail na adres:",
+                p3_desc3: "Nie ujawniaj podatności publicznie przed wydaniem poprawki.",
+                
+                p4_title: "Format zgłoszenia",
+                p4_desc: "Sformatuj swój raport (najlepiej zgodnie z formatem GHSA) z następującymi szczegółami:",
+                p4_li1: "<strong>Summary (Podsumowanie):</strong> Krótki opis podatności.",
+                p4_li2: "<strong>Details (Szczegóły):</strong> Dotknięte repozytorium, wersja/zatwierdzenie, klasyfikacja CWE i główna przyczyna.",
+                p4_li3: "<strong>PoC (Dowód koncepcji):</strong> Szczegółowe kroki reprodukcji lub minimalny skrypt wykonywalny.",
+                p4_li4: "<strong>Impact (Wpływ):</strong> Zakres dotkniętych użytkowników (np. przejęcie konta administratora).",
+                p4_li5: "<strong>CVSS (Ocena):</strong> Ciąg wektorowy v3.1/v4.0.",
+                
+                p5_title: "Priorytet segregacji i SLA",
+                p5_desc: "Odtwarzalny PoC jest kluczowym czynnikiem naszej priorytetyzacji.",
+                p5_p0: "CVSS >= 8.0 z PoC. Wstępna odpowiedź w ciągu 7 dni.",
+                p5_p1: "CVSS 4.0 - 7.9 lub ograniczony wpływ. Wstępna odpowiedź w ciągu 14 dni.",
+                p5_p2: "CVSS < 4.0 lub niekompletne informacje. Odpowiedź w miarę możliwości.",
+                
+                p6_title: "Przydzielanie i ujawnianie CVE",
+                p6_desc1: "Po zweryfikowaniu podatności Linkest CNA przydzieli oficjalny identyfikator CVE. <em>(Uwaga: GHSA służy jako nasze narzędzie do współpracy przy śledzeniu i publikowaniu, podczas gdy identyfikatory CVE są wydawane przez Linkest CNA).</em>",
+                p6_desc2: "Egzekwujemy ścisły harmonogram <strong>90-dniowego odpowiedzialnego ujawniania</strong>. Publiczne ostrzeżenia zostaną opublikowane wspólnie po udostępnieniu poprawki lub wygaśnięciu 90-dniowego okresu.",
+                
+                p7_title: "Bezpieczna przystań i zasady współpracy",
+                p7_li1: "<strong>Zobowiązanie bezpiecznej przystani:</strong> Nie podejmiemy działań prawnych przeciwko badaczom działającym w dobrej wierze i przestrzegającym tej polityki. Publicznie docenimy Twój wkład.",
+                p7_li2: "<strong>Zabronione ataki destrukcyjne:</strong> Stanowczo odrzucamy celowe ataki wolumetryczne, takie jak ataki DDoS na dużą skalę, ataki siłowe, uszkodzenia fizyczne lub inżynierię społeczną wymierzoną w pracowników.",
+                p7_li3: "<strong>Kluczowy wyjątek (DoS wywołany podatnością):</strong> Jeśli odkryjesz problem wyczerpania zasobów spowodowany <strong>bezpośrednio przez wadę logiczną</strong> w naszym kodzie (np. ReDoS, wycieki pamięci wywołane pojedynczym żądaniem), <strong>jest to ważna podatność i zostanie poddana segregacji.</strong> Musisz jednak zademonstrować to za pomocą kontrolowanego, minimalnego Dowodu Koncepcji (PoC). Nieograniczone testy obciążeniowe są niedozwolone.",
+                p7_li4: "<strong>Zasada testowania na własnym hostingu:</strong> Wszelkie potencjalnie zakłócające testy (w tym wspomniany powyżej logiczny DoS) <strong>muszą być przeprowadzane w lokalnym środowisku hostowanym na własnym serwerze</strong>. Nie testuj środowiska produkcyjnego Linkest Foundation. Jeśli wymagana jest weryfikacja na żywo, musisz uzyskać uprzednią pisemną zgodę za pośrednictwem security@linkest.org.",
+                p7_li5: "<strong>Granice danych:</strong> Nie wolno uzyskiwać dostępu, modyfikować, pobierać ani eksfiltrować rzeczywistych danych użytkowników, które nie zostały przez Ciebie wygenerowane. Wszelkie dane testowe utworzone podczas testów należy natychmiast usunąć.",
+                
+                p8_title: "Ścisłe zrzeczenie się odpowiedzialności",
+                p8_desc: "Zastrzegamy sobie prawo do odrzucania raportów o podatnościach, które są wyraźnie sfabrykowane, złośliwie zawyżone pod względem wagi lub przesłane z destrukcyjnymi ładunkami. Próby oszukania systemu CVE skutkują publicznym ujawnieniem nadużycia.",
+                
                 dec_title: "Nasza Deklaracja",
                 dec_text: "Szanuj badania nad bezpieczeństwem. Honoruj zasady ujawniania. Chroń ekosystem open source. Praktykuj odpowiedzialne ujawnianie.",
                 dec_subtext: "Zaczyna się od ciebie i ode mnie, i zaczyna się od każdego niezależnego programisty."
@@ -838,38 +1045,54 @@
                 footer_status: "الحالة", footer_policy: "سياسة", footer_contact: "اتصل بنا",
                 trans_banner: "يتم توفير النسخ غير الإنجليزية من هذه الصفحة بواسطة الترجمة الآلية أو المجتمع وهي للإشارة فقط. في حالة وجود أي تعارض، تكون النسخة الإنجليزية هي المعتمدة.", machine_trans_notice: "* بعض اللغات مترجمة آلياً. نرحب بتصحيحات المجتمع.",
                 policy_title: "سياسة الأمن والإفصاح", policy_subtitle: "آخر تحديث: 14 نوفمبر 2026",
+                
                 p1_title: "النطاق واختصاص CNA",
                 p1_desc: "تنطبق هذه السياسة بصرامة على الأصول التي تديرها Linkest Foundation رسمياً.",
                 p1_li1: "جميع مستودعات المصادر المفتوحة الرسمية (github.com/Linkest-FDT/*)",
                 p1_li2: "البنية التحتية والمواقع الإلكترونية الرسمية (*.linkest.org)",
                 p1_cna: "امتثالاً لمتطلبات NIST وMITRE لسلطات ترقيم CVE (CNA)، فإننا نعالج فقط التقارير الخاصة بنظام Linkest Foundation البيئي. <strong>نحن لا نعالج ولا يمكننا</strong> معالجة تقارير مشاريع الطرف الثالث. يرجى الإبلاغ عنها إلى المشرفين المعنيين أو CNA.",
-                p2_title: "قنوات الإبلاغ",
-                p2_desc1: "<strong>القناة الأساسية:</strong> أرسل تقريراً خاصاً عن الثغرة الأمنية (GHSA) مباشرة في مستودع الأمان الخاص بنا:",
-                p2_desc2: "<strong>قناة النسخ الاحتياطي:</strong> إذا لم تتمكن من استخدام GitHub، راسلنا عبر البريد الإلكتروني على:",
-                p2_desc3: "لا تفصح عن الثغرات الأمنية للجمهور قبل إصدار التصحيح.",
-                p3_title: "تنسيق التقرير",
-                p3_desc: "يرجى تنسيق تقريرك (ويفضل أن يتطابق مع تنسيق GHSA) مع التفاصيل التالية:",
-                p3_li1: "<strong>Summary (ملخص):</strong> وصف موجز للثغرة الأمنية.",
-                p3_li2: "<strong>Details (التفاصيل):</strong> المستودع المتأثر، الإصدار/الالتزام، تصنيف CWE، والسبب الجذري.",
-                p3_li3: "<strong>PoC (إثبات المفهوم):</strong> خطوات إعادة الإنتاج خطوة بخطوة أو نص برمجي قابل للتنفيذ كحد أدنى.",
-                p3_li4: "<strong>Impact (التأثير):</strong> نطاق المستخدم المتأثر (على سبيل المثال، الاستيلاء على حساب المسؤول).",
-                p3_li5: "<strong>CVSS (التقييم):</strong> سلسلة متجهات v3.1/v4.0.",
-                p4_title: "أولوية الفرز واتفاقيات مستوى الخدمة",
-                p4_desc: "يعد PoC القابل لإعادة الإنتاج عاملاً حاسماً في تحديد أولوياتنا.",
-                p4_p0: "CVSS >= 8.0 مع PoC. استجابة أولية في غضون 7 أيام.",
-                p4_p1: "CVSS 4.0 - 7.9 أو تأثير محدود. استجابة أولية في غضون 14 يوماً.",
-                p4_p2: "CVSS < 4.0 أو معلومات غير كاملة. استجابة بأفضل جهد.",
-                p5_title: "تعيين وإفصاح CVE",
-                p5_desc1: "بمجرد التحقق من الثغرة الأمنية، ستقوم Linkest CNA بتعيين معرف CVE رسمي. <em>(ملاحظة: يعمل GHSA كأداة تعاونية لتتبع ونشر، بينما يتم إصدار معرفات CVE بواسطة Linkest CNA).</em>",
-                p5_desc2: "نحن نطبق جدولاً زمنياً صارماً <strong>للإفصاح المسؤول لمدة 90 يوماً</strong>. سيتم نشر التنبيهات العامة بشكل مشترك بعد توفر التصحيح أو انتهاء فترة 90 يوماً.",
-                p6_title: "الملاذ الآمن وقواعد الاشتباك",
-                p6_li1: "<strong>التزام الملاذ الآمن:</strong> لن نتخذ إجراءات قانونية ضد الباحثين الذين يتصرفون بحسن نية ويتبعون هذه السياسة. سنقر بمساهمتك علناً.",
-                p6_li2: "<strong>الهجمات التدميرية المحظورة:</strong> نرفض بشدة الهجمات الحجمية المتعمدة مثل هجمات DDoS واسعة النطاق، أو القوة الغاشمة، أو الأضرار المادية، أو الهندسة الاجتماعية ضد الموظفين.",
-                p6_li3: "<strong>استثناء حاسم (DoS الناجم عن الثغرة الأمنية):</strong> إذا اكتشفت مشكلة استنفاد الموارد ناتجة <strong>مباشرة عن خلل منطقي</strong> في الكود الخاص بنا (على سبيل المثال، ReDoS، تسرب الذاكرة الناجم عن طلب واحد)، <strong>فهذه ثغرة أمنية صالحة وسيتم فرزها.</strong> ومع ذلك، يجب عليك إثبات ذلك من خلال إثبات مفهوم (PoC) خاضع للرقابة ومحدود. لا يسمح باختبار الإجهاد غير المحدود.",
-                p6_li4: "<strong>مبدأ الاختبار المستضاف ذاتياً:</strong> يجب إجراء أي اختبار قد يكون disruptive (بما في ذلك DoS المنطقي المذكور أعلاه) <strong>في بيئة محلية مستضافة ذاتياً</strong>. لا تختبر ضد بيئة الإنتاج الخاصة بـ Linkest Foundation. إذا كان التحقق المباشر مطلوباً، فيجب عليك الحصول على إذن كتابي مسبق عبر security@linkest.org.",
-                p6_li5: "<strong>حدود البيانات:</strong> يجب ألا تصل إلى أي بيانات مستخدم حقيقية لم تنشئها أو تعدلها أو تنزلها أو تسربها. يجب حذف أي بيانات اختبار تم إنشاؤها أثناء الاختبار على الفور.",
-                p7_title: "إخلاء مسؤولية صارم",
-                p7_desc: "نحتفظ بالحق في رفض التقارير الخاصة بالثغرات الأمنية التي من الواضح أنها ملفقة، أو مبالغ فيها بشكل ضار من حيث الخطورة، أو المقدمة مع حمولات مدمرة. ستؤدي محاولات الاحتيال على نظام CVE إلى الكشف العلني عن سوء الاستخدام.",
+                
+                p2_affiliated_title: "المشاريع التابعة والشركاء",
+                p2_affiliated_desc: "بينما تغطي Linkest CNA بشكل أساسي المستودعات التابعة لمؤسسة Linkest-FDT، فإننا نقدم أيضاً خدمات تعيين CVE وفرز الثغرات الأمنية لمشاريع تابعة محددة. يتم دعم هذه المشاريع وصيانتها بنشاط من قبل فريقنا، ولكنها قد تنتمي إلى مؤسسات أو استوديوهات مستقلة خاصة بها.",
+                p2_affiliated_elig_title: "الأهلية لتغطية CNA:",
+                p2_affiliated_elig_desc: "لكي يتم الاعتراف بالمشروع كمشروع تابع مؤهل لخدمات Linkest CNA، يجب أن يستوفي <strong>كلا</strong> المعيارين التاليين في وقت واحد:",
+                p2_affiliated_li1: "<strong>إعلان متبادل في README:</strong> يجب أن يذكر المستودع الرسمي للمشروع صراحةً ارتباطه بـ Linkest Foundation في ملف README.md (أو وثائق مكافئة).",
+                p2_affiliated_li2: "<strong>الإدراج في الموقع الرسمي:</strong> يجب إدراج المشروع رسمياً في صفحة \"المشاريع\" على موقع Linkest Foundation.",
+                p2_affiliated_note: "<em>ملاحظة: تحتفظ المشاريع التابعة بالملكية الكاملة لملكيتها الفكرية. لا تطالب Linkest Foundation بالملكية ولكنها تعمل كشريك أمني موثوق يوفر تغطية CNA ودعم الفرز.</em>",
+                
+                p3_title: "قنوات الإبلاغ",
+                p3_desc1: "<strong>القناة الأساسية:</strong> أرسل تقريراً خاصاً عن الثغرة الأمنية (GHSA) مباشرة في مستودع الأمان الخاص بنا:",
+                p3_desc2: "<strong>قناة النسخ الاحتياطي:</strong> إذا لم تتمكن من استخدام GitHub، راسلنا عبر البريد الإلكتروني على:",
+                p3_desc3: "لا تفصح عن الثغرات الأمنية للجمهور قبل إصدار التصحيح.",
+                
+                p4_title: "تنسيق التقرير",
+                p4_desc: "يرجى تنسيق تقريرك (ويفضل أن يتطابق مع تنسيق GHSA) مع التفاصيل التالية:",
+                p4_li1: "<strong>Summary (ملخص):</strong> وصف موجز للثغرة الأمنية.",
+                p4_li2: "<strong>Details (التفاصيل):</strong> المستودع المتأثر، الإصدار/الالتزام، تصنيف CWE، والسبب الجذري.",
+                p4_li3: "<strong>PoC (إثبات المفهوم):</strong> خطوات إعادة الإنتاج خطوة بخطوة أو نص برمجي قابل للتنفيذ كحد أدنى.",
+                p4_li4: "<strong>Impact (التأثير):</strong> نطاق المستخدم المتأثر (على سبيل المثال، الاستيلاء على حساب المسؤول).",
+                p4_li5: "<strong>CVSS (التقييم):</strong> سلسلة متجهات v3.1/v4.0.",
+                
+                p5_title: "أولوية الفرز واتفاقيات مستوى الخدمة",
+                p5_desc: "يعد PoC القابل لإعادة الإنتاج عاملاً حاسماً في تحديد أولوياتنا.",
+                p5_p0: "CVSS >= 8.0 مع PoC. استجابة أولية في غضون 7 أيام.",
+                p5_p1: "CVSS 4.0 - 7.9 أو تأثير محدود. استجابة أولية في غضون 14 يوماً.",
+                p5_p2: "CVSS < 4.0 أو معلومات غير كاملة. استجابة بأفضل جهد.",
+                
+                p6_title: "تعيين وإفصاح CVE",
+                p6_desc1: "بمجرد التحقق من الثغرة الأمنية، ستقوم Linkest CNA بتعيين معرف CVE رسمي. <em>(ملاحظة: يعمل GHSA كأداة تعاونية لتتبع ونشر، بينما يتم إصدار معرفات CVE بواسطة Linkest CNA).</em>",
+                p6_desc2: "نحن نطبق جدولاً زمنياً صارماً <strong>للإفصاح المسؤول لمدة 90 يوماً</strong>. سيتم نشر التنبيهات العامة بشكل مشترك بعد توفر التصحيح أو انتهاء فترة 90 يوماً.",
+                
+                p7_title: "الملاذ الآمن وقواعد الاشتباك",
+                p7_li1: "<strong>التزام الملاذ الآمن:</strong> لن نتخذ إجراءات قانونية ضد الباحثين الذين يتصرفون بحسن نية ويتبعون هذه السياسة. سنقر بمساهمتك علناً.",
+                p7_li2: "<strong>الهجمات التدميرية المحظورة:</strong> نرفض بشدة الهجمات الحجمية المتعمدة مثل هجمات DDoS واسعة النطاق، أو القوة الغاشمة، أو الأضرار المادية، أو الهندسة الاجتماعية ضد الموظفين.",
+                p7_li3: "<strong>استثناء حاسم (DoS الناجم عن الثغرة الأمنية):</strong> إذا اكتشفت مشكلة استنفاد الموارد ناتجة <strong>مباشرة عن خلل منطقي</strong> في الكود الخاص بنا (على سبيل المثال، ReDoS، تسرب الذاكرة الناجم عن طلب واحد)، <strong>فهذه ثغرة أمنية صالحة وسيتم فرزها.</strong> ومع ذلك، يجب عليك إثبات ذلك من خلال إثبات مفهوم (PoC) خاضع للرقابة ومحدود. لا يسمح باختبار الإجهاد غير المحدود.",
+                p7_li4: "<strong>مبدأ الاختبار المستضاف ذاتياً:</strong> يجب إجراء أي اختبار قد يكون disruptive (بما في ذلك DoS المنطقي المذكور أعلاه) <strong>في بيئة محلية مستضافة ذاتياً</strong>. لا تختبر ضد بيئة الإنتاج الخاصة بـ Linkest Foundation. إذا كان التحقق المباشر مطلوباً، فيجب عليك الحصول على إذن كتابي مسبق عبر security@linkest.org.",
+                p7_li5: "<strong>حدود البيانات:</strong> يجب ألا تصل إلى أي بيانات مستخدم حقيقية لم تنشئها أو تعدلها أو تنزلها أو تسربها. يجب حذف أي بيانات اختبار تم إنشاؤها أثناء الاختبار على الفور.",
+                
+                p8_title: "إخلاء مسؤولية صارم",
+                p8_desc: "نحتفظ بالحق في رفض التقارير الخاصة بالثغرات الأمنية التي من الواضح أنها ملفقة، أو مبالغ فيها بشكل ضار من حيث الخطورة، أو المقدمة مع حمولات مدمرة. ستؤدي محاولات الاحتيال على نظام CVE إلى الكشف العلني عن سوء الاستخدام.",
+                
                 dec_title: "إعلاننا",
                 dec_text: "احترم أبحاث الأمن. التزم بقواعد الإفصاح. احمِ النظام البيئي مفتوح المصدر. مارس الإفصاح المسؤول.",
                 dec_subtext: "تبدأ بك وبكاتبها، وتبدأ بكل مطور مستقل."
@@ -917,7 +1140,6 @@
                 if (dict[key] !== undefined) el.innerHTML = dict[key];
             });
 
-            // Show translation banner if not English
             const transBanner = document.getElementById('trans-banner');
             if (langCode !== 'en-US' && dict.trans_banner) {
                 transBanner.style.display = 'block';
@@ -925,7 +1147,6 @@
                 transBanner.style.display = 'none';
             }
 
-            // Show footer notice if not English
             const machineNotice = document.getElementById('machine-notice');
             if (langCode !== 'en-US' && dict.machine_trans_notice) {
                 machineNotice.style.display = 'block';
@@ -935,7 +1156,6 @@
 
             if (updateUrl) updateURL(langCode);
             renderMenu(langCode);
-            
             document.getElementById('lang-menu').classList.remove('show');
         }
 
@@ -944,7 +1164,6 @@
             menu.innerHTML = '';
             languages.forEach(lang => {
                 const a = document.createElement('a');
-                // Show asterisk for any language that is not English
                 a.innerHTML = lang.name + (lang.code !== 'en-US' ? '<span class="machine-ast">*</span>' : '');
                 
                 if (lang.code === currentLang) {
