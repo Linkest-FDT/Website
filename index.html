@@ -69,7 +69,6 @@
 
         .logo { display: flex; align-items: center; gap: 10px; font-weight: 800; font-size: 16px; letter-spacing: -0.5px; color: #fff; }
         
-        /* Fix: Use img for logo */
         .logo-mark {
             width: 28px; height: 28px;
             display: flex; align-items: center; justify-content: center;
@@ -110,7 +109,6 @@
             text-align: center; padding: 40px 24px 80px; position: relative;
         }
 
-        /* Fix: Use img for big background logo */
         .hero-shape-container {
             position: absolute; top: 5%; left: 50%;
             transform: translateX(-50%);
@@ -191,7 +189,8 @@
     <!-- Header -->
     <header>
         <div class="header-container">
-            <a href="index.html" class="logo">
+            <!-- Changed href to / for clean URL -->
+            <a href="/" class="logo">
                 <span class="logo-mark">
                     <img src="logo.svg" alt="Linkest Foundation Logo" />
                 </span>
@@ -199,7 +198,8 @@
             </a>
             <nav>
                 <a href="#" onclick="return false;" data-i18n="nav_contribution">Contribution</a>
-                <a href="security.html" data-i18n="nav_security">Security</a>
+                <!-- Changed href to /security for clean URL -->
+                <a href="/security" data-i18n="nav_security">Security</a>
                 <a href="#" onclick="return false;" data-i18n="nav_projects">Projects</a>
                 <a href="#" onclick="return false;" data-i18n="nav_sponsor">Sponsor</a>
                 <a href="#" onclick="return false;" data-i18n="nav_about">About</a>
@@ -222,7 +222,6 @@
     <!-- Main Hero Content -->
     <main>
         <div class="hero-shape-container">
-            <!-- 直接引用物理图片 -->
             <img src="logo.svg" alt="" />
         </div>
 
@@ -246,7 +245,8 @@
                 </div>
                 <div class="footer-links">
                     <a href="https://status.linkest.org" target="_blank" rel="noopener" data-i18n="footer_status">Status</a>
-                    <a href="security.html" data-i18n="footer_policy">Policy</a>
+                    <!-- Changed href to /security for clean URL -->
+                    <a href="/security" data-i18n="footer_policy">Policy</a>
                     <a href="#" onclick="return false;" data-i18n="footer_contact">Contact Us</a>
                 </div>
             </div>
@@ -257,10 +257,13 @@
     </footer>
 
     <script>
+        // ==========================================
+        // 1. Language Configuration
+        // ==========================================
         const languages = [
             { code: 'en-US', name: 'English', rtl: false, isMachine: false },
             { code: 'zh-CN', name: '简体中文', rtl: false, isMachine: false },
-            { code: 'zh-TW', name: '繁體中文', rtl: false, isMachine: true },
+            { code: 'zh-TW', name: '繁體中文', rtl: false, isMachine: false },
             { code: 'ja-JP', name: '日本語', rtl: false, isMachine: true },
             { code: 'ru-RU', name: 'Русский', rtl: false, isMachine: true },
             { code: 'de-DE', name: 'Deutsch', rtl: false, isMachine: true },
@@ -273,6 +276,9 @@
             { code: 'ar-SA', name: 'العربية', rtl: true, isMachine: true }
         ];
 
+        // ==========================================
+        // 2. Language Dictionary
+        // ==========================================
         const i18n = {
             'en-US': {
                 nav_contribution: "Contribution", nav_security: "Security", nav_projects: "Projects", nav_sponsor: "Sponsor", nav_about: "About",
@@ -293,8 +299,7 @@
                 hero_subtitle: "歡迎來到 <span>Linkest Foundation</span>。",
                 btn_join: "加入 Linkest Foundation", btn_github: "訪問 GitHub",
                 footer_status: "狀態", footer_policy: "政策", footer_contact: "聯繫我們",
-                machine_trans_notice: "* 部分內容由機器翻譯提供，歡迎社區修正。",
-                typewriter_text: "連接這片星系，用你的創作。"
+                machine_trans_notice: "", typewriter_text: "連接這片星系，用你的創作。"
             },
             'ja-JP': {
                 nav_contribution: "コントリビューション", nav_security: "セキュリティ", nav_projects: "プロジェクト", nav_sponsor: "スポンサー", nav_about: "概要",
@@ -397,6 +402,7 @@
 
         function setLanguage(langCode, updateUrl = true) {
             document.cookie = `linkest_lang=${langCode}; path=/; max-age=31536000`;
+            
             const langConfig = languages.find(l => l.code === langCode) || languages[0];
             const dict = Object.assign({}, i18n['en-US'], i18n[langCode] || {});
 
@@ -409,7 +415,7 @@
             });
 
             const machineNotice = document.getElementById('machine-notice');
-            if (langCode !== 'en-US' && dict.machine_trans_notice) {
+            if (langConfig.isMachine) {
                 machineNotice.style.display = 'block';
             } else {
                 machineNotice.style.display = 'none';
@@ -420,6 +426,7 @@
 
             if (updateUrl) updateURL(langCode);
             renderMenu(langCode);
+            
             document.getElementById('lang-menu').classList.remove('show');
         }
 
@@ -450,7 +457,7 @@
             menu.innerHTML = '';
             languages.forEach(lang => {
                 const a = document.createElement('a');
-                a.innerHTML = lang.name + (lang.code !== 'en-US' ? '<span class="machine-ast">*</span>' : '');
+                a.innerHTML = lang.name + (lang.isMachine ? '<span class="machine-ast">*</span>' : '');
                 
                 if (lang.code === currentLang) {
                     a.style.color = 'var(--brand-400)';
