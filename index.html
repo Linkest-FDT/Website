@@ -189,7 +189,6 @@
     <!-- Header -->
     <header>
         <div class="header-container">
-            <!-- Changed href to / for clean URL -->
             <a href="/" class="logo">
                 <span class="logo-mark">
                     <img src="logo.svg" alt="Linkest Foundation Logo" />
@@ -197,12 +196,12 @@
                 Linkest Foundation
             </a>
             <nav>
-                <a href="#" onclick="return false;" data-i18n="nav_contribution">Contribution</a>
-                <!-- Changed href to /security for clean URL -->
+                <!-- Updated routing paths -->
+                <a href="/contribution" data-i18n="nav_contribution">Contribution</a>
                 <a href="/security" data-i18n="nav_security">Security</a>
-                <a href="#" onclick="return false;" data-i18n="nav_projects">Projects</a>
-                <a href="#" onclick="return false;" data-i18n="nav_sponsor">Sponsor</a>
-                <a href="#" onclick="return false;" data-i18n="nav_about">About</a>
+                <a href="/projects" data-i18n="nav_projects">Projects</a>
+                <a href="/sponsor" data-i18n="nav_sponsor">Sponsor</a>
+                <a href="/about" data-i18n="nav_about">About</a>
                 <a href="https://github.com/Linkest-FDT" target="_blank" rel="noopener">GitHub ↗</a>
                 
                 <div class="lang-switcher">
@@ -245,9 +244,9 @@
                 </div>
                 <div class="footer-links">
                     <a href="https://status.linkest.org" target="_blank" rel="noopener" data-i18n="footer_status">Status</a>
-                    <!-- Changed href to /security for clean URL -->
                     <a href="/security" data-i18n="footer_policy">Policy</a>
-                    <a href="#" onclick="return false;" data-i18n="footer_contact">Contact Us</a>
+                    <!-- Updated routing path -->
+                    <a href="/contact" data-i18n="footer_contact">Contact Us</a>
                 </div>
             </div>
             <div class="footer-notice" id="machine-notice">
@@ -257,9 +256,6 @@
     </footer>
 
     <script>
-        // ==========================================
-        // 1. Language Configuration
-        // ==========================================
         const languages = [
             { code: 'en-US', name: 'English', rtl: false, isMachine: false },
             { code: 'zh-CN', name: '简体中文', rtl: false, isMachine: false },
@@ -276,9 +272,6 @@
             { code: 'ar-SA', name: 'العربية', rtl: true, isMachine: true }
         ];
 
-        // ==========================================
-        // 2. Language Dictionary
-        // ==========================================
         const i18n = {
             'en-US': {
                 nav_contribution: "Contribution", nav_security: "Security", nav_projects: "Projects", nav_sponsor: "Sponsor", nav_about: "About",
