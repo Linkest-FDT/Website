@@ -1,0 +1,596 @@
+<!DOCTYPE html>
+<html lang="en-US" class="dark">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Contact Us | Linkest Foundation</title>
+    <meta name="description" content="Contact Linkest Foundation. Find the right email address for general inquiries, security, copyright, and support.">
+    
+    <!-- Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Fira+Code:wght@400;500&display=swap" rel="stylesheet" />
+
+    <style>
+        /* CSS Variables */
+        :root {
+            color-scheme: dark;
+            --bg-base: #0b1020;
+            --bg-surface: #131c33;
+            --border-color: #1e2942;
+            --text-primary: #e5e7eb;
+            --text-secondary: #94a3b8;
+            --text-muted: #64748b;
+            --brand-300: #93c5fd;
+            --brand-400: #60a5fa;
+            --brand-500: #3b82f6;
+            --brand-600: #2563eb;
+            --font-sans: 'Inter', system-ui, -apple-system, sans-serif;
+            --font-mono: 'Fira Code', monospace;
+        }
+
+        * { box-sizing: border-box; margin: 0; padding: 0; }
+        html { background-color: var(--bg-base); scroll-behavior: smooth; }
+        body {
+            font-family: var(--font-sans); background-color: var(--bg-base); color: var(--text-primary);
+            line-height: 1.6; min-height: 100vh; display: flex; flex-direction: column;
+            overflow-x: hidden; -webkit-font-smoothing: antialiased;
+        }
+
+        /* RTL Support */
+        html[dir="rtl"] body { direction: rtl; }
+        html[dir="rtl"] nav { flex-direction: row-reverse; }
+        html[dir="rtl"] .lang-switcher { margin-right: 16px; margin-left: 0; }
+        html[dir="rtl"] .dropdown-content { right: auto; left: 0; }
+        html[dir="rtl"] .logo { flex-direction: row-reverse; }
+        html[dir="rtl"] .contact-card { flex-direction: row-reverse; text-align: right; }
+
+        a { color: var(--text-primary); text-decoration: none; transition: color 0.2s ease; }
+        a:hover { color: var(--brand-400); }
+
+        /* Header */
+        header {
+            position: sticky; top: 0; z-index: 100;
+            background: linear-gradient(180deg, rgba(11,16,32,.98) 0%, rgba(30,41,59,.92) 100%);
+            backdrop-filter: blur(18px); -webkit-backdrop-filter: blur(18px);
+            border-bottom: 1px solid rgba(255,255,255,.08);
+        }
+
+        .header-container {
+            max-width: 1200px; margin: 0 auto; padding: 14px 24px;
+            display: flex; justify-content: space-between; align-items: center;
+        }
+
+        .logo { display: flex; align-items: center; gap: 10px; font-weight: 800; font-size: 16px; letter-spacing: -0.5px; color: #fff; }
+        .logo-mark { width: 28px; height: 28px; display: flex; align-items: center; justify-content: center; filter: drop-shadow(0 4px 10px rgba(108, 126, 229, 0.5)); }
+        .logo-mark img { width: 100%; height: 100%; object-fit: contain; }
+
+        nav { display: flex; gap: 24px; align-items: center; font-size: 13.5px; font-weight: 500; color: var(--text-secondary); }
+        nav a { color: var(--text-secondary); }
+        nav a:hover, nav a.active { color: #fff; }
+        nav a.active { border-bottom: 2px solid var(--brand-400); padding-bottom: 2px; }
+
+        /* Language Dropdown */
+        .lang-switcher { position: relative; display: inline-block; margin-left: 10px; }
+        .lang-btn {
+            background-color: rgba(59,130,246,.12); border: 1px solid rgba(59,130,246,.3);
+            color: var(--brand-300); padding: 6px 10px; border-radius: 8px;
+            font-weight: 600; display: flex; align-items: center; gap: 6px; cursor: pointer;
+            transition: all 0.2s ease; font-size: 13px;
+        }
+        .lang-btn:hover { background-color: rgba(59,130,246,.2); border-color: var(--brand-400); color: #fff; }
+        
+        .dropdown-content {
+            display: none; position: absolute; right: 0; top: 100%; margin-top: 8px;
+            background-color: var(--bg-surface); border: 1px solid var(--border-color);
+            border-radius: 8px; box-shadow: 0 10px 25px rgba(0,0,0,0.5); min-width: 140px; z-index: 101;
+            max-height: 400px; overflow-y: auto;
+        }
+        .dropdown-content.show { display: block; }
+        
+        .dropdown-content a { display: block; padding: 8px 16px; font-size: 13px; color: var(--text-primary); cursor: pointer;}
+        .dropdown-content a:hover { background-color: rgba(255,255,255,0.05); color: var(--brand-400); }
+        
+        .machine-ast { font-size: 10px; color: var(--text-muted); margin-left: 2px; vertical-align: super;}
+
+        /* Main Content */
+        main { flex: 1; max-width: 1000px; margin: 0 auto; padding: 60px 24px 80px; width: 100%; position: relative; }
+
+        .page-header { text-align: center; margin-bottom: 56px; }
+        .page-title { font-size: clamp(2rem, 4vw, 2.8rem); font-weight: 800; color: #fff; letter-spacing: -1px; margin-bottom: 12px; }
+        .page-subtitle { color: var(--text-secondary); font-size: clamp(1rem, 2vw, 1.1rem); max-width: 600px; margin: 0 auto; }
+
+        /* Contact Grid */
+        .contact-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 24px;
+        }
+
+        .contact-card {
+            background-color: var(--bg-surface);
+            border: 1px solid var(--border-color);
+            border-radius: 16px;
+            padding: 32px;
+            display: flex;
+            align-items: flex-start;
+            gap: 20px;
+            box-shadow: 0 10px 30px -15px rgba(0,0,0,0.5);
+            transition: transform 0.2s ease, border-color 0.2s ease;
+        }
+        .contact-card:hover {
+            border-color: rgba(96, 165, 250, 0.4);
+            transform: translateY(-2px);
+        }
+
+        .card-icon {
+            flex-shrink: 0;
+            width: 48px;
+            height: 48px;
+            background: rgba(59,130,246,.1);
+            border: 1px solid rgba(59,130,246,.2);
+            border-radius: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--brand-400);
+        }
+
+        .card-content { flex: 1; }
+        .card-title { font-size: 18px; font-weight: 700; color: #f8fafc; margin-bottom: 6px; }
+        .card-desc { font-size: 13.5px; color: var(--text-secondary); margin-bottom: 16px; line-height: 1.5; }
+        
+        .card-email {
+            display: inline-flex;
+            align-items: center;
+            font-family: var(--font-mono);
+            font-size: 14px;
+            font-weight: 500;
+            color: var(--brand-300);
+            background: rgba(59,130,246,.08);
+            padding: 6px 12px;
+            border-radius: 6px;
+            word-break: break-all;
+            transition: background 0.2s ease, color 0.2s ease;
+        }
+        .card-email:hover {
+            background: rgba(59,130,246,.15);
+            color: #fff;
+        }
+
+        /* Footer */
+        footer { border-top: 1px solid rgba(255,255,255,.05); padding: 32px 24px; font-size: 13px; color: var(--text-muted); margin-top: auto; }
+        .footer-container { max-width: 1200px; margin: 0 auto; display: flex; flex-direction: column; gap: 16px; }
+        .footer-top { display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 16px; }
+        .footer-links { display: flex; gap: 24px; }
+        .footer-links a { color: var(--text-muted); font-weight: 500; }
+        .footer-links a:hover { color: var(--brand-400); }
+        
+        .footer-notice { font-size: 12px; color: var(--text-muted); border-top: 1px solid rgba(255,255,255,0.05); padding-top: 16px; text-align: left; display: none; }
+        .footer-notice .ast { color: var(--brand-400); font-weight: bold;}
+
+        @media (max-width: 768px) {
+            .header-container { flex-direction: column; gap: 16px; }
+            nav { flex-wrap: wrap; justify-content: center; gap: 16px; }
+            .footer-top { flex-direction: column; text-align: center; }
+            .contact-card { flex-direction: column; text-align: center; align-items: center; padding: 24px; }
+            .card-email { justify-content: center; }
+        }
+    </style>
+</head>
+<body>
+
+    <header>
+        <div class="header-container">
+            <a href="/" class="logo">
+                <span class="logo-mark">
+                    <img src="logo.svg" alt="Linkest Foundation Logo" />
+                </span>
+                Linkest Foundation
+            </a>
+            <nav>
+                <a href="/contribution" data-i18n="nav_contribution">Contribution</a>
+                <a href="/security" data-i18n="nav_security">Security</a>
+                <a href="/projects" data-i18n="nav_projects">Projects</a>
+                <a href="/sponsor" data-i18n="nav_sponsor">Sponsor</a>
+                <a href="/about" data-i18n="nav_about">About</a>
+                <a href="https://github.com/Linkest-FDT" target="_blank" rel="noopener">GitHub ↗</a>
+                
+                <div class="lang-switcher">
+                    <button class="lang-btn" aria-label="Choose Language" id="lang-btn">
+                        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                            <circle cx="12" cy="12" r="10"></circle>
+                            <line x1="2" y1="12" x2="22" y2="12"></line>
+                            <path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"></path>
+                        </svg>
+                    </button>
+                    <div class="dropdown-content" id="lang-menu"></div>
+                </div>
+            </nav>
+        </div>
+    </header>
+
+    <main>
+        <div class="page-header">
+            <h1 class="page-title" data-i18n="contact_title">Contact Us</h1>
+            <p class="page-subtitle" data-i18n="contact_subtitle">Find the right department for your inquiries. We're here to help.</p>
+        </div>
+
+        <div class="contact-grid">
+            <!-- General Inquiries -->
+            <div class="contact-card">
+                <div class="card-icon">
+                    <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"></path><polyline points="22,6 12,13 2,6"></polyline></svg>
+                </div>
+                <div class="card-content">
+                    <h2 class="card-title" data-i18n="contact_hi_title">General Inquiries</h2>
+                    <p class="card-desc" data-i18n="contact_hi_desc">For general questions, partnership proposals, media requests, or just to say hello.</p>
+                    <a href="mailto:hi@linkest.org" class="card-email">hi@linkest.org</a>
+                </div>
+            </div>
+
+            <!-- Security -->
+            <div class="contact-card">
+                <div class="card-icon">
+                    <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"></path></svg>
+                </div>
+                <div class="card-content">
+                    <h2 class="card-title" data-i18n="contact_sec_title">Security & CNA</h2>
+                    <p class="card-desc" data-i18n="contact_sec_desc">For reporting security vulnerabilities, coordinating CVE assignments, or safe harbor inquiries.</p>
+                    <a href="mailto:security@linkest.org" class="card-email">security@linkest.org</a>
+                </div>
+            </div>
+
+            <!-- Copyright -->
+            <div class="contact-card">
+                <div class="card-icon">
+                    <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"></circle><line x1="12" y1="8" x2="12" y2="16"></line><line x1="8" y1="12" x2="16" y2="12"></line></svg>
+                </div>
+                <div class="card-content">
+                    <h2 class="card-title" data-i18n="contact_copy_title">Legal & Copyright</h2>
+                    <p class="card-desc" data-i18n="contact_copy_desc">For DMCA takedown notices, licensing questions, trademark issues, and legal affairs.</p>
+                    <a href="mailto:copyright@linkest.org" class="card-email">copyright@linkest.org</a>
+                </div>
+            </div>
+
+            <!-- Support -->
+            <div class="contact-card">
+                <div class="card-icon">
+                    <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"></path></svg>
+                </div>
+                <div class="card-content">
+                    <h2 class="card-title" data-i18n="contact_sup_title">Developer Support</h2>
+                    <p class="card-desc" data-i18n="contact_sup_desc">For technical assistance with Chronos Seal, Signet, or other Linkest-FDT projects.</p>
+                    <a href="mailto:support@linkest.org" class="card-email">support@linkest.org</a>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <footer>
+        <div class="footer-container">
+            <div class="footer-top">
+                <div class="footer-copyright">
+                    <p>&copy; <span id="year"></span> Linkest Foundation and its affiliated organizations. All rights reserved.</p>
+                </div>
+                <div class="footer-links">
+                    <a href="https://status.linkest.org" target="_blank" rel="noopener" data-i18n="footer_status">Status</a>
+                    <a href="/security" data-i18n="footer_policy">Policy</a>
+                    <a href="/contact" class="active" data-i18n="footer_contact">Contact Us</a>
+                </div>
+            </div>
+            <div class="footer-notice" id="machine-notice">
+                <span class="ast">*</span> <span data-i18n="machine_trans_notice"></span>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        const languages = [
+            { code: 'en-US', name: 'English', rtl: false, isMachine: false },
+            { code: 'zh-CN', name: '简体中文', rtl: false, isMachine: false },
+            { code: 'zh-TW', name: '繁體中文', rtl: false, isMachine: false },
+            { code: 'ja-JP', name: '日本語', rtl: false, isMachine: true },
+            { code: 'ru-RU', name: 'Русский', rtl: false, isMachine: true },
+            { code: 'de-DE', name: 'Deutsch', rtl: false, isMachine: true },
+            { code: 'fr-FR', name: 'Français', rtl: false, isMachine: true },
+            { code: 'es-ES', name: 'Español', rtl: false, isMachine: true },
+            { code: 'pt-BR', name: 'Português', rtl: false, isMachine: true },
+            { code: 'it-IT', name: 'Italiano', rtl: false, isMachine: true },
+            { code: 'ko-KR', name: '한국어', rtl: false, isMachine: true },
+            { code: 'pl-PL', name: 'Polski', rtl: false, isMachine: true },
+            { code: 'ar-SA', name: 'العربية', rtl: true, isMachine: true }
+        ];
+
+        const i18n = {
+            'en-US': {
+                nav_contribution: "Contribution", nav_security: "Security", nav_projects: "Projects", nav_sponsor: "Sponsor", nav_about: "About",
+                footer_status: "Status", footer_policy: "Policy", footer_contact: "Contact Us",
+                machine_trans_notice: "",
+                contact_title: "Contact Us",
+                contact_subtitle: "Find the right department for your inquiries. We're here to help.",
+                contact_hi_title: "General Inquiries",
+                contact_hi_desc: "For general questions, partnership proposals, media requests, or just to say hello.",
+                contact_sec_title: "Security & CNA",
+                contact_sec_desc: "For reporting security vulnerabilities, coordinating CVE assignments, or safe harbor inquiries.",
+                contact_copy_title: "Legal & Copyright",
+                contact_copy_desc: "For DMCA takedown notices, licensing questions, trademark issues, and legal affairs.",
+                contact_sup_title: "Developer Support",
+                contact_sup_desc: "For technical assistance with Chronos Seal, Signet, or other Linkest-FDT projects."
+            },
+            'zh-CN': {
+                nav_contribution: "贡献", nav_security: "安全", nav_projects: "项目", nav_sponsor: "赞助", nav_about: "关于",
+                footer_status: "状态", footer_policy: "政策", footer_contact: "联系我们",
+                machine_trans_notice: "",
+                contact_title: "联系我们",
+                contact_subtitle: "寻找对应的部门进行联系，我们随时为您提供帮助。",
+                contact_hi_title: "一般咨询",
+                contact_hi_desc: "用于一般问题、合作提案、媒体请求，或者只是打个招呼。",
+                contact_sec_title: "安全与 CNA",
+                contact_sec_desc: "用于报告安全漏洞、协调 CVE 分配或咨询安全港政策。",
+                contact_copy_title: "法务与版权",
+                contact_copy_desc: "用于处理 DMCA 下架通知、授权问题、商标事务及法律相关事宜。",
+                contact_sup_title: "开发者支持",
+                contact_sup_desc: "获取关于 Chronos Seal、Signet 或其他 Linkest-FDT 项目的技术支持。"
+            },
+            'zh-TW': {
+                nav_contribution: "貢獻", nav_security: "安全", nav_projects: "專案", nav_sponsor: "贊助", nav_about: "關於",
+                footer_status: "狀態", footer_policy: "政策", footer_contact: "聯繫我們",
+                machine_trans_notice: "",
+                contact_title: "聯繫我們",
+                contact_subtitle: "尋找對應的部門進行聯繫，我們隨時為您提供幫助。",
+                contact_hi_title: "一般諮詢",
+                contact_hi_desc: "用於一般問題、合作提案、媒體請求，或者只是打個招呼。",
+                contact_sec_title: "安全與 CNA",
+                contact_sec_desc: "用於報告安全漏洞、協調 CVE 分配或諮詢安全港政策。",
+                contact_copy_title: "法務與版權",
+                contact_copy_desc: "用於處理 DMCA 下架通知、授權問題、商標事務及法律相關事宜。",
+                contact_sup_title: "開發者支持",
+                contact_sup_desc: "獲取關於 Chronos Seal、Signet 或其他 Linkest-FDT 項目的技術支持。"
+            },
+            'ja-JP': {
+                nav_contribution: "コントリビューション", nav_security: "セキュリティ", nav_projects: "プロジェクト", nav_sponsor: "スポンサー", nav_about: "概要",
+                footer_status: "ステータス", footer_policy: "ポリシー", footer_contact: "お問い合わせ",
+                machine_trans_notice: "* 一部の言語は機械翻訳によって提供されています。コミュニティによる修正を歓迎します。",
+                contact_title: "お問い合わせ",
+                contact_subtitle: "お問い合わせ内容に応じた適切な窓口をお選びください。",
+                contact_hi_title: "一般的なお問い合わせ",
+                contact_hi_desc: "一般的なご質問、パートナーシップの提案、メディアの取材依頼など。",
+                contact_sec_title: "セキュリティ＆CNA",
+                contact_sec_desc: "セキュリティ脆弱性の報告、CVEの割り当て調整、セーフハーバーに関するお問い合わせ。",
+                contact_copy_title: "法務・著作権",
+                contact_copy_desc: "DMCA削除通知、ライセンスに関する質問、商標問題、法務関連。",
+                contact_sup_title: "開発者サポート",
+                contact_sup_desc: "Chronos Seal、Signet、その他のLinkest-FDTプロジェクトの技術サポート。"
+            },
+            'ru-RU': {
+                nav_contribution: "Вклад", nav_security: "Безопасность", nav_projects: "Проекты", nav_sponsor: "Спонсор", nav_about: "О нас",
+                footer_status: "Статус", footer_policy: "Политика", footer_contact: "Связаться с нами",
+                machine_trans_notice: "* Некоторые языки предоставлены машинным переводом. Мы приветствуем исправления от сообщества.",
+                contact_title: "Связаться с нами",
+                contact_subtitle: "Найдите нужный отдел для вашего запроса. Мы здесь, чтобы помочь.",
+                contact_hi_title: "Общие вопросы",
+                contact_hi_desc: "По общим вопросам, предложениям о сотрудничестве, запросам СМИ или просто поздороваться.",
+                contact_sec_title: "Безопасность и CNA",
+                contact_sec_desc: "Для сообщения об уязвимостях, координации назначения CVE или запросов о безопасной гавани.",
+                contact_copy_title: "Юридические вопросы и авторские права",
+                contact_copy_desc: "Для уведомлений DMCA, вопросов лицензирования, проблем с товарными знаками и юридических вопросов.",
+                contact_sup_title: "Поддержка разработчиков",
+                contact_sup_desc: "За технической помощью по Chronos Seal, Signet или другим проектам Linkest-FDT."
+            },
+            'de-DE': { 
+                nav_contribution: "Beitragen", nav_security: "Sicherheit", nav_projects: "Projekte", nav_sponsor: "Sponsor", nav_about: "Über uns",
+                footer_status: "Status", footer_policy: "Richtlinie", footer_contact: "Kontakt",
+                machine_trans_notice: "* Einige Sprachen werden maschinell übersetzt. Korrekturen aus der Community sind willkommen.",
+                contact_title: "Kontaktieren Sie uns",
+                contact_subtitle: "Finden Sie die richtige Abteilung für Ihre Anfragen. Wir sind hier, um zu helfen.",
+                contact_hi_title: "Allgemeine Anfragen",
+                contact_hi_desc: "Für allgemeine Fragen, Partnerschaftsvorschläge, Medienanfragen oder einfach nur um Hallo zu sagen.",
+                contact_sec_title: "Sicherheit & CNA",
+                contact_sec_desc: "Für die Meldung von Sicherheitslücken, die Koordinierung von CVE-Zuweisungen oder Safe-Harbor-Anfragen.",
+                contact_copy_title: "Recht & Urheberrecht",
+                contact_copy_desc: "Für DMCA-Takedown-Benachrichtigungen, Lizenzierungsfragen, Markenprobleme und rechtliche Angelegenheiten.",
+                contact_sup_title: "Entwickler-Support",
+                contact_sup_desc: "Für technische Unterstützung bei Chronos Seal, Signet oder anderen Linkest-FDT-Projekten."
+            },
+            'fr-FR': { 
+                nav_contribution: "Contribution", nav_security: "Sécurité", nav_projects: "Projets", nav_sponsor: "Sponsor", nav_about: "À propos",
+                footer_status: "Statut", footer_policy: "Politique", footer_contact: "Contact",
+                machine_trans_notice: "* Certaines langues sont traduites automatiquement. Les corrections de la communauté sont les bienvenues.",
+                contact_title: "Contactez-nous",
+                contact_subtitle: "Trouvez le bon département pour vos demandes. Nous sommes là pour vous aider.",
+                contact_hi_title: "Demandes générales",
+                contact_hi_desc: "Pour les questions générales, les propositions de partenariat, les demandes des médias ou simplement pour dire bonjour.",
+                contact_sec_title: "Sécurité & CNA",
+                contact_sec_desc: "Pour signaler des vulnérabilités de sécurité, coordonner les attributions de CVE ou pour des demandes de safe harbor.",
+                contact_copy_title: "Juridique & Droit d'auteur",
+                contact_copy_desc: "Pour les notifications de retrait DMCA, les questions de licence, les problèmes de marque et les affaires juridiques.",
+                contact_sup_title: "Support aux développeurs",
+                contact_sup_desc: "Pour une assistance technique avec Chronos Seal, Signet ou d'autres projets Linkest-FDT."
+            },
+            'es-ES': { 
+                nav_contribution: "Contribución", nav_security: "Seguridad", nav_projects: "Proyectos", nav_sponsor: "Patrocinador", nav_about: "Acerca de",
+                footer_status: "Estado", footer_policy: "Política", footer_contact: "Contacto",
+                machine_trans_notice: "* Algunos idiomas están traducidos automáticamente. Se agradecen las correcciones de la comunidad.",
+                contact_title: "Contáctenos",
+                contact_subtitle: "Encuentre el departamento adecuado para sus consultas. Estamos aquí para ayudar.",
+                contact_hi_title: "Consultas generales",
+                contact_hi_desc: "Para preguntas generales, propuestas de asociación, solicitudes de medios o simplemente para saludar.",
+                contact_sec_title: "Seguridad y CNA",
+                contact_sec_desc: "Para reportar vulnerabilidades de seguridad, coordinar asignaciones de CVE o consultas sobre puerto seguro.",
+                contact_copy_title: "Legal y derechos de autor",
+                contact_copy_desc: "Para avisos de retirada de DMCA, preguntas sobre licencias, problemas de marcas registradas y asuntos legales.",
+                contact_sup_title: "Soporte para desarrolladores",
+                contact_sup_desc: "Para asistencia técnica con Chronos Seal, Signet u otros proyectos de Linkest-FDT."
+            },
+            'pt-BR': { 
+                nav_contribution: "Contribuição", nav_security: "Segurança", nav_projects: "Projetos", nav_sponsor: "Patrocinador", nav_about: "Sobre",
+                footer_status: "Status", footer_policy: "Política", footer_contact: "Contato",
+                machine_trans_notice: "* Alguns idiomas são traduzidos automaticamente. Correções da comunidade são bem-vindas.",
+                contact_title: "Fale Conosco",
+                contact_subtitle: "Encontre o departamento certo para suas dúvidas. Estamos aqui para ajudar.",
+                contact_hi_title: "Dúvidas Gerais",
+                contact_hi_desc: "Para perguntas gerais, propostas de parceria, pedidos de mídia ou apenas para dizer olá.",
+                contact_sec_title: "Segurança & CNA",
+                contact_sec_desc: "Para relatar vulnerabilidades de segurança, coordenar atribuições de CVE ou dúvidas sobre porto seguro.",
+                contact_copy_title: "Jurídico & Direitos Autorais",
+                contact_copy_desc: "Para avisos de remoção DMCA, dúvidas sobre licenciamento, problemas de marcas registradas e assuntos legais.",
+                contact_sup_title: "Suporte ao Desenvolvedor",
+                contact_sup_desc: "Para assistência técnica com Chronos Seal, Signet ou outros projetos Linkest-FDT."
+            },
+            'it-IT': { 
+                nav_contribution: "Contributo", nav_security: "Sicurezza", nav_projects: "Progetti", nav_sponsor: "Sponsor", nav_about: "Chi siamo",
+                footer_status: "Stato", footer_policy: "Politica", footer_contact: "Contattaci",
+                machine_trans_notice: "* Alcune lingue sono tradotte automaticamente. Le correzioni della community sono benvenute.",
+                contact_title: "Contattaci",
+                contact_subtitle: "Trova il reparto giusto per le tue richieste. Siamo qui per aiutarti.",
+                contact_hi_title: "Richieste generali",
+                contact_hi_desc: "Per domande generali, proposte di partnership, richieste dai media o semplicemente per salutare.",
+                contact_sec_title: "Sicurezza & CNA",
+                contact_sec_desc: "Per segnalare vulnerabilità di sicurezza, coordinare assegnazioni CVE o richieste di safe harbor.",
+                contact_copy_title: "Legale & Copyright",
+                contact_copy_desc: "Per notifiche di rimozione DMCA, domande sulle licenze, problemi di marchi e questioni legali.",
+                contact_sup_title: "Supporto agli sviluppatori",
+                contact_sup_desc: "Per assistenza tecnica su Chronos Seal, Signet o altri progetti Linkest-FDT."
+            },
+            'ko-KR': { 
+                nav_contribution: "기여", nav_security: "보안", nav_projects: "프로젝트", nav_sponsor: "후원", nav_about: "소개",
+                footer_status: "상태", footer_policy: "정책", footer_contact: "문의하기",
+                machine_trans_notice: "* 일부 언어는 기계 번역으로 제공됩니다. 커뮤니티의 수정을 환영합니다.",
+                contact_title: "문의하기",
+                contact_subtitle: "문의 사항에 맞는 부서를 찾아보세요. 기꺼이 도와드리겠습니다.",
+                contact_hi_title: "일반 문의",
+                contact_hi_desc: "일반적인 질문, 파트너십 제안, 미디어 요청 또는 간단한 인사.",
+                contact_sec_title: "보안 및 CNA",
+                contact_sec_desc: "보안 취약점 보고, CVE 할당 조정 또는 세이프 하버 문의.",
+                contact_copy_title: "법률 및 저작권",
+                contact_copy_desc: "DMCA 삭제 통지, 라이선스 문의, 상표 문제 및 법률 관련 문의.",
+                contact_sup_title: "개발자 지원",
+                contact_sup_desc: "Chronos Seal, Signet 또는 기타 Linkest-FDT 프로젝트에 대한 기술 지원."
+            },
+            'pl-PL': { 
+                nav_contribution: "Wkład", nav_security: "Bezpieczeństwo", nav_projects: "Projekty", nav_sponsor: "Sponsor", nav_about: "O nas",
+                footer_status: "Status", footer_policy: "Polityka", footer_contact: "Kontakt",
+                machine_trans_notice: "* Niektóre języki są tłumaczone maszynowo. Poprawki społeczności są mile widziane.",
+                contact_title: "Skontaktuj się z nami",
+                contact_subtitle: "Znajdź odpowiedni dział dla swoich zapytań. Jesteśmy tutaj, aby pomóc.",
+                contact_hi_title: "Zapytania ogólne",
+                contact_hi_desc: "W przypadku ogólnych pytań, propozycji partnerstwa, próśb mediów lub po prostu pozdrowień.",
+                contact_sec_title: "Bezpieczeństwo i CNA",
+                contact_sec_desc: "Do zgłaszania podatności, koordynacji przydziału CVE lub zapytań dotyczących bezpiecznej przystani.",
+                contact_copy_title: "Kwestie prawne i prawa autorskie",
+                contact_copy_desc: "W przypadku powiadomień o usunięciu DMCA, pytań dotyczących licencji, problemów ze znakami towarowymi i spraw prawnych.",
+                contact_sup_title: "Wsparcie dla programistów",
+                contact_sup_desc: "Aby uzyskać pomoc techniczną dotyczącą Chronos Seal, Signet lub innych projektów Linkest-FDT."
+            },
+            'ar-SA': { 
+                nav_contribution: "مساهمة", nav_security: "الأمن", nav_projects: "المشاريع", nav_sponsor: "الراعي", nav_about: "حول",
+                footer_status: "الحالة", footer_policy: "سياسة", footer_contact: "اتصل بنا",
+                machine_trans_notice: "* بعض اللغات مترجمة آلياً. نرحب بتصحيحات المجتمع.",
+                contact_title: "اتصل بنا",
+                contact_subtitle: "ابحث عن القسم المناسب لاستفساراتك. نحن هنا للمساعدة.",
+                contact_hi_title: "استفسارات عامة",
+                contact_hi_desc: "للأسئلة العامة، مقترحات الشراكة، طلبات وسائل الإعلام، أو مجرد إلقاء التحية.",
+                contact_sec_title: "الأمن و CNA",
+                contact_sec_desc: "للإبلاغ عن الثغرات الأمنية، تنسيق تعيينات CVE، أو استفسارات الملاذ الآمن.",
+                contact_copy_title: "القانونية وحقوق النشر",
+                contact_copy_desc: "لإشعارات إزالة DMCA، وأسئلة الترخيص، ومشاكل العلامات التجارية، والشؤون القانونية.",
+                contact_sup_title: "دعم المطورين",
+                contact_sup_desc: "للحصول على مساعدة تقنية بشأن Chronos Seal، Signet، أو مشاريع Linkest-FDT الأخرى."
+            }
+        };
+
+        function updateURL(langCode) {
+            const url = new URL(window.location);
+            if (langCode === 'en-US') {
+                url.searchParams.delete('lang');
+            } else {
+                url.searchParams.set('lang', langCode);
+            }
+            window.history.replaceState({ lang: langCode }, '', url);
+        }
+
+        document.getElementById('lang-btn').addEventListener('click', (e) => {
+            e.stopPropagation();
+            document.getElementById('lang-menu').classList.toggle('show');
+        });
+
+        document.addEventListener('click', (e) => {
+            const menu = document.getElementById('lang-menu');
+            const btn = document.getElementById('lang-btn');
+            if (menu.classList.contains('show') && !btn.contains(e.target) && !menu.contains(e.target)) {
+                menu.classList.remove('show');
+            }
+        });
+
+        function setLanguage(langCode, updateUrl = true) {
+            document.cookie = `linkest_lang=${langCode}; path=/; max-age=31536000`;
+            
+            const langConfig = languages.find(l => l.code === langCode) || languages[0];
+            const dict = Object.assign({}, i18n['en-US'], i18n[langCode] || {});
+
+            document.documentElement.setAttribute('dir', langConfig.rtl ? 'rtl' : 'ltr');
+            document.documentElement.setAttribute('lang', langCode);
+
+            document.querySelectorAll('[data-i18n]').forEach(el => {
+                const key = el.getAttribute('data-i18n');
+                if (dict[key] !== undefined) el.innerHTML = dict[key];
+            });
+
+            const machineNotice = document.getElementById('machine-notice');
+            if (langConfig.isMachine) {
+                machineNotice.style.display = 'block';
+            } else {
+                machineNotice.style.display = 'none';
+            }
+
+            if (updateUrl) updateURL(langCode);
+            renderMenu(langCode);
+            document.getElementById('lang-menu').classList.remove('show');
+        }
+
+        function renderMenu(currentLang) {
+            const menu = document.getElementById('lang-menu');
+            menu.innerHTML = '';
+            languages.forEach(lang => {
+                const a = document.createElement('a');
+                a.innerHTML = lang.name + (lang.isMachine ? '<span class="machine-ast">*</span>' : '');
+                
+                if (lang.code === currentLang) {
+                    a.style.color = 'var(--brand-400)';
+                    a.style.backgroundColor = 'rgba(59,130,246,.1)';
+                }
+                
+                a.addEventListener('click', (e) => {
+                    e.preventDefault();
+                    e.stopPropagation();
+                    setLanguage(lang.code);
+                });
+                
+                menu.appendChild(a);
+            });
+        }
+
+        function initLanguage() {
+            const urlParams = new URLSearchParams(window.location.search);
+            const urlLang = urlParams.get('lang');
+            if (urlLang && languages.some(l => l.code === urlLang)) {
+                return urlLang;
+            }
+
+            const match = document.cookie.match(/(^| )linkest_lang=([^;]+)/);
+            if (match) return match[2];
+            
+            const browserLang = navigator.language || navigator.userLanguage;
+            const matchedLang = languages.find(l => browserLang.startsWith(l.code.split('-')[0]));
+            return matchedLang ? matchedLang.code : 'en-US';
+        }
+
+        document.addEventListener('DOMContentLoaded', () => {
+            document.getElementById('year').textContent = new Date().getFullYear();
+            const initialLang = initLanguage();
+            setLanguage(initialLang, false); 
+        });
+    </script>
+</body>
+</html>
