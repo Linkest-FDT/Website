@@ -63,7 +63,6 @@
         }
 
         .logo { display: flex; align-items: center; gap: 10px; font-weight: 800; font-size: 16px; letter-spacing: -0.5px; color: #fff; }
-        
         .logo-mark { 
             width: 28px; height: 28px; 
             display: flex; align-items: center; justify-content: center; 
@@ -97,7 +96,7 @@
         .dropdown-content a { display: block; padding: 8px 16px; font-size: 13px; color: var(--text-primary); cursor: pointer;}
         .dropdown-content a:hover { background-color: rgba(255,255,255,0.05); color: var(--brand-400); }
         
-        .machine-ast { font-size: 10px; color: var(--text-muted); margin-left: 2px; vertical-align: super;}
+        .machine-ast { font-size: 12px; color: var(--brand-400); margin-left: 2px; vertical-align: super;}
 
         /* Main Content */
         main { flex: 1; max-width: 900px; margin: 0 auto; padding: 60px 24px 80px; width: 100%; position: relative; }
@@ -136,7 +135,6 @@
         .policy-card ul { padding-left: 24px; }
         .policy-card li { margin-bottom: 8px; }
         
-        .highlight { color: var(--brand-300); font-weight: 600; }
         .code-box {
             background: #0b1020; padding: 12px 16px; border-radius: 8px; font-family: var(--font-mono);
             color: #a7f3d0; font-size: 13.5px; border: 1px solid rgba(255,255,255,0.05); margin-bottom: 16px;
@@ -182,7 +180,7 @@
 
     <header>
         <div class="header-container">
-            <a href="index.html" class="logo">
+            <a href="/" class="logo">
                 <span class="logo-mark">
                     <img src="logo.svg" alt="Linkest Foundation Logo" />
                 </span>
@@ -190,7 +188,7 @@
             </a>
             <nav>
                 <a href="#" onclick="return false;" data-i18n="nav_contribution">Contribution</a>
-                <a href="security.html" class="active" data-i18n="nav_security">Security</a>
+                <a href="/security" class="active" data-i18n="nav_security">Security</a>
                 <a href="#" onclick="return false;" data-i18n="nav_projects">Projects</a>
                 <a href="#" onclick="return false;" data-i18n="nav_sponsor">Sponsor</a>
                 <a href="#" onclick="return false;" data-i18n="nav_about">About</a>
@@ -231,7 +229,7 @@
             <p data-i18n="p1_cna">In compliance with NIST and MITRE requirements for CVE Numbering Authorities (CNA), we only process reports for the Linkest Foundation ecosystem. We <strong>do not and cannot</strong> process reports for third-party projects. Please report those to their respective maintainers or CNAs.</p>
         </div>
 
-        <!-- 02 Affiliated Projects (NEW) -->
+        <!-- 02 Affiliated Projects -->
         <div class="policy-card">
             <h2><span class="num">02</span> <span data-i18n="p2_affiliated_title">Affiliated & Partnered Projects</span></h2>
             <p data-i18n="p2_affiliated_desc">While the Linkest CNA primarily covers repositories under the Linkest-FDT organization, we also extend our CVE assignment and vulnerability triage services to specific Affiliated Projects. These projects are actively supported and maintained by our team but may belong to their own independent organizations or studios.</p>
@@ -322,7 +320,7 @@
                 </div>
                 <div class="footer-links">
                     <a href="https://status.linkest.org" target="_blank" rel="noopener" data-i18n="footer_status">Status</a>
-                    <a href="security.html" class="active" data-i18n="footer_policy">Policy</a>
+                    <a href="/security" class="active" data-i18n="footer_policy">Policy</a>
                     <a href="#" onclick="return false;" data-i18n="footer_contact">Contact Us</a>
                 </div>
             </div>
@@ -1140,6 +1138,7 @@
                 if (dict[key] !== undefined) el.innerHTML = dict[key];
             });
 
+            // Show translation banner if not English
             const transBanner = document.getElementById('trans-banner');
             if (langCode !== 'en-US' && dict.trans_banner) {
                 transBanner.style.display = 'block';
@@ -1147,6 +1146,7 @@
                 transBanner.style.display = 'none';
             }
 
+            // Show footer notice if not English
             const machineNotice = document.getElementById('machine-notice');
             if (langCode !== 'en-US' && dict.machine_trans_notice) {
                 machineNotice.style.display = 'block';
@@ -1156,6 +1156,7 @@
 
             if (updateUrl) updateURL(langCode);
             renderMenu(langCode);
+            
             document.getElementById('lang-menu').classList.remove('show');
         }
 
@@ -1164,6 +1165,7 @@
             menu.innerHTML = '';
             languages.forEach(lang => {
                 const a = document.createElement('a');
+                // Show asterisk for any language that is not English
                 a.innerHTML = lang.name + (lang.code !== 'en-US' ? '<span class="machine-ast">*</span>' : '');
                 
                 if (lang.code === currentLang) {
