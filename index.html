@@ -33,8 +33,6 @@
             --brand-600: #2563eb;
             --font-sans: 'Inter', system-ui, -apple-system, sans-serif;
             --font-mono: 'Fira Code', monospace;
-            --shape-start: #8da4f1;
-            --shape-end: #6c7ee5;
         }
 
         * { box-sizing: border-box; margin: 0; padding: 0; }
@@ -71,11 +69,13 @@
 
         .logo { display: flex; align-items: center; gap: 10px; font-weight: 800; font-size: 16px; letter-spacing: -0.5px; color: #fff; }
         
+        /* Fix: Use img for logo */
         .logo-mark {
             width: 28px; height: 28px;
             display: flex; align-items: center; justify-content: center;
             filter: drop-shadow(0 4px 10px rgba(108, 126, 229, 0.5));
         }
+        .logo-mark img { width: 100%; height: 100%; object-fit: contain; }
 
         nav { display: flex; gap: 24px; align-items: center; font-size: 13.5px; font-weight: 500; color: var(--text-secondary); }
         nav a { color: var(--text-secondary); }
@@ -110,6 +110,7 @@
             text-align: center; padding: 40px 24px 80px; position: relative;
         }
 
+        /* Fix: Use img for big background logo */
         .hero-shape-container {
             position: absolute; top: 5%; left: 50%;
             transform: translateX(-50%);
@@ -118,7 +119,9 @@
             filter: blur(20px);
             animation: float 8s ease-in-out infinite;
             pointer-events: none;
+            display: flex; align-items: center; justify-content: center;
         }
+        .hero-shape-container img { width: 100%; height: 100%; object-fit: contain; }
 
         .hero-title {
             font-size: clamp(2rem, 5vw, 3.5rem); font-weight: 800; color: #fff;
@@ -185,24 +188,12 @@
 </head>
 <body>
 
-    <!-- Reusable SVG Gradients -->
-    <svg width="0" height="0" style="display: none;">
-        <defs>
-            <linearGradient id="brandShapeGradient" x1="0%" y1="0%" x2="100%" y2="100%">
-                <stop offset="0%" stop-color="#8da4f1" />
-                <stop offset="100%" stop-color="#6c7ee5" />
-            </linearGradient>
-        </defs>
-    </svg>
-
     <!-- Header -->
     <header>
         <div class="header-container">
             <a href="index.html" class="logo">
                 <span class="logo-mark">
-                    <svg width="100%" height="100%" viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
-                        <path d="M 17.5 50 C 10 20, 80 5, 90 45 C 100 85, 25 95, 17.5 50 Z" fill="url(#brandShapeGradient)" />
-                    </svg>
+                    <img src="logo.svg" alt="Linkest Foundation Logo" />
                 </span>
                 Linkest Foundation
             </a>
@@ -231,9 +222,8 @@
     <!-- Main Hero Content -->
     <main>
         <div class="hero-shape-container">
-            <svg width="100%" height="100%" viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
-                <path d="M 17.5 50 C 10 20, 80 5, 90 45 C 100 85, 25 95, 17.5 50 Z" fill="url(#brandShapeGradient)" />
-            </svg>
+            <!-- 直接引用物理图片 -->
+            <img src="logo.svg" alt="" />
         </div>
 
         <h1 class="hero-title">
@@ -267,9 +257,6 @@
     </footer>
 
     <script>
-        // ==========================================
-        // 1. Language Configuration
-        // ==========================================
         const languages = [
             { code: 'en-US', name: 'English', rtl: false, isMachine: false },
             { code: 'zh-CN', name: '简体中文', rtl: false, isMachine: false },
@@ -286,25 +273,20 @@
             { code: 'ar-SA', name: 'العربية', rtl: true, isMachine: true }
         ];
 
-        // ==========================================
-        // 2. Language Dictionary
-        // ==========================================
         const i18n = {
             'en-US': {
                 nav_contribution: "Contribution", nav_security: "Security", nav_projects: "Projects", nav_sponsor: "Sponsor", nav_about: "About",
                 hero_subtitle: "Welcome to <span>Linkest Foundation</span>.",
                 btn_join: "Join Linkest Foundation", btn_github: "Visit GitHub",
                 footer_status: "Status", footer_policy: "Policy", footer_contact: "Contact Us",
-                machine_trans_notice: "",
-                typewriter_text: "Link this galaxy, with your content."
+                machine_trans_notice: "", typewriter_text: "Link this galaxy, with your content."
             },
             'zh-CN': {
                 nav_contribution: "贡献", nav_security: "安全", nav_projects: "项目", nav_sponsor: "赞助", nav_about: "关于",
                 hero_subtitle: "欢迎来到 <span>Linkest Foundation</span>。",
                 btn_join: "加入 Linkest Foundation", btn_github: "访问 GitHub",
                 footer_status: "状态", footer_policy: "政策", footer_contact: "联系我们",
-                machine_trans_notice: "",
-                typewriter_text: "连接这片星系，用你的创作。"
+                machine_trans_notice: "", typewriter_text: "连接这片星系，用你的创作。"
             },
             'zh-TW': {
                 nav_contribution: "貢獻", nav_security: "安全", nav_projects: "專案", nav_sponsor: "贊助", nav_about: "關於",
@@ -390,29 +372,21 @@
 
         let typewriterTimeout;
 
-        // ==========================================
-        // 3. Core Functions
-        // ==========================================
-        
-        // Use query parameters (?lang=zh-CN) to avoid 404 on GitHub Pages
         function updateURL(langCode) {
             const url = new URL(window.location);
             if (langCode === 'en-US') {
-                url.searchParams.delete('lang'); // Clean URL for default English
+                url.searchParams.delete('lang');
             } else {
                 url.searchParams.set('lang', langCode);
             }
             window.history.replaceState({ lang: langCode }, '', url);
         }
 
-        // Mobile-friendly dropdown toggle
         document.getElementById('lang-btn').addEventListener('click', (e) => {
             e.stopPropagation();
-            const menu = document.getElementById('lang-menu');
-            menu.classList.toggle('show');
+            document.getElementById('lang-menu').classList.toggle('show');
         });
 
-        // Close dropdown when clicking outside
         document.addEventListener('click', (e) => {
             const menu = document.getElementById('lang-menu');
             const btn = document.getElementById('lang-btn');
@@ -423,7 +397,6 @@
 
         function setLanguage(langCode, updateUrl = true) {
             document.cookie = `linkest_lang=${langCode}; path=/; max-age=31536000`;
-            
             const langConfig = languages.find(l => l.code === langCode) || languages[0];
             const dict = Object.assign({}, i18n['en-US'], i18n[langCode] || {});
 
@@ -436,19 +409,17 @@
             });
 
             const machineNotice = document.getElementById('machine-notice');
-            if (langConfig.isMachine) {
+            if (langCode !== 'en-US' && dict.machine_trans_notice) {
                 machineNotice.style.display = 'block';
             } else {
                 machineNotice.style.display = 'none';
             }
 
-            // Restart typewriter effect
             clearTimeout(typewriterTimeout);
             runTypewriter(dict.typewriter_text);
 
             if (updateUrl) updateURL(langCode);
             renderMenu(langCode);
-            
             document.getElementById('lang-menu').classList.remove('show');
         }
 
@@ -479,8 +450,7 @@
             menu.innerHTML = '';
             languages.forEach(lang => {
                 const a = document.createElement('a');
-                // Add asterisk for machine-translated languages (except EN and ZH)
-                a.innerHTML = lang.name + (lang.isMachine ? '<span class="machine-ast">*</span>' : '');
+                a.innerHTML = lang.name + (lang.code !== 'en-US' ? '<span class="machine-ast">*</span>' : '');
                 
                 if (lang.code === currentLang) {
                     a.style.color = 'var(--brand-400)';
@@ -498,18 +468,15 @@
         }
 
         function initLanguage() {
-            // Priority 1: Check URL Query Parameter (?lang=...)
             const urlParams = new URLSearchParams(window.location.search);
             const urlLang = urlParams.get('lang');
             if (urlLang && languages.some(l => l.code === urlLang)) {
                 return urlLang;
             }
 
-            // Priority 2: Cookie
             const match = document.cookie.match(/(^| )linkest_lang=([^;]+)/);
             if (match) return match[2];
             
-            // Priority 3: Browser Language
             const browserLang = navigator.language || navigator.userLanguage;
             const matchedLang = languages.find(l => browserLang.startsWith(l.code.split('-')[0]));
             return matchedLang ? matchedLang.code : 'en-US';
